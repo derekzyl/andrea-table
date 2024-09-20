@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 
 import { ViewUsers } from './example/users/components/view-users';
-import './index.css';
+
 // Example data that matches IncomingTableDataT
 
 

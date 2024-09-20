@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { memo, useEffect } from "react";
-import '../index.css';
+
 import { addColumns, addHeader } from "./add_column";
 import Exports from "./components/exports";
 import Filter from "./components/filter";

@@ -66,7 +66,7 @@ export interface IncomingTableDataI {
   };
 }
 
-export type columnT = Record<string, any>;
+export type columnT = Record<string, JSX.Element>;
 
 export type IncomingTableDataT = IncomingTableDataI;
 

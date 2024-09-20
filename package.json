@@ -2,11 +2,11 @@
   "name": "andrea-table",
   "private": false,
   "description": "A Rich table for React",
-  "version": "0.0.1",
+  "version": "0.0.202",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
   "author": "Derek Og <derekzyl@gmail.com>",
+  "types": "./dist/index.es.d.ts",
   "keywords": [
     "react",
     "table",
@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -b &&vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -44,10 +44,19 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@types/lodash": "^4.17.7",
+    "@types/papaparse": "^5.3.14",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9.9.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^4.2.1"
   }

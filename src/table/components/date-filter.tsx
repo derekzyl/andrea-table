@@ -925,7 +925,7 @@ export const CalendarFilter= ({data}:{data:any}) => {
         )}
         {showYearDropdown && (
           <div className="custom-dropdown-andrea-calendar">
-            {range(currentYear - 10, currentYear + 11).map((year) => (
+            {range(currentYear - 10, currentYear + 11).map((year:any) => (
               <div
                 key={year}
                 className="p-1 cursor-pointer hover:bg-gray-200"
@@ -951,10 +951,10 @@ export const CalendarFilter= ({data}:{data:any}) => {
               {day}
             </div>
           ))}
-          {range(0, startDayOfWeek).map((_, index) => (
+          {range(0, startDayOfWeek).map((_:any, index) => (
             <div key={index}></div>
           ))}
-          {daysArray.map((day) => {
+          {daysArray.map((day:any) => {
             const date = dayjs(new Date(currentYear, currentMonth, day)).format(
               "YYYY-MM-DD"
             );

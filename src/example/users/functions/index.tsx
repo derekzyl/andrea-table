@@ -118,6 +118,7 @@ const ActionHeader: React.FC<{
 
   const handleClick = () => {};
   const handleDelete = async (id: string) => {
+    console.log(id)
  
   };
 

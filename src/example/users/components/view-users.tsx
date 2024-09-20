@@ -1,6 +1,6 @@
 
-import NewTable from 'andrea-table';
 
+import { NewTable } from "../../../table/new-table";
 import { userTableData } from "../functions";
 
 export function ViewUsers() {

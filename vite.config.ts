@@ -25,10 +25,8 @@ export default defineConfig({
     sourcemap: true,
     emptyOutDir: true,
   },
-  plugins: [react(), dts(
-    {
-      insertTypesEntry: true,
-    outDir: "dist",
-    }
-  )],
+  plugins: [
+    react(),
+    dts({ rollupTypes: true, tsconfigPath: "./tsconfig.app.json" }),
+  ],
 });

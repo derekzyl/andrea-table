@@ -30,6 +30,27 @@
 
 
 
+      "typeRoots": [
+        "./dist/index.d.ts",
+        "node_modules/@types"
+      ],
+      "declaration": true,
+      "declarationMap": true,
+      "declarationDir": "./dist",
+      "emitDeclarationOnly": true,
+      "baseUrl": "./src",
+      "rootDir": "./src",
+      "types": [
+        "node",
+        "react"
+      ],
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "noImplicitReturns": false,
+      "forceConsistentCasingInFileNames": true
 
 
 
@@ -44,5 +65,6 @@
 
 
   },
-  "include": ["src"]
+  "include": ["src", "./index.ts"]
+  
 }
