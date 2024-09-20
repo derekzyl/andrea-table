@@ -3,6 +3,29 @@
 ## Overview
 
 This project is a reusable and customizable table component built for React applications. It provides advanced features such as sorting, filtering, pagination, CRUD operations, and remote data fetching. This component is designed to be flexible, scalable, and easily integrable into any React project.
+kindly star ⭐ and share my repo on github: [Andrea Table GitHub Repository](https://github.com/derekzyl/andrea-table) .
+And if you are very generous and want to appreciate my work [sponsor](#sponsor) or subscribe with github sponsor.
+
+## Table of Contents
+
+1. [Project Title: Andrea Table](#project-title-andrea-table)
+2. [Overview](#overview)
+3. [Features](#features)
+4. [Installation](#installation)
+5. [Usage](#usage)
+    - [Table Component Example](#table-component-example)
+    - [Calling the Setup File](#calling-the-setup-file)
+    - [Incoming Data Structure](#incoming-data-structure)
+    -[screenshots](#screenshots)
+6. [Props](#props)
+    - [HeadingT - Table Heading](#headingt---table-heading)
+    - [TableDataT - Table Data Interface](#tabledatat---table-data-interface)
+7. [CRUD Operations](#crud-operations)
+8. [Example Data Fetching Function](#example-data-fetching-function)
+9. [Custom Button and Additional Features](#custom-button-and-additional-features)
+10. [State Management](#state-management)
+11. [Customization Options](#customization-options)
+12. [License](#license)
 
 ## Features
 
@@ -241,9 +264,19 @@ export function ViewUsers() {
 
 ```
 
+### ScreenShots
+
+- ![Table Screenshot](https://github.com/derekzyl/andrea-table-test/blob/main/src/screenshots/image.png)
+- ![Table Screenshot](https://github.com/derekzyl/andrea-table-test/blob/main/src/screenshots/image1.png)
+- ![Table Screenshot](https://github.com/derekzyl/andrea-table-test/blob/main/src/screenshots/image2.png)
+- ![Table Screenshot](https://github.com/derekzyl/andrea-table-test/blob/main/src/screenshots/image3.png)
+- ![Table Screenshot](https://github.com/derekzyl/andrea-table-test/blob/main/src/screenshots/image4.png)
+
 ### Incoming Data Structure
 
-#### `HeadingT` - Table Heading
+## Props
+
+### `HeadingT` - Table Heading
 
 ```typescript
 export type HeadingT = {
@@ -258,7 +291,7 @@ export type HeadingT = {
 };
 ```
 
-#### `TableDataT` - Table Data Interface
+### `TableDataT` - Table Data Interface
 
 ```typescript
 export interface TableDataI {
@@ -302,7 +335,7 @@ export interface TableDataI {
 }
 ```
 
-### CRUD Operations
+## CRUD Operations
 
 This table supports creating, editing, viewing, and deleting records. You can customize how these actions are handled using the `crud` object within the table data.
 
@@ -315,7 +348,7 @@ const crud = {
 };
 ```
 
-### Example Data Fetching Function
+## Example Data Fetching Function
 
 ```typescript
 async function fetchData(url: string, baseUrl: string) {
@@ -325,7 +358,7 @@ async function fetchData(url: string, baseUrl: string) {
 }
 ```
 
-### Custom Button and Additional Features
+## Custom Button and Additional Features
 
 You can add custom buttons to the table and define other actions like "See More" or "Custom Button" through the `show` object:
 
@@ -351,3 +384,9 @@ The component can be easily customized by providing your own styles, color schem
 ## License
 
 This project is licensed under the MIT License.
+
+## Sponsor
+
+- [Buy me a coffee](buymeacoffee.com/cybergenii)
+- solana address `cSntSgCMytF1wjdGpa2tYt7gpgAxCNNM4QGVN9xjJSo`
+- Btc address `18Zne6NrvrvYYM83hKeCqGoBVWeyhfpym1`

@@ -149,7 +149,12 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
               {showTableName && (
                 <div
                   className="box-title capitalize text-[18px]"
-                  style={{ fontSize: "18px", textTransform: "capitalize", fontWeight:'bolder' }}
+                  style={{
+                    fontSize: "18px",
+                    textTransform: "capitalize",
+                    fontWeight: "bolder",
+                    color:`${state.color.primary}`
+                  }}
                 >
                   {data.data.table_name}
                 </div>
@@ -165,16 +170,15 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                     className=" custom-button   btn-primary"
                     style={{ background: state.color.primary }}
                   >
-                    <i className="custom-icon-bcg w-[28px] h-[28px] text-[#fff] show-button-setup-icon"
-                    
+                    <i
+                      className="custom-icon-bcg w-[28px] h-[28px] text-[#fff] show-button-setup-icon"
                       style={{
                         width: "28px",
                         height: "28px",
                         color: "#fff",
                         background: state.color.primary,
-                        boxShadow:`inset 0px -1px 2px 1px ${state.color.tertiary}, inset 0px 2px 2px 1px ${state.color.secondary}`
-                        
-                    }}
+                        boxShadow: `inset 0px -1px 2px 1px ${state.color.tertiary}, inset 0px 2px 2px 1px ${state.color.secondary}`,
+                      }}
                     >
                       <PlusIcon />
                     </i>{" "}
@@ -193,7 +197,16 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                     className=" custom-button   btn-primary"
                     style={{ background: state.color.primary }}
                   >
-                    <i className="custom-icon-bcg w-[28px] h-[28px] text-[#fff] show-button-setup-icon">
+                    <i
+                      className="custom-icon-bcg w-[28px] h-[28px] text-[#fff] show-button-setup-icon"
+                      style={{
+                        width: "28px",
+                        height: "28px",
+                        color: "#fff",
+                        background: state.color.primary,
+                        boxShadow: `inset 0px -1px 2px 1px ${state.color.tertiary}, inset 0px 2px 2px 1px ${state.color.secondary}`,
+                      }}
+                    >
                       <PlusIcon />
                     </i>{" "}
                     <div className="add-button text">{customButtonName}</div>
@@ -207,15 +220,20 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                     data.data.fn.goto_fn && data.data.fn.goto_fn();
                   }}
                 >
-                  <div className=" custom-button   btn-secondary"
-                  style={{
-                    color:state.color.primary,
-                    border:`1px solid ${state.color.primary}`
-
-                  }}
+                  <div
+                    className=" custom-button   btn-secondary"
+                    style={{
+                      color: state.color.primary,
+                      border: `1px solid ${state.color.primary}`,
+                    }}
                   >
                     <div className=" text">See More</div>
-                    <i className="custom_submerged_gray w-[28px] h-[28px] show-button-setup-icon">
+                    <i
+                      className="custom_submerged_gray w-[28px] h-[28px] show-button-setup-icon"
+                      style={{
+                        color: state.color.primary,
+                      }}
+                    >
                       <PlusIcon />
                     </i>{" "}
                   </div>

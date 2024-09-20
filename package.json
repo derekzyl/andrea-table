@@ -2,7 +2,7 @@
   "name": "andrea-table",
   "private": false,
   "description": "A Rich table for React",
-  "version": "0.0.208",
+  "version": "0.0.209",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "author": "Derek Og <derekzyl@gmail.com>",
@@ -14,6 +14,20 @@
     "component",
     "typescript"
   ],
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/derekzyl/andrea-table.git",
+    "directory": ""
+  },
+  
+
+  "homepage": "https://github.com/derekzyl/andrea-table#readme",
+    "bugs": {
+      "url": "https://github.com/derekzyl/andrea-table/issues",
+      "email": "derekzyl@gmail.com"
+    },
+  
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
@@ -29,17 +43,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "andrea-table": "^0.0.1",
-    "dayjs": "^1.11.13",
-    "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.8.3",
-    "lodash": "^4.17.21",
-    "papaparse": "^5.4.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "xlsx": "^0.18.5"
-  },
+
   "peerDependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
@@ -62,6 +66,14 @@
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^4.2.1",
-    "vite-plugin-libcss": "^1.1.1"
+    "vite-plugin-libcss": "^1.1.1",
+      "dayjs": "^1.11.13",
+      "jspdf": "^2.5.1",
+      "jspdf-autotable": "^3.8.3",
+      "lodash": "^4.17.21",
+      "papaparse": "^5.4.1",
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1",
+      "xlsx": "^0.18.5"
   }
 }
