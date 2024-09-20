@@ -50,6 +50,8 @@ npm install andrea-table
 
 ## Usage
 
+### [Github Repo For Example Usage](https://github.com/derekzyl/andrea-table-test)
+
 ### Table Component Example
 
 #### Setup File
