@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { memo, useEffect } from "react";
+import "../index.styles.andrea.css";
 
 import { addColumns, addHeader } from "./add_column";
 import Exports from "./components/exports";
@@ -13,7 +14,6 @@ import { TableContextProvider } from "./hooks/context-hooks";
 import { PlusIcon } from "./icons";
 import { HeadingT, IncomingTableDataT } from "./interface/interface.table";
 import { ActionTableTypesE } from "./state-manager/table-action-types";
-
 
 
 function NewTableMemo(data: { data: IncomingTableDataT }) {

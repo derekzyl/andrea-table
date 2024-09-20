@@ -1,5 +1,5 @@
  
-import "../../index.css";
+
 import { useTableContext } from "../hooks/context";
 import { IncomingTableDataT } from "../interface/interface.table";
 import TableBody from "./table-body";

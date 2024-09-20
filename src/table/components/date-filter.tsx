@@ -797,6 +797,7 @@
 import dayjs from 'dayjs';
 import { range } from 'lodash';
 import { useEffect, useState } from 'react';
+
 import { handleFilterSelect } from '../functions/filter';
 import { useTableContext } from '../hooks/context';
 import { IconBxLeftArrow, IconBxRightArrow, IconDeleteEmpty } from '../icons';

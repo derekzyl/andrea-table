@@ -2,11 +2,12 @@
   "name": "andrea-table",
   "private": false,
   "description": "A Rich table for React",
-  "version": "0.0.202",
+  "version": "0.0.208",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "author": "Derek Og <derekzyl@gmail.com>",
   "types": "./dist/index.es.d.ts",
+  "style": "./dist/style.css",
   "keywords": [
     "react",
     "table",
@@ -54,10 +55,13 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "postcss": "^8.4.47",
+    "rollup-plugin-postcss": "^4.0.2",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
-    "vite-plugin-dts": "^4.2.1"
+    "vite-plugin-dts": "^4.2.1",
+    "vite-plugin-libcss": "^1.1.1"
   }
 }

@@ -22,7 +22,7 @@ This project is a reusable and customizable table component built for React appl
 Install the project dependencies:
 
 ```bash
-npm install
+npm install andrea-table
 ```
 
 ## Usage
@@ -33,17 +33,20 @@ npm install
 
 ```typescript
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { columnT, HeadingT, TableDataT, } from "andrea-table";
 
 
-import { columnT, HeadingT, IncomingTableDataI, IncomingTableDataT } from "../../../table/interface/interface.table";
 
 
 const Address: React.FC<{
-  variableFromTable: any;
-  crud: IncomingTableDataT["crud"];
-}> = ({ variableFromTable }) => {
+  columnData: any;
+  crud: TableDataT["crud"];
+}> = ({ columnData }) => {
 
-  const address = variableFromTable.address
+  const address = columnData.address
 
   
   return (
@@ -62,11 +65,11 @@ const Address: React.FC<{
 };
 
 const ActionHeader: React.FC<{
-  variableFromTable: any;
-  crud: IncomingTableDataT["crud"];
+  columnData: any;
+  crud: TableDataT["crud"];
   onDeleteSuccess?: () => void;
-}> = ({ variableFromTable, onDeleteSuccess }) => {
-  console.log({variableFromTable, onDeleteSuccess})
+}> = ({ columnData, onDeleteSuccess }) => {
+  console.log({columnData, onDeleteSuccess})
 
 
  
@@ -87,7 +90,7 @@ const ActionHeader: React.FC<{
           /*   dispatch(hideMiniLayout()); */
         }}
         className="btn-primary h-[5px] p-[6px] text-[14px]"
-        // to={`/user/${variableFromTable.id}/edit`}
+        // to={`/user/${columnData.id}/edit`}
       >
         edit
       </div>
@@ -97,7 +100,7 @@ const ActionHeader: React.FC<{
           /*      dispatch(hideMiniLayout()); */
         }}
         className="btn-secondary m-2 p-[6px] text-[14px]"
-        // to={`/user/${variableFromTable.id}/view`}
+        // to={`/user/${columnData.id}/view`}
       >
         view
       </div>
@@ -132,8 +135,8 @@ async function fetchData(url: string, baseUrl: string) {
 }
 const extraColumn: columnT[] = [
   {
-    _address: <Address variableFromTable={""} crud={{}} />,
-    action: <ActionHeader variableFromTable={""} crud={{}} />,
+    _address: <Address columnData={""} crud={{}} />,
+    action: <ActionHeader columnData={""} crud={{}} />,
   },
 ];
 const header: HeadingT[] = [
@@ -194,7 +197,7 @@ const header: HeadingT[] = [
   },
 ];
 
-export const userTableData: IncomingTableDataI = {
+export const userTableData: TableDataT = {
   base_url: "https://dummyjson.com",
   fn: {
     fetch_fn: fetchData,
@@ -216,18 +219,26 @@ export const userTableData: IncomingTableDataI = {
 #### Calling the setup file
 
 ```typescript
-import React from 'react';
-import { userTableData } from './path-to-your-data';
+import { NewTable } from 'andrea-table';
 
-const App = () => {
+
+import { userTableData } from "../functions";
+
+export function ViewUsers() {
+
+  userTableData.fn.add_fn = () =>"";
+  userTableData.show.addButton = true;
   return (
-    <div>
-      <TableComponent tableData={userTableData} />
-    </div>
-  );
-};
+    <>
+      {" "}
+      <div  className="">
 
-export default App;
+<NewTable data={userTableData} />
+      </div>
+    </>
+  );
+}
+
 ```
 
 ### Incoming Data Structure
@@ -247,10 +258,10 @@ export type HeadingT = {
 };
 ```
 
-#### `IncomingTableDataI` - Table Data Interface
+#### `TableDataT` - Table Data Interface
 
 ```typescript
-export interface IncomingTableDataI {
+export interface TableDataI {
   table_name: string;
   base_url: string;
   sub_url: string;

@@ -6,11 +6,11 @@ import { columnT, HeadingT, IncomingTableDataI, IncomingTableDataT } from "../..
 
 
 const Address: React.FC<{
-  variableFromTable: any;
+  columnData: any;
   crud: IncomingTableDataT["crud"];
-}> = ({ variableFromTable }) => {
+}> = ({ columnData }) => {
 
-  const address = variableFromTable.address
+  const address = columnData.address
 
   
   return (
@@ -28,90 +28,12 @@ const Address: React.FC<{
   );
 };
 
-
-//   variableFromTable: any;
-//   crud: IncomingTableDataT["crud"];
-//   onDeleteSuccess?: () => void;
-// }> = ({ variableFromTable, onDeleteSuccess }) => {
-//   const dispatch = useAppDispatch();
-
-//   const tableData = useAppSelector((state) => state.tableData);
-//   const [del] = useLazyDeleteUserQuery();
-
-//   const handleClick = () => {};
-//   const handleDelete = async (id: string) => {
-//     // //console.log("hello world handle click", variableFromTable, "and", crud);
-//     // //console.log("hello world handle delete", tableData, "and", crud);
-
-//     try {
-//       if (tableData.click === 0) {
-//         await del(id);
-
-//         dispatch(setClickCount(1)); // Assuming this is used for disabling the button
-//         onDeleteSuccess && onDeleteSuccess();
-//       }
-//     } catch (error) {
-//       console.error("Error deleting user:", error);
-//       toast.error(`${error}`);
-//     }
-//   };
-
-//   return (
-//     <div className="">
-//       {
-//         <CustomModal
-//           children={
-//             <DeleteModal
-//               props={{
-//                 id: tableData.data.id,
-//                 confirm: handleDelete,
-//                 metadata: [
-//                   `${tableData.data.firstName} ${tableData.data.lastName}`,
-//                 ],
-//               }}
-//             />
-//           }
-//         />
-//       }
-//       <NavLink
-//         onClick={() => {
-//           handleClick();
-//           /*   dispatch(hideMiniLayout()); */
-//         }}
-//         className="btn-primary h-[5px] p-[6px] text-[14px]"
-//         to={`/user/${variableFromTable.id}/edit`}
-//       >
-//         edit
-//       </NavLink>
-//       <NavLink
-//         onClick={() => {
-//           handleClick();
-//           /*      dispatch(hideMiniLayout()); */
-//         }}
-//         className="btn-secondary m-2 p-[6px] text-[14px]"
-//         to={`/user/${variableFromTable.id}/view`}
-//       >
-//         view
-//       </NavLink>
-//       <button
-//         className="btn-tertiary"
-//         onClick={() => {
-//           dispatch(setTableData(variableFromTable));
-//           dispatch(setClickCount(0));
-//           dispatch(openDeleteModal());
-//         }}
-//       >
-//         delete
-//       </button>
-//     </div>
-//   );
-// };
 const ActionHeader: React.FC<{
-  variableFromTable: any;
+  columnData: any;
   crud: IncomingTableDataT["crud"];
   onDeleteSuccess?: () => void;
-}> = ({ variableFromTable, onDeleteSuccess }) => {
-  console.log({variableFromTable, onDeleteSuccess})
+}> = ({ columnData, onDeleteSuccess }) => {
+  console.log({columnData, onDeleteSuccess})
 
 
  
@@ -119,6 +41,7 @@ const ActionHeader: React.FC<{
   const handleClick = () => {};
   const handleDelete = async (id: string) => {
     console.log(id)
+   
  
   };
 
@@ -133,7 +56,7 @@ const ActionHeader: React.FC<{
           /*   dispatch(hideMiniLayout()); */
         }}
         className="btn-primary h-[5px] p-[6px] text-[14px]"
-        // to={`/user/${variableFromTable.id}/edit`}
+        // to={`/user/${columnData.id}/edit`}
       >
         edit
       </div>
@@ -143,7 +66,7 @@ const ActionHeader: React.FC<{
           /*      dispatch(hideMiniLayout()); */
         }}
         className="btn-secondary m-2 p-[6px] text-[14px]"
-        // to={`/user/${variableFromTable.id}/view`}
+        // to={`/user/${columnData.id}/view`}
       >
         view
       </div>
@@ -178,8 +101,8 @@ async function fetchData(url: string, baseUrl: string) {
 }
 const extraColumn: columnT[] = [
   {
-    _address: <Address variableFromTable={""} crud={{}} />,
-    action: <ActionHeader variableFromTable={""} crud={{}} />,
+    _address: <Address columnData={""} crud={{}} />,
+    action: <ActionHeader columnData={""} crud={{}} />,
   },
 ];
 const header: HeadingT[] = [
@@ -211,7 +134,17 @@ const header: HeadingT[] = [
     can_sort: true,
     is_header: true,
     can_copy: true,
+    can_filter: false,
+
+  },
+  {
+    key: "gender",
+    name: "gender",
+    can_sort: true,
+    is_header: true,
+    can_copy: true,
     can_filter: true,
+    filters:['male', 'female']
 
   },
   {
@@ -220,7 +153,7 @@ const header: HeadingT[] = [
     can_filter: true,
     can_sort: true,
     is_header: true,
-    filters: ["true", "false"],
+
     isSearchFilter: true,
   },
 

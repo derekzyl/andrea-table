@@ -1,3 +1,5 @@
+
+
 export function UpArrow() {
   return (
     <svg
@@ -101,12 +103,16 @@ export function PrintIcon() {
 export function FilterIcon() {
   return (
     <svg
+    style={{
+            width: "24px",
+            height:"24px"
+          }}>
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       x="0px"
       y="0px"
       viewBox="1 -1 100 125"
-    >
+    
       <path d="M91.7,8H10.3c-0.1,0-0.1,0-0.2,0C10,8,9.9,8.2,10,8.5L42,52V90l18-6.6V52L92,8.5c0,0,0-0.1,0-0.2C91.9,8.1,91.8,8,91.7,8z" />
     </svg>
   );
@@ -168,6 +174,10 @@ export function CSVIcon() {
 export function PlusIcon() {
   return (
     <svg
+    style={{
+            width: "24px",
+            height:"24px"
+          }}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

@@ -1,6 +1,7 @@
  
 
 import React, { useState } from "react";
+
 import { addColumns, addHeader } from "../add_column";
 import { onChangeHandler } from "../functions/change";
 import { handleCopyToClipboard } from "../functions/copy-to-clipboard";
@@ -120,10 +121,10 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
                           val[v.key].props &&
                           Object.prototype.hasOwnProperty.call(
                             val[v.key].props,
-                            "variableFromTable"
+                            "columnData"
                           ) ? (
                           React.cloneElement(val[v.key], {
-                            variableFromTable: val,
+                            columnData: val,
                             crud: data.data.crud,
                             onDeleteSuccess: onDeleteSuccess,
                           })
