@@ -15,7 +15,7 @@ export default function TableHead(data: { data: IncomingTableDataT }) {
     ? [
         {
           canSort: false,
-          key: "check_box",
+          key: "checkBox",
           name: "check box",
          isHeader: true,
           canFilter: false,
@@ -37,7 +37,7 @@ export default function TableHead(data: { data: IncomingTableDataT }) {
               isHeader && (
                 <th key={index} className="px-[4px] text-[14px]" style={{paddingLeft:"4px",paddingRight:"4px", fontSize:"14px", background:`${state.color.tertiary}`}} >
                   <div className="header-cell-content px-[2px]" style={{paddingRight:"2px", paddingLeft:"2px", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"row", justifyItems:"center"}}>
-                    {value.key === "check_box" && showCheckBox ? (
+                    {value.key === "checkBox" && showCheckBox ? (
                       <div className="check-box-container">
                         <input
                           type="checkbox"
@@ -46,7 +46,7 @@ export default function TableHead(data: { data: IncomingTableDataT }) {
                             onChangeHandler(dispatch, state, e, "")
                           }
                           checked={state.selectAll}
-                          name="check_box"
+                          name="checkBox"
                         />
                         <label className="check-box-label text-[14px]" style={{fontSize:"12px"}}>
                           Select All

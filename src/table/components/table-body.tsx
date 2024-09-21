@@ -66,7 +66,7 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
     ? [
         {
           canSort: false,
-          key: "check_box",
+          key: "checkBox",
           name: "check box",
          isHeader: true,
           canFilter: false,
@@ -98,16 +98,16 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
                   return (
                     v.isHeader && (
                       <td key={idex} className={"td-table "}>
-                        {v.key === "check_box" ? (
+                        {v.key === "checkBox" ? (
                           <div>
                             <input
                               type="checkbox"
                               className="check-box"
-                              checked={val.check_box}
+                              checked={val.checkBox}
                               onChange={(e) => {
                                 // Update the state of the current checkbox
                                 onChangeHandler(dispatch, state, e, val._id);
-                                // //console.log("val check", val.check_box);
+                                // //console.log("val check", val.checkBox);
 
                                 dispatch({
                                   type: ActionTableTypesE.SET_CHECKED_ITEMS,

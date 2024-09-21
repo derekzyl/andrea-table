@@ -34,7 +34,7 @@ export const TableReducer = (
       // "SET_SELECT_ALL":
       const data = state.bodyData.map((item) => ({
         ...item,
-        check_box: !state.selectAll,
+        checkBox: !state.selectAll,
       }));
 
       return { ...state, bodyData: data, selectAll: action.payload };
@@ -230,7 +230,7 @@ let formattedStartDate;
 
       const data = state.bodyData.map((item) => ({
         ...item,
-        check_box: state.selectAll,
+        checkBox: state.selectAll,
       }));
       return { ...state, bodyData: data };
     }
@@ -242,7 +242,7 @@ let formattedStartDate;
         item._id === action.payload
           ? {
               ...item,
-              check_box: !item.check_box,
+              checkBox: !item.checkBox,
             }
           : item
       );

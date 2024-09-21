@@ -10,7 +10,7 @@ export function addColumns(
     data.map((item) => ({
       ...Object.assign({}, ...column),
       ...item,
-      check_box: false,
+      checkBox: false,
     }));
 
   return combined;

@@ -34,11 +34,10 @@ const ActionHeader: React.FC<{
   onDeleteSuccess?: () => void;
 }> = ({ columnData, onDeleteSuccess }) => {
   
- let x = false;
-  if (x = true) {
+
     
     console.log({columnData, onDeleteSuccess})
-  }
+  
 
 
  

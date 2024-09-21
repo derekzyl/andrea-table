@@ -1,11 +1,10 @@
 
 
 import { handleColumnVisibility } from "../functions/column-visible";
-import { handleDelete } from "../functions/delete";
 import { handleFileExport } from "../functions/file-exports";
 import { toggleColumnMenu } from "../functions/toggleMenu";
 import { useTableContext } from "../hooks/context";
-import { CSVIcon, DeleteIcon, ExcelIcon, PDFIcon, PrintIcon } from "../icons";
+import { CSVIcon, ExcelIcon, PDFIcon, PrintIcon } from "../icons";
 import { HeadingT } from "../interface/interface.table";
 
 export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
@@ -112,7 +111,7 @@ export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
           </span>
         </button>
 
-        <button
+        {/* <button
           className="btn buttons-pdf buttons-html5 btn-sm"
           onClick={handleDelete}
           disabled={state.selectedItems.length === 0 ? true : false}
@@ -123,7 +122,7 @@ export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
             </i>{" "}
             Delete
           </span>
-        </button>
+        </button> */}
       </div>
     </div>
   );

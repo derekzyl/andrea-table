@@ -50,7 +50,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
     ? [
         {
           canSort: false,
-          key: "check_box",
+          key: "checkBox",
           name: "check box",
          isHeader: true,
           canFilter: false,

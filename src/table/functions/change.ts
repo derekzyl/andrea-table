@@ -42,7 +42,7 @@ export const onChangeHandler = (
       }
       break;
 
-    case "check_box":
+    case "checkBox":
       // Handle checkbox in the header
       //   setSelectAll(() => e.target.checked);
 
@@ -55,7 +55,7 @@ export const onChangeHandler = (
       //   setBodyData((prevData) => {
       //     const updatedData = prevData.map((row) => ({
       //       ...row,
-      //       check_box: selectAll,
+      //       checkBox: selectAll,
       //     }));
 
       dispatch({ type: ActionTableTypesE.SET_CHECK_BOX, payload: "" });
@@ -70,7 +70,7 @@ export const onChangeHandler = (
           if (item._id === id) {
             return {
               ...item,
-              check_box: !item.check_box,
+              checkBox: !item.checkBox,
             };
           }
           return item;
