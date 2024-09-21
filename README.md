@@ -141,7 +141,7 @@ const ActionHeader: React.FC<{
     </div>
   );
 };
-async function fetchData(url: string, baseUrl: string) {
+async function fetchData({url, baseUrl}:{url: string, baseUrl: string}) {
 
 
   try {
@@ -168,40 +168,40 @@ const header: HeadingT[] = [
   {
     key: "id",
     name: "id",
-    can_sort: true,
-    is_header: true,
-    can_filter: false,
-    can_copy: true,
+    canSort: true,
+   isHeader: true,
+    canFilter: false,
+    canCopy: true,
   },
   {
     key: "firstName",
     name: "first name",
-    can_sort: true,
-    is_header: true,
-    can_filter: false,
+    canSort: true,
+   isHeader: true,
+    canFilter: false,
   },
   {
     key: "lastName",
     name: "last name",
-    can_sort: true,
-    is_header: true,
-    can_filter: false,
+    canSort: true,
+   isHeader: true,
+    canFilter: false,
   },
   {
     key: "email",
     name: "email",
-    can_sort: true,
-    is_header: true,
-    can_copy: true,
-    can_filter: true,
+    canSort: true,
+   isHeader: true,
+    canCopy: true,
+    canFilter: true,
 
   },
   {
     key: "_address",
     name: "address",
-    can_filter: true,
-    can_sort: true,
-    is_header: true,
+    canFilter: true,
+    canSort: true,
+   isHeader: true,
     filters: ["true", "false"],
     isSearchFilter: true,
   },
@@ -209,23 +209,23 @@ const header: HeadingT[] = [
   {
     key: "calendarFilter",
     name: "calendar",
-    can_sort: false,
-    is_header: false,
-    can_filter: true,
+    canSort: false,
+   isHeader: false,
+    canFilter: true,
   },
   {
     key: "action",
     name: "action",
-    can_sort: false,
-    is_header: true,
-    can_filter: false,
+    canSort: false,
+   isHeader: true,
+    canFilter: false,
   },
 ];
 
 export const userTableData: TableDataT = {
-  base_url: "https://dummyjson.com",
+  baseUrl: "https://dummyjson.com",
   fn: {
-    fetch_fn: fetchData,
+    fetchFn: fetchData,
   },
   crud: {},
   heading: header,
@@ -233,8 +233,8 @@ export const userTableData: TableDataT = {
   query: {pageName:"skip"},
   show: { seeMore: true, tableName:true, customButton:true },
   refresh: { intervalInSec: 100, status: false },
-  sub_url: "/users",
-  table_name: "user",
+  subUrl: "/users",
+  tableName: "user",
   color: { primary: "red", secondary: "black", tertiary: "green" },
 };
 
@@ -251,7 +251,7 @@ import { userTableData } from "../functions";
 
 export function ViewUsers() {
 
-  userTableData.fn.add_fn = () =>"";
+  userTableData.fn.addFn = () =>"";
   userTableData.show.addButton = true;
   return (
     <>
@@ -284,10 +284,10 @@ export function ViewUsers() {
 export type HeadingT = {
   name: string;
   key: string;
-  can_sort: boolean;
-  is_header: boolean;
-  can_filter: boolean;
-  can_copy?: boolean;
+  canSort: boolean;
+ isHeader: boolean;
+  canFilter: boolean;
+  canCopy?: boolean;
   isSearchFilter?: boolean;
   filters?: string[];
 };
@@ -297,19 +297,19 @@ export type HeadingT = {
 
 ```typescript
 export interface TableDataI {
-  table_name: string;
-  base_url: string;
-  sub_url: string;
+  tableName: string;
+  baseUrl: string;
+  subUrl: string;
   heading: HeadingT[];
   column?: columnT[];
   query: { pageName?: string; limitName?: string };
   color?: { primary?: string; secondary?: string; tertiary?: string };
   refresh?: { status: boolean; intervalInSec: number };
   fn: {
-    fetch_fn: (url: string, base_url: string) => Promise<any>;
-    add_fn?: () => void;
-    goto_fn?: () => any;
-    custom_fn?: () => void;
+    fetchFn: (url: string, baseUrl: string) => Promise<any>;
+    addFn?: () => void;
+    gotoFn?: () => any;
+    customFn?: () => void;
   };
   buttonName?: { customButton?: string };
   show: {

@@ -1,21 +1,53 @@
 import { ActionTableTypesE } from "../state-manager/table-action-types";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ * The type `HeadingT` defines properties for a table heading, including name, key, sorting capability,
+ * header status, filtering capability, optional copying capability, search filtering status, and
+ * filter options.
+ * @property {string} name - The `name` property in the `HeadingT` type represents the display name of
+ * the heading. It is a string type.
+ * @property {string} key - The `key` property in the `HeadingT` type represents a unique identifier
+ * for the heading. It is typically used to identify the heading when working with collections or
+ * tables of data.
+ * @property {boolean} canSort - The `canSort` property in the `HeadingT` type indicates whether the
+ * heading can be used for sorting purposes. If `canSort` is set to `true`, it means that the heading
+ * can be used as a sorting option. If it is set to `false`, the heading cannot be
+ * @property {boolean} isHeader - The `isHeader` property in the `HeadingT` type indicates whether the
+ * item is a header or not. It is a boolean value that specifies if the item is a header in a table or
+ * a similar structure.
+ * @property {boolean} canFilter - The `canFilter` property in the `HeadingT` type indicates whether
+ * the column can be filtered or not. If `canFilter` is set to `true`, it means that filtering
+ * functionality is available for that particular column.
+ * @property {boolean} canCopy - The `canCopy` property in the `HeadingT` type indicates whether the
+ * heading can be copied. It is an optional property, meaning it may or may not be present in an object
+ * of type `HeadingT`.
+ * @property {boolean} isSearchFilter - The property `isSearchFilter` is a boolean flag that indicates
+ * whether the heading can be used as a search filter. If it is set to `true`, it means that this
+ * particular heading can be used for searching/filtering data in the dataset.
+ * @property {string[]} filters - The `filters` property in the `HeadingT` type is an optional array of
+ * strings. It is used to store the possible filter options for a specific heading.
+ */
 export type HeadingT = {
   name: string;
   key: string;
-  can_sort: boolean;
-  is_header: boolean;
-  can_filter: boolean;
-  can_copy?: boolean;
+  canSort?: boolean;// set to default false
+ isHeader?: boolean;  // set to default true
+  canFilter: boolean;
+  canCopy?: boolean;
   isSearchFilter?: boolean;
   filters?: string[];
 };
 
+/* The `export interface IncomingTableDataI {` statement is defining an interface named
+`IncomingTableDataI`. This interface specifies the structure of an object that typically represents
+incoming data for a table component. It includes properties such as `tableName`, `baseUrl`,
+`subUrl`, `heading`, `column`, `query`, `color`, `refresh`, `fn`, `buttonName`, `show`, `crud`,
+which define various aspects of the table configuration and behavior. */
 export interface IncomingTableDataI {
-  table_name: string;
-  base_url: string;
-  sub_url: string;
+  tableName: string;
+  baseUrl: string;
+  subUrl: string;
   heading: HeadingT[];
   column?: columnT[];
   query: {
@@ -31,16 +63,24 @@ export interface IncomingTableDataI {
     status: boolean;
     intervalInSec: number;
   };
+  /* The `fn` property in the `IncomingTableDataI` interface is defining an object that contains
+  various functions related to table behavior. It includes the following properties: */
   fn: {
-    fetch_fn: (url: string, base_url: string) => Promise<any>;
-    add_fn?: () => void;
-    goto_fn?: () => any;
-    custom_fn?: () => void;
+    fetchFn: ({baseUrl, url}:{url: string, baseUrl: string}) => Promise<any>;
+    addFn?: () => void;
+    gotoFn?: () => any;
+    customFn?: () => void;
 
   };
   buttonName?: {
     customButton?: string;
   },
+  /* The `show` property within the `IncomingTableDataI` interface is defining an object that specifies
+  various display options for the table component. It includes boolean properties that control the
+  visibility of different elements within the table, such as filters, pagination, search bar,
+  selection checkboxes, sorting options, table itself, exports button, add button, custom button,
+  see more button, and the table name. Each boolean property indicates whether the corresponding
+  element should be displayed or not in the table interface based on its value (true or false). */
   show: {
     filters?: boolean;
     pagination?: boolean;

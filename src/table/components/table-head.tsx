@@ -14,11 +14,11 @@ export default function TableHead(data: { data: IncomingTableDataT }) {
   const checkbox_header: HeadingT[] = showCheckBox
     ? [
         {
-          can_sort: false,
+          canSort: false,
           key: "check_box",
           name: "check box",
-          is_header: true,
-          can_filter: false,
+         isHeader: true,
+          canFilter: false,
         },
       ]
     : [];
@@ -31,8 +31,10 @@ export default function TableHead(data: { data: IncomingTableDataT }) {
       <tr role="row">
         {visibleHeaders &&
           visibleHeaders.map((value, index) => {
+            const isHeader = value.isHeader??true;
+            const canSort = value.canSort??false;
             return (
-              value.is_header && (
+              isHeader && (
                 <th key={index} className="px-[4px] text-[14px]" style={{paddingLeft:"4px",paddingRight:"4px", fontSize:"14px", background:`${state.color.tertiary}`}} >
                   <div className="header-cell-content px-[2px]" style={{paddingRight:"2px", paddingLeft:"2px", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"row", justifyItems:"center"}}>
                     {value.key === "check_box" && showCheckBox ? (
@@ -64,7 +66,7 @@ export default function TableHead(data: { data: IncomingTableDataT }) {
                         handleSort(dispatch, value.key);
                       }}
                     >
-                      {value.can_sort && showSort ? (
+                      {canSort && showSort ? (
                         state.sortConfig.order === "asc" &&
                         state.sortConfig.key === value.key ? (
                           <UpArrow />

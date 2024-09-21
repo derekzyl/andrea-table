@@ -46,7 +46,8 @@ export default function Filter(data: { data: any[]; header: HeadingT[] }) {
         >
           {visibleHeaders &&
             visibleHeaders.map((v, k) => {
-              return v.can_filter ? (
+              const canFilter = v.canFilter ?? false;
+              return canFilter ? (
                 <div className={"flex "}>
                   {v.key !== "createdAt" && v.key !== "calendarFilter" && (
                     <>
@@ -123,11 +124,11 @@ export default function Filter(data: { data: any[]; header: HeadingT[] }) {
                             <option selected={true} value="All">
                               All
                             </option>
-                            {[...new Set(v.filters)].map((item, k) => (
+                            {v.filters?[...new Set(v.filters)].map((item, k) => (
                               <option key={k} value={item}>
                                 {item}
                               </option>
-                            ))}
+                            )):[]}
                             {/* </datalist> */}
                           </select>
                         )}

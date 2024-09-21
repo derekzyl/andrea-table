@@ -33,7 +33,12 @@ const ActionHeader: React.FC<{
   crud: IncomingTableDataT["crud"];
   onDeleteSuccess?: () => void;
 }> = ({ columnData, onDeleteSuccess }) => {
-  console.log({columnData, onDeleteSuccess})
+  
+ let x = false;
+  if (x = true) {
+    
+    console.log({columnData, onDeleteSuccess})
+  }
 
 
  
@@ -82,7 +87,7 @@ const ActionHeader: React.FC<{
     </div>
   );
 };
-async function fetchData(url: string, baseUrl: string) {
+async function fetchData ({ baseUrl, url}:{url: string, baseUrl: string}) {
 
 
   try {
@@ -109,50 +114,50 @@ const header: HeadingT[] = [
   {
     key: "id",
     name: "id",
-    can_sort: true,
-    is_header: true,
-    can_filter: false,
-    can_copy: true,
+    canSort: true,
+   isHeader: true,
+    canFilter: false,
+    canCopy: true,
   },
   {
     key: "firstName",
     name: "first name",
-    can_sort: true,
-    is_header: true,
-    can_filter: false,
+    canSort: true,
+   isHeader: true,
+    canFilter: false,
   },
   {
     key: "lastName",
     name: "last name",
-    can_sort: true,
-    is_header: true,
-    can_filter: false,
+    canSort: true,
+   isHeader: true,
+    canFilter: false,
   },
   {
     key: "email",
     name: "email",
-    can_sort: true,
-    is_header: true,
-    can_copy: true,
-    can_filter: false,
+    canSort: true,
+   isHeader: true,
+    canCopy: true,
+    canFilter: false,
 
   },
   {
     key: "gender",
     name: "gender",
-    can_sort: true,
-    is_header: true,
-    can_copy: true,
-    can_filter: true,
+    canSort: true,
+   isHeader: true,
+    canCopy: true,
+    canFilter: true,
     filters:['male', 'female']
 
   },
   {
     key: "_address",
     name: "address",
-    can_filter: true,
-    can_sort: true,
-    is_header: true,
+    canFilter: true,
+    canSort: true,
+   isHeader: true,
 
     isSearchFilter: true,
   },
@@ -160,31 +165,31 @@ const header: HeadingT[] = [
   {
     key: "calendarFilter",
     name: "calendar",
-    can_sort: false,
-    is_header: false,
-    can_filter: true,
+    canSort: false,
+   isHeader: false,
+    canFilter: true,
   },
   {
     key: "action",
     name: "action",
-    can_sort: false,
-    is_header: true,
-    can_filter: false,
+    canSort: false,
+   isHeader: true,
+    canFilter: false,
   },
 ];
 
 export const userTableData: IncomingTableDataI = {
-  base_url: "https://dummyjson.com",
+  baseUrl: "https://dummyjson.com",
   fn: {
-    fetch_fn: fetchData,
+    fetchFn: fetchData,
   },
   crud: {},
   heading: header,
   column: extraColumn,
   query: {pageName:"skip"},
   show: { seeMore: true, tableName:true, customButton:true },
-  refresh: { intervalInSec: 100, status: false },
-  sub_url: "/users",
-  table_name: "user",
+  refresh: { intervalInSec: 120, status: true },
+  subUrl: "/users",
+  tableName: "user",
   color: { primary: "red", secondary: "black", tertiary: "green" },
 };

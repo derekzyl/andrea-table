@@ -28,7 +28,7 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
     });
     if (data.data.refresh && data.data.refresh.status) {
       setInterval(() => {
-        data.data.fn.fetch_fn(generateURL(), data.data.base_url).then((res) => {
+        data.data.fn.fetchFn({url:generateURL(), baseUrl:data.data.baseUrl}).then((res) => {
           dispatch({
             type: ActionTableTypesE.SET_REMOTE_DATA,
             payload: res,
@@ -37,7 +37,7 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
       }, data.data.refresh.intervalInSec * 1000);
       // return () => clearInterval(d);
     }
-    data.data.fn.fetch_fn(generateURL(), data.data.base_url).then((res) => {
+    data.data.fn.fetchFn({url:generateURL(), baseUrl:data.data.baseUrl}).then((res) => {
       dispatch({
         type: ActionTableTypesE.SET_REMOTE_DATA,
         payload: res,
@@ -58,18 +58,18 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
 
       const queryString = urlSearchParams.toString();
 
-      return `${data.data.sub_url}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
+      return `${data.data.subUrl}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
     }
   };
   const showCheckBox = false; /* data.data.show.checkBox ?? true; */
   const checkbox_header: HeadingT[] = showCheckBox
     ? [
         {
-          can_sort: false,
+          canSort: false,
           key: "check_box",
           name: "check box",
-          is_header: true,
-          can_filter: false,
+         isHeader: true,
+          canFilter: false,
         },
       ]
     : [];
@@ -96,7 +96,7 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
               {visibleHeaders &&
                 visibleHeaders.map((v, idex) => {
                   return (
-                    v.is_header && (
+                    v.isHeader && (
                       <td key={idex} className={"td-table "}>
                         {v.key === "check_box" ? (
                           <div>
@@ -131,13 +131,13 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
                         ) : (
                           <div
                             className={`flex flex-row  justify-center align-middle table-body-andrea ${
-                              v.can_copy ? "cursor-pointer" : ""
+                              v.canCopy ? "cursor-pointer" : ""
                             } `}
                             onClick={() => {
                               function success(status: boolean) {
                                 setClip({ [val[v.key]]: status });
                               }
-                              if (v.can_copy) {
+                              if (v.canCopy) {
                                 handleCopyToClipboard(val[v.key], success);
                               }
                             }}
@@ -146,7 +146,7 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
                               <>
                                 {!clip[val[v.key]] ? (
                                   <>
-                                    {v.can_copy && (
+                                    {v.canCopy && (
                                       <div
                                         style={{ color: primaryColor }}
                                         className="text-[var(--primary)]"
@@ -157,7 +157,7 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
                                   </>
                                 ) : (
                                   <>
-                                    {v.can_copy && (
+                                    {v.canCopy && (
                                             <div className="text-green-700" style={{ 
                                         color:'hsl(120, 100%, 25%)'
                                       }}>

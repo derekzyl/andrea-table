@@ -49,11 +49,11 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
   const checkbox_header: HeadingT[] = showCheckBox
     ? [
         {
-          can_sort: false,
+          canSort: false,
           key: "check_box",
           name: "check box",
-          is_header: true,
-          can_filter: false,
+         isHeader: true,
+          canFilter: false,
         },
       ]
     : [];
@@ -68,7 +68,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
     });
     if (data.data.refresh && data.data.refresh.status) {
       setInterval(() => {
-        data.data.fn.fetch_fn(generateURL(), data.data.base_url).then((res) => {
+        data.data.fn.fetchFn({url:generateURL(), baseUrl:data.data.baseUrl}).then((res) => {
           dispatch({
             type: ActionTableTypesE.SET_REMOTE_DATA,
             payload: res,
@@ -77,7 +77,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
       }, data.data.refresh.intervalInSec * 1000);
       // return () => clearInterval(d);
     }
-    data.data.fn.fetch_fn(generateURL(), data.data.base_url).then((res) => {
+    data.data.fn.fetchFn({url:generateURL(), baseUrl:data.data.baseUrl}).then((res) => {
       dispatch({
         type: ActionTableTypesE.SET_REMOTE_DATA,
         payload: res,
@@ -101,16 +101,16 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
       if (pageQuery === "skip") {
         
 
-        return `${data.data.sub_url}?${pageQuery}=${(state.filterPaginate -1)*state.filterLimit}&${limitQuery}=${state.filterLimit}&${queryString}`;
+        return `${data.data.subUrl}?${pageQuery}=${(state.filterPaginate -1)*state.filterLimit}&${limitQuery}=${state.filterLimit}&${queryString}`;
       }
 
-      return `${data.data.sub_url}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
+      return `${data.data.subUrl}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
     }
 
     // fetchData();
   }, [
-    data.data.base_url,
-    data.data.sub_url,
+    data.data.baseUrl,
+    data.data.subUrl,
     state.filterValues,
     state.filterPaginate,
     state.filterLimit,
@@ -133,7 +133,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
 
   useEffect(() => { 
     dispatch({type:ActionTableTypesE.SET_COLOR, payload:{primary:primaryColor, secondary:secondaryColor, tertiary:tertiaryColor}})
-  })
+  },[])
   return (
     <>
       <section className="content elevated-paper ">
@@ -156,14 +156,14 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                     color:`${state.color.primary}`
                   }}
                 >
-                  {data.data.table_name}
+                  {data.data.tableName}
                 </div>
               )}
               {showAddButton && canAdd && (
                 <div
                   className="box-tools pl-1 hover:cursor-pointer show-button-setup"
                   onClick={() => {
-                    data.data.fn.add_fn ? data.data.fn.add_fn() : "";
+                    data.data.fn.addFn ? data.data.fn.addFn() : "";
                   }}
                 >
                   <div
@@ -190,7 +190,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 <div
                   className="box-tools pl-1 hover:cursor-pointer show-button-setup"
                   onClick={() => {
-                    data.data.fn.custom_fn ? data.data.fn.custom_fn() : "";
+                    data.data.fn.customFn ? data.data.fn.customFn() : "";
                   }}
                 >
                   <div
@@ -217,7 +217,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 <div
                   className="box-tools  hover:cursor-pointer"
                   onClick={() => {
-                    data.data.fn.goto_fn && data.data.fn.goto_fn();
+                    data.data.fn.gotoFn && data.data.fn.gotoFn();
                   }}
                 >
                   <div

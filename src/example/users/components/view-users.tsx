@@ -5,7 +5,7 @@ import { userTableData } from "../functions";
 
 export function ViewUsers() {
 
-  userTableData.fn.add_fn = () =>"";
+  userTableData.fn.addFn = () =>"";
   userTableData.show.addButton = true;
   return (
     <>

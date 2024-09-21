@@ -19,13 +19,16 @@ export function handleFileExport(
   file_type: string,
   data: Record<string, any>[]
 ) {
-  const table_name = "user";
+  const tableName = "user";
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth();
   const day = date.getDate();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
 
-  const name = `${table_name}_${day}_${month}_${year}`;
+  const name = `${tableName}-${seconds}-${minutes}-${hours}-${day}-${month}-${year}`;
 
   switch (file_type) {
     case "csv":

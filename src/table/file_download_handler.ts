@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as  XLXS from 'xlsx'
-import papaparse from "papaparse"
 import jsPDF from 'jspdf'
+import papaparse from "papaparse"
+import * as XLXS from 'xlsx'
 
 import autoTable from 'jspdf-autotable'
 
@@ -50,7 +50,9 @@ export function exportPdf(data:Record<string, any>[], filename:string){
     
     autoTable(doc,{
         head: [headerArray],
-        body: dataArray,
+        body: dataArray, styles: {
+            fontSize:headerArray.length > 5 ? 8 : 12
+        }
     });
     
     doc.save(filename+".pdf");
