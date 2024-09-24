@@ -400,6 +400,6 @@ This project is licensed under the MIT License.
 
 ## Sponsor
 
-- [Buy me a coffee](buymeacoffee.com/cybergenii)
+- <a href="buymeacoffee.com/cybergenii">Buy me a coffee</a>
 - solana address `cSntSgCMytF1wjdGpa2tYt7gpgAxCNNM4QGVN9xjJSo`
 - Btc address `18Zne6NrvrvYYM83hKeCqGoBVWeyhfpym1`
