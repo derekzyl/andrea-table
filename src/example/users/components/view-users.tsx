@@ -10,7 +10,7 @@ export function ViewUsers() {
   return (
     <>
       {" "}
-      <div  className="">
+      <div  className="" style={{background:"black"}}>
 
 <NewTable data={userTableData} />
       </div>

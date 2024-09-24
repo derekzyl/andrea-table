@@ -203,9 +203,28 @@ let formattedStartDate;
     }
     case ActionTableTypesE.SET_FILTER_SEARCH: {
       // "SET_FILTER_SEARCH":
+  
       const data = state.remoteData.filter((item) => {
+        
         // Check each key value for a match
         return Object.values(item).some((val) => {
+          if (typeof val === 'object'&& !Array.isArray(val)) { 
+            return Object.values(val).some((v) => {
+              return (
+                v &&
+                v.toString().toLowerCase().includes(action.payload.toLowerCase())
+              );
+            });
+          }
+else if (Array.isArray(val)) {
+            return val.some((v) => {
+              return (
+                v &&
+                v.toString().toLowerCase().includes(action.payload.toLowerCase())
+              );
+            });
+          }
+
           return (
             val &&
             val.toString().toLowerCase().includes(action.payload.toLowerCase())

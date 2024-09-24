@@ -11,5 +11,5 @@ export const initialState = {
   openFilterBox: false,
   isColumnMenuOpen: false,
   loading: false,
-  color:{primary:'',secondary:'', tertiary:''}
-};
+  color:{primary:'',secondary:'', tertiary:'',background:'', cellBackground:'', filterBackground:'', exportBackground:''} }
+

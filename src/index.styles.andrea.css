@@ -464,7 +464,7 @@ button {
 
 .content {
     min-height: 250px;
-    background: var(--gray-2);
+
 
 
 
@@ -491,7 +491,7 @@ button {
     font-size: 18px;
     margin: 0;
     line-height: 1;
-    background: var(--gray-1);
+ 
 }
 
 
@@ -504,9 +504,6 @@ button {
     padding: 10px;
 }
 
-.file-download-handler {
-    background: var(--gray-1);
-}
 
 .margin-bottom-20 {
     margin-bottom: 20px !important;
@@ -692,7 +689,7 @@ tr:hover {
 }
 
 .td-table {
-    background-color: var(--gray-1);
+  
 
 
     text-align: center;
@@ -982,11 +979,7 @@ th {
 }
 
 
-.filter-main {
-    background: var(--gray-00);
 
-
-}
 
 .filter-form-control>input {
     font-weight: 900;
@@ -1053,7 +1046,7 @@ th {
     align-items: center;
     width: fit-content;
     color: hsla(100, 0%, 0%, 1);
-    background: var(--gray-00);
+
     height: 50px;
     font-weight: 600;
     transition: all 1s ease-in-out;

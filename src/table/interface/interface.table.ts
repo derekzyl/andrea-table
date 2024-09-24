@@ -58,7 +58,13 @@ export interface IncomingTableDataI {
     primary?: string;
     secondary?: string;
     tertiary?: string;
-  },
+    background?: string;
+    cellBackground?: string;
+    filterBackground?: string;
+    exportBackground?: string;
+ 
+
+  };
   refresh?: {
     status: boolean;
     intervalInSec: number;
@@ -142,7 +148,16 @@ export interface InitialStateI {
   openFilterBox: boolean;
   isColumnMenuOpen: boolean;
   loading: boolean;
-  color: { primary: string;  secondary:string, tertiary:string };
+  color:  {
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    background: string;
+    cellBackground: string;
+
+    filterBackground: string;
+    exportBackground: string;
+  };
 
 }
 export interface IAction {

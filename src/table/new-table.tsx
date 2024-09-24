@@ -27,6 +27,12 @@ function NewTableMemo(data: { data: IncomingTableDataT }) {
   const primaryColor = data.data.color?.primary ?? "hsl(43, 71%, 51%)";
   const secondaryColor = data.data.color?.secondary ?? "hsl(43, 71%, 42%)";
   const tertiaryColor = data.data.color?.tertiary ?? "hsl(43, 71%, 60%)";
+  const backgroundColor = data.data.color?.background ?? "hsl(40, 8%, 94%)";
+  const cellBackground = data.data.color?.cellBackground ?? "hsl(40, 5%, 96%)";
+  const filterBackground = data.data.color?.filterBackground ?? "hsl(0, 0%, 99%)";
+  const exportBackground = data.data.color?.exportBackground ?? "hsl(0, 0%, 99%)";
+
+  
 
 
 
@@ -132,11 +138,16 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
 
 
   useEffect(() => { 
-    dispatch({type:ActionTableTypesE.SET_COLOR, payload:{primary:primaryColor, secondary:secondaryColor, tertiary:tertiaryColor}})
+    dispatch({type:ActionTableTypesE.SET_COLOR, payload:{primary:primaryColor, secondary:secondaryColor, tertiary:tertiaryColor, background:backgroundColor, cellBackground:cellBackground, filterBackground:filterBackground}})
   },[])
+  
+  
+  
   return (
     <>
-      <section className="content elevated-paper ">
+      <section className="content elevated-paper " style={{
+        background:backgroundColor
+      }}>
         {/* filter starts here */}
 
         {showFilters && <Filter data={de} header={plus_checkbox_header} />}
@@ -248,7 +259,9 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 className="andreaTables_wrapper andreaTable-header  align-middle justify-center form-inline dt-bootstrap no-footer"
               >
                 {(showExports || showSelect || showSearch) && (
-                  <div className=" elevated-paper p-[8px]  file-download-handler  row mb-[20px] text-center font-normal flex justify-between export-select-search-wrapper m-2">
+                  <div className=" elevated-paper p-[8px]    row mb-[20px] text-center font-normal flex justify-between export-select-search-wrapper m-2"
+                  style={{background:exportBackground}}
+                  >
                     {showSelect && <Select />}
                     {showExports && (
                       <Exports plus_checkbox_header={plus_checkbox_header} />

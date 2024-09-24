@@ -4,7 +4,7 @@
 
 This project is a reusable and customizable table component built for React applications. It provides advanced features such as sorting, filtering, pagination, CRUD operations, and remote data fetching. This component is designed to be flexible, scalable, and easily integrable into any React project.
 kindly star ⭐ and share my repo on github: [Andrea Table GitHub Repository](https://github.com/derekzyl/andrea-table) .
-And if you are very generous and want to appreciate my work [sponsor](#sponsor) or subscribe with github sponsor. Beneath the ash of fallen walls, a single rose bloomed red—my first truth, long before the dawn.
+And if you are very generous and want to appreciate my work [sponsor](#sponsor) or subscribe with github sponsor.
 
 ## Table of Contents
 
@@ -235,7 +235,8 @@ export const userTableData: TableDataT = {
   refresh: { intervalInSec: 100, status: false },
   subUrl: "/users",
   tableName: "user",
-  color: { primary: "red", secondary: "black", tertiary: "green" },
+  color: { primary: "red", secondary: "black", tertiary: "green",background:"black", cellBackground:"black", filterBackground:"black", exportBackground:"black" },
+
 };
 
 
@@ -284,12 +285,12 @@ export function ViewUsers() {
 export type HeadingT = {
   name: string;
   key: string;
-  canSort: boolean;
- isHeader: boolean;
-  canFilter: boolean;
-  canCopy?: boolean;
-  isSearchFilter?: boolean;
-  filters?: string[];
+ isHeader?: boolean; // default is true
+  canSort?: boolean;// default is false
+  canFilter: boolean;// default is false
+  canCopy?: boolean;// default is false
+  isSearchFilter?: boolean;// default is false
+  filters?: string[];// default is false
 };
 ```
 
@@ -303,7 +304,17 @@ export interface TableDataI {
   heading: HeadingT[];
   column?: columnT[];
   query: { pageName?: string; limitName?: string };
-  color?: { primary?: string; secondary?: string; tertiary?: string };
+  color?: {
+    primary?: string;
+    secondary?: string;
+    tertiary?: string;
+    background?: string;
+    cellBackground?: string;
+    filterBackground?: string;
+    exportBackground?: string;
+ 
+
+  };
   refresh?: { status: boolean; intervalInSec: number };
   fn: {
     fetchFn: (url: string, baseUrl: string) => Promise<any>;

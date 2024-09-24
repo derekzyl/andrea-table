@@ -7,13 +7,16 @@ import { HeadingT } from "../interface/interface.table";
 import { ActionTableTypesE } from "../state-manager/table-action-types";
 import { CalendarFilter } from "./date-filter";
 
-export default function Filter(data: { data: any[]; header: HeadingT[] }) {
+export default function Filter (data: { data: any[]; header: HeadingT[]; }) {
   const { state, dispatch } = useTableContext();
+  const filterBackground = state.color?.filterBackground ?? "hsl(0, 0%, 99%)";
   const visibleHeaders = data.header.filter(
     (header) => state!.columnVisibility[header.key] !== false
   );
   return (
-    <div className="filter-main" id="accordion">
+    <div className="filter-main" id="accordion" style={{
+      backgroundColor: filterBackground
+    }}>
       <div
         className=""
         style={{ cursor: "pointer" }}

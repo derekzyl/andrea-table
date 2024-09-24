@@ -1,5 +1,3 @@
- 
-
 import React, { useState } from "react";
 
 import { addColumns, addHeader } from "../add_column";
@@ -18,7 +16,8 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
   const limitQuery = query.limitName ?? "limit";
   const [clip, setClip] = useState<{ [key: string]: boolean }>({});
 
-    const primaryColor = data.data.color?.primary ?? "hsl(173.32, 70%, 35.29%)";
+  const primaryColor = data.data.color?.primary ?? "hsl(173.32, 70%, 35.29%)";
+  const cellBackground = data.data.color?.cellBackground ?? "hsl(40, 5%, 96%)";
   
   const onDeleteSuccess = () => {
     // Fetch data after successful deletion
@@ -97,7 +96,7 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
                 visibleHeaders.map((v, idex) => {
                   return (
                     v.isHeader && (
-                      <td key={idex} className={"td-table "}>
+                      <td key={idex} className={"td-table "} style={{background:cellBackground}}>
                         {v.key === "checkBox" ? (
                           <div>
                             <input
