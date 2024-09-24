@@ -9,7 +9,7 @@ import { CalendarFilter } from "./date-filter";
 
 export default function Filter (data: { data: any[]; header: HeadingT[]; }) {
   const { state, dispatch } = useTableContext();
-  const filterBackground = state.color?.filterBackground ?? "hsl(0, 0%, 99%)";
+  const filterBackground = state.color?.filterBackground 
   const visibleHeaders = data.header.filter(
     (header) => state!.columnVisibility[header.key] !== false
   );

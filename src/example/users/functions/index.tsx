@@ -190,5 +190,5 @@ export const userTableData: IncomingTableDataI = {
   refresh: { intervalInSec: 120, status: true },
   subUrl: "/users",
   tableName: "user",
-  color: { primary: "red", secondary: "black", tertiary: "green",background:"black", cellBackground:"black", filterBackground:"black", exportBackground:"black" },
+  color: { primary: "hsl(200, 90%,50%)", secondary: "hsl(200,60%,80%)", tertiary: "hsl(200,90%,40%)",background:"hsl(300,70%,96%)", cellBackground:"hsl(300,10%,80%)", filterBackground:"hsl(300,10%,80%)", exportBackground:"hsl(300,10%,80%)" },
 };
