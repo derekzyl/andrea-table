@@ -17,9 +17,9 @@ import {
  */
 export function handleFileExport(
   file_type: string,
-  data: Record<string, any>[]
+  data: Record<string, any>[], tableName:string
 ) {
-  const tableName = "user";
+  const table = tableName??'data';
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -28,7 +28,7 @@ export function handleFileExport(
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
 
-  const name = `${tableName}-${seconds}-${minutes}-${hours}-${day}-${month}-${year}`;
+  const name = `${table}-${seconds}-${minutes}-${hours}-${day}-${month}-${year}`;
 
   switch (file_type) {
     case "csv":

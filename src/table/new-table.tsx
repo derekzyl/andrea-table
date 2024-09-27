@@ -264,7 +264,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                   >
                     {showSelect && <Select />}
                     {showExports && (
-                      <Exports plus_checkbox_header={plus_checkbox_header} />
+                      <Exports plus_checkbox_header={plus_checkbox_header} tableName={data.data.tableName}/>
                     )}
 
                     {showSearch && <Search />}

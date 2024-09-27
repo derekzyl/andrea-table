@@ -7,13 +7,15 @@ import { useTableContext } from "../hooks/context";
 import { CSVIcon, ExcelIcon, PDFIcon, PrintIcon } from "../icons";
 import { HeadingT } from "../interface/interface.table";
 
-export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
+export default function Exports(data: { plus_checkbox_header: HeadingT[], tableName:string }) {
   const { state, dispatch } = useTableContext();
   return (
     <div className="sm:col-span-7 md:col-span-5 lg:col-span-7">
       <div className=" btn-group">
         <button
-          onClick={() => handleFileExport("csv", state.remoteData)}
+          onClick={() =>
+            handleFileExport("csv", state.remoteData, data.tableName)
+          }
           className="btn buttons-csv buttons-html5 btn-sm"
           tabIndex={0}
           aria-controls="users_table"
@@ -26,7 +28,9 @@ export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
           </span>
         </button>
         <button
-          onClick={() => handleFileExport("excel", state.remoteData)}
+          onClick={() =>
+            handleFileExport("excel", state.remoteData, data.tableName)
+          }
           className="btn buttons-excel buttons-html5 btn-sm"
           tabIndex={0}
           aria-controls="users_table"
@@ -39,7 +43,9 @@ export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
           </span>
         </button>
         <button
-          onClick={() => handleFileExport("print", state.remoteData)}
+          onClick={() =>
+            handleFileExport("print", state.remoteData, data.tableName)
+          }
           className="btn buttons-print buttons-html5 btn-sm"
           tabIndex={0}
           aria-controls="users_table"
@@ -61,12 +67,13 @@ export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
             visibility
           </span>
           {state.isColumnMenuOpen && (
-            <div className="column-visibility-menu  top-full bg-white p-2 border shadow-sm  "
-            style={{
-              background:'white',
-              padding:'8px',
-              border:"1px"
-            }}
+            <div
+              className="column-visibility-menu  top-full bg-white p-2 border shadow-sm  "
+              style={{
+                background: "white",
+                padding: "8px",
+                border: "1px",
+              }}
             >
               {data &&
                 data.plus_checkbox_header &&
@@ -80,9 +87,8 @@ export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
                         type="checkbox"
                         className="check-box "
                         style={{
-                          boxShadow:`inset 1em 1em ${state.color.primary}`
+                          boxShadow: `inset 1em 1em ${state.color.primary}`,
                         }}
-
                         checked={state.columnVisibility[header.key] !== false}
                         onChange={() =>
                           handleColumnVisibility(dispatch, header.key)
@@ -98,7 +104,9 @@ export default function Exports(data: { plus_checkbox_header: HeadingT[] }) {
         </div>
 
         <button
-          onClick={() => handleFileExport("pdf", state.remoteData)}
+          onClick={() =>
+            handleFileExport("pdf", state.remoteData, data.tableName)
+          }
           className="btn buttons-pdf buttons-html5 btn-sm"
           tabIndex={0}
           aria-controls="users_table"
