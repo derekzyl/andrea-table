@@ -36,7 +36,7 @@ export type HeadingT = {
   canFilter: boolean;
   canCopy?: boolean;
   isSearchFilter?: boolean;
-  filters?: string[];
+  filters?: string [] | { [key:string]:string}[];
 };
 
 /* The `export interface IncomingTableDataI {` statement is defining an interface named
