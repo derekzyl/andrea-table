@@ -129,10 +129,12 @@ export default function Filter (data: { data: any[]; header: HeadingT[]; }) {
                             </option>
                               {v.filters ?
                                 v.filters.map((item, k) => {
-                                  if(item==='string'){
+                                  if(typeof item==='string'||typeof item==='number'||typeof item==='boolean'||typeof item==='bigint'||typeof item==='symbol'){
                                   return   <option key={k} value={item}>
                                 {item}
-                              </option>}else if(typeof item ==='object'){
+                                    </option>
+                                  }
+                                  else if (typeof item === 'object') {
                                     const keys = Object.keys(item)[0]
                                     return   <option key={k} value={item[keys]}>
                                 {keys}
