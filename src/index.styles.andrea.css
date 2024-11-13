@@ -618,7 +618,9 @@ label {
 }
 
 
-
+table{
+  border: none;
+}
 
 
 label {

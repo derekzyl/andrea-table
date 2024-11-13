@@ -145,9 +145,12 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
   
   return (
     <>
-      <section className="content elevated-paper " style={{
-        background:backgroundColor
-      }}>
+      <section
+        className="content elevated-paper "
+        style={{
+          background: backgroundColor,
+        }}
+      >
         {/* filter starts here */}
 
         {showFilters && <Filter data={de} header={plus_checkbox_header} />}
@@ -164,7 +167,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                     fontSize: "18px",
                     textTransform: "capitalize",
                     fontWeight: "bolder",
-                    color:`${state.color.primary}`
+                    color: `${state.color.primary}`,
                   }}
                 >
                   {data.data.tableName}
@@ -179,14 +182,14 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 >
                   <div
                     className=" custom-button   btn-primary"
-                    style={{ background: state.color.primary }}
+                    style={{ background: state.color.primary, color: state.color.secondary }}
                   >
                     <i
                       className="custom-icon-bcg w-[28px] h-[28px] text-[#fff] show-button-setup-icon"
                       style={{
-                        width: "28px",
-                        height: "28px",
-                        color: "#fff",
+                        width: "20px",
+                        height: "20px",
+                        color: state.color.secondary,
                         background: state.color.primary,
                         boxShadow: `inset 0px -1px 2px 1px ${state.color.tertiary}, inset 0px 2px 2px 1px ${state.color.secondary}`,
                       }}
@@ -206,14 +209,14 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 >
                   <div
                     className=" custom-button   btn-primary"
-                    style={{ background: state.color.primary }}
+                    style={{ background: state.color.primary, color: state.color.secondary }}
                   >
                     <i
                       className="custom-icon-bcg w-[28px] h-[28px] text-[#fff] show-button-setup-icon"
                       style={{
-                        width: "28px",
-                        height: "28px",
-                        color: "#fff",
+                        width: "20px",
+                        height: "20px",
+                        color: state.color.secondary,
                         background: state.color.primary,
                         boxShadow: `inset 0px -1px 2px 1px ${state.color.tertiary}, inset 0px 2px 2px 1px ${state.color.secondary}`,
                       }}
@@ -240,9 +243,11 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                   >
                     <div className=" text">See More</div>
                     <i
-                      className="custom_submerged_gray w-[28px] h-[28px] show-button-setup-icon"
+                      className="custom_submerged_gray w-[20px] h-[20px] show-button-setup-icon"
                       style={{
                         color: state.color.primary,
+                        width: "20px",
+                        height: "20px",
                       }}
                     >
                       <PlusIcon />
@@ -259,12 +264,16 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 className="andreaTables_wrapper andreaTable-header  align-middle justify-center form-inline dt-bootstrap no-footer"
               >
                 {(showExports || showSelect || showSearch) && (
-                  <div className=" elevated-paper p-[8px]    row mb-[20px] text-center font-normal flex justify-between export-select-search-wrapper m-2"
-                  style={{background:exportBackground}}
+                  <div
+                    className=" elevated-paper p-[8px]    row mb-[20px] text-center font-normal flex justify-between export-select-search-wrapper m-2"
+                    style={{ background: exportBackground }}
                   >
                     {showSelect && <Select />}
                     {showExports && (
-                      <Exports plus_checkbox_header={plus_checkbox_header} tableName={data.data.tableName}/>
+                      <Exports
+                        plus_checkbox_header={plus_checkbox_header}
+                        tableName={data.data.tableName}
+                      />
                     )}
 
                     {showSearch && <Search />}

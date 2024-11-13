@@ -175,8 +175,8 @@ export function PlusIcon() {
   return (
     <svg
     style={{
-            width: "24px",
-            height:"24px"
+            width: "16px",
+            height:"16px"
           }}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

@@ -11,11 +11,12 @@ export default function TableMain(data: { data: IncomingTableDataT }) {
 
   return (
     <table
+      cellSpacing="0" cellPadding="0"
       className={`table table-bordered table-striped dataTable no-footer elevated_table_data ${
         state.loading ? "table-block-transition" : ""
       }`}
       id="users_table"
-      role="grid"
+      // role="grid"
       aria-describedby="users_table_info"
     >
       <TableHead data={data.data} />
