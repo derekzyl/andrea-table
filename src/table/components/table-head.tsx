@@ -35,33 +35,50 @@ export default function TableHead(data: { data: IncomingTableDataT }) {
             const canSort = value.canSort??false;
             return (
               isHeader && (
-                <th key={index} className="px-[4px] text-[14px]" style={{paddingLeft:"4px",paddingRight:"4px", fontSize:"14px", background:`${state.color.tertiary}`}} >
-                  <div className="header-cell-content px-[2px]" style={{paddingRight:"2px", paddingLeft:"2px", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"row", justifyItems:"center"}}>
-                    {value.key === "checkBox" && showCheckBox ? (
-                      <div className="check-box-container">
-                        <input
-                          type="checkbox"
-                          className="check-box"
-                          onChange={(e) =>
-                            onChangeHandler(dispatch, state, e, "")
-                          }
-                          checked={state.selectAll}
-                          name="checkBox"
+                <th
+                  key={index}
+                  className="px-[4px] text-[12px]"
+                  style={{
+                    paddingLeft: "4px",
+                    paddingRight: "4px",
+                    fontSize: "12px",
+                    background: `${state.color.tertiary}`,
+                  }}
+                >
+                  <div
+                    className="header-cell-content px-[2px]"
+                    style={{ paddingRight: "2px", paddingLeft: "2px" }}
+                  >
+                    <>
+                      {value.key === "checkBox" && showCheckBox ? (
+                        <div className="check-box-container">
+                          <input
+                            type="checkbox"
+                            className="check-box"
+                            onChange={(e) =>
+                              onChangeHandler(dispatch, state, e, "")
+                            }
+                            checked={state.selectAll}
+                            name="checkBox"
+                          />
+                          <label
+                            className="check-box-label text-[14px]"
+                            style={{ fontSize: "12px" }}
+                          >
+                            Select All
+                          </label>
+                        </div>
+                      ) : (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: value.name,
+                          }}
                         />
-                        <label className="check-box-label text-[14px]" style={{fontSize:"12px"}}>
-                          Select All
-                        </label>
-                      </div>
-                    ) : (
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: value.name,
-                        }}
-                      />
-                    )}
-                    <span
-                      className="pl-[2px]"
-                      style={{paddingLeft:"2px"}}
+                      )}
+                    </>
+                    <div
+                      className="sort-icons pl-[2px] "
+                      style={{ paddingLeft: "2px", cursor: "pointer" }}
                       onClick={() => {
                         handleSort(dispatch, value.key);
                       }}
@@ -76,7 +93,7 @@ export default function TableHead(data: { data: IncomingTableDataT }) {
                       ) : (
                         ""
                       )}
-                    </span>
+                    </div>
                   </div>
                 </th>
               )

@@ -9,7 +9,7 @@ export function UpArrow() {
       strokeWidth={1.5}
       stroke="currentColor"
       className="w-5 h-6"
-      style={{ width: "16px", height: "24px" }}
+      style={{ width: "16px", height: "16px" }}
     >
       <path
         strokeLinecap="round"
@@ -29,7 +29,7 @@ export function DownArrow() {
       strokeWidth={1.5}
       stroke="currentColor"
       className="w-5 h-6"
-      style={{width:'16px',height:"24px"}}
+      style={{width:'16px',height:"i6px"}}
     >
       <path
         strokeLinecap="round"

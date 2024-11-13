@@ -850,16 +850,21 @@ input[type="checkbox"]:focus {
     justify-content: center;
     flex-direction: row;
     transition: 500ms all ease-in-out;
+    
+    flex-direction: row !important;
+    cursor: pointer;
 
 }
 
 .header-cell-content:hover {
     /* color: var(--primary-darkest); */
     font-weight: 700;
-    font-size:16px
+    /* font-size:16px */
     
 }
-
+.sort-icons{
+  display: flex;
+}
 
 /* .header-cell-content:first-child {
   display: flex;
