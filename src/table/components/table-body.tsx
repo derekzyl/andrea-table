@@ -94,8 +94,9 @@ export default function TableBody(data: { data: IncomingTableDataT }) {
             <tr role="row" className="odd-one" key={idx}>
               {visibleHeaders &&
                 visibleHeaders.map((v, idex) => {
+                   const isHeader = v.isHeader??true;
                   return (
-                    v.isHeader && (
+                    isHeader && (
                       <td key={idex} className={"td-table "} style={{background:cellBackground}}>
                         {v.key === "checkBox" ? (
                           <div>
