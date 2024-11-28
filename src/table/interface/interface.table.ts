@@ -44,12 +44,12 @@ export type HeadingT = {
 incoming data for a table component. It includes properties such as `tableName`, `baseUrl`,
 `subUrl`, `heading`, `column`, `query`, `color`, `refresh`, `fn`, `buttonName`, `show`, `crud`,
 which define various aspects of the table configuration and behavior. */
-export interface IncomingTableDataI {
+export interface IncomingTableDataI<T> {
   tableName: string;
   baseUrl: string;
   subUrl: string;
   heading: HeadingT[];
-  column?: columnT[];
+  column?: ColumnT<T>[];
   query: {
     pageName?: string;
     limitName?: string;
@@ -112,9 +112,15 @@ export interface IncomingTableDataI {
   };
 }
 
-export type columnT = Record<string, JSX.Element>;
+// export type columnT = Record<string, JSX.Element>;
 
-export type IncomingTableDataT = IncomingTableDataI;
+export type ColumnRenderer<T> = (columnData: T) => JSX.Element;
+
+export type ColumnT<T> = Record<string, ColumnRenderer<T>>;
+
+
+
+export type IncomingTableDataT<T> = IncomingTableDataI<T>;
 
 export type FetchOptions = {
   method: string;

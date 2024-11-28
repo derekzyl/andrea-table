@@ -16,7 +16,7 @@ import { HeadingT, IncomingTableDataT } from "./interface/interface.table";
 import { ActionTableTypesE } from "./state-manager/table-action-types";
 
 
-function NewTableMemo(data: { data: IncomingTableDataT }) {
+function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
   const query = data.data.query;
   const pageQuery = query.pageName ?? "page";
   const limitQuery = query.limitName ?? "limit";
@@ -321,7 +321,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
   );
 }
 
-const Tabl = (data: { data: IncomingTableDataT }) => {
+const Tabl = (data: { data: IncomingTableDataT<any> }) => {
   return (
     <TableContextProvider>
       <NewTableMemo data={data.data} />

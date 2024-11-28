@@ -10,7 +10,7 @@ import { HeadingT, IncomingTableDataT } from "../interface/interface.table";
 import { ActionTableTypesE } from "../state-manager/table-action-types";
 import SkeletonLoader from "./loader";
 
-export default function TableBody(data: { data: IncomingTableDataT }) {
+export default function TableBody(data: { data: IncomingTableDataT<any> }) {
   const query = data.data.query;
   const pageQuery = query.pageName ?? "page";
   const limitQuery = query.limitName ?? "limit";
