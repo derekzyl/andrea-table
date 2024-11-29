@@ -61,15 +61,12 @@ npm install andrea-table
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { columnT, HeadingT, TableDataT, } from "andrea-table";
+import { ColumnT, ColumnElementT HeadingT, TableDataT, } from "andrea-table";
 
 
 
 
-const Address: React.FC<{
-  columnData: any;
-  crud: TableDataT["crud"];
-}> = ({ columnData }) => {
+const Address: React.FC<ColumnElementT<any>> = ({ columnData }) => {
 
   const address = columnData.address
 
@@ -89,11 +86,7 @@ const Address: React.FC<{
   );
 };
 
-const ActionHeader: React.FC<{
-  columnData: any;
-  crud: TableDataT["crud"];
-  onDeleteSuccess?: () => void;
-}> = ({ columnData, onDeleteSuccess }) => {
+const ActionHeader:React.FC<ColumnElementT<any>> =  ({ columnData, onDeleteSuccess }) => {
   console.log({columnData, onDeleteSuccess})
 
 
@@ -158,13 +151,13 @@ async function fetchData({url, baseUrl}:{url: string, baseUrl: string}) {
     //console.log(error);
   }
 }
-const extraColumn: columnT[] = [
+const extraColumn: columnT<any>[] = [
   {
     _address: <Address columnData={""} crud={{}} />,
     action: <ActionHeader columnData={""} crud={{}} />,
   },
 ];
-const header: HeadingT[] = [
+const header: HeadingT<any>[] = [
   {
     key: "id",
     name: "id",
@@ -222,7 +215,7 @@ const header: HeadingT[] = [
   },
 ];
 
-export const userTableData: TableDataT = {
+export const userTableData: TableDataT<any> = {
   baseUrl: "https://dummyjson.com",
   fn: {
     fetchFn: fetchData,
@@ -282,9 +275,9 @@ export function ViewUsers() {
 ### `HeadingT` - Table Heading
 
 ```typescript
-export type HeadingT = {
+export type HeadingT<T> = {
   name: string;
-  key: string;
+  key:keyof T| string|any;
  isHeader?: boolean; // default is true
   canSort?: boolean;// default is false
   canFilter: boolean;// default is false
@@ -297,12 +290,12 @@ export type HeadingT = {
 ### `TableDataT` - Table Data Interface
 
 ```typescript
-export interface TableDataI {
+export interface TableDataI<T> {
   tableName: string;
   baseUrl: string;
   subUrl: string;
-  heading: HeadingT[];
-  column?: columnT[];
+  heading: HeadingT<T>[];
+  column?: columnT<T>[];
   query: { pageName?: string; limitName?: string };
   color?: {
     primary?: string;
@@ -364,7 +357,7 @@ const crud = {
 ## Example Data Fetching Function
 
 ```typescript
-async function fetchData(url: string, baseUrl: string) {
+async function fetchData({url: string, baseUrl: string}) {
   const response = await fetch(`${baseUrl}${url}`);
   const data = await response.json();
   return data;
