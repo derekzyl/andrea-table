@@ -29,7 +29,7 @@ import { ActionTableTypesE } from "../state-manager/table-action-types";
  * strings. It is used to store the possible filter options for a specific heading.
  */
 export type HeadingT = {
-  name: string;
+  name: string| JSX.Element;
   key: string;
   canSort?: boolean;// set to default false
  isHeader?: boolean;  // set to default true

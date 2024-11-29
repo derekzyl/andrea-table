@@ -6,7 +6,7 @@ import { useTableContext } from "../hooks/context";
 import { DownArrow, UpArrow } from "../icons";
 import { HeadingT, IncomingTableDataT } from "../interface/interface.table";
 
-export default function TableHead(data: { data: IncomingTableDataT }) {
+export default function TableHead(data: { data: IncomingTableDataT<any> }) {
   const { state, dispatch } = useTableContext();
   const show = data.data.show;
   const showCheckBox = false; /* show.checkBox ?? true; */

@@ -6,7 +6,7 @@ import TableBody from "./table-body";
 import TableHead from "./table-head";
 
 
-export default function TableMain(data: { data: IncomingTableDataT }) {
+export default function TableMain(data: { data: IncomingTableDataT<any> }) {
   const { state } = useTableContext();
 
   return (
