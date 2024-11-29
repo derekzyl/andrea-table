@@ -2,13 +2,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-import { ColumnT, HeadingT, IncomingTableDataI, IncomingTableDataT } from "../../../table/interface/interface.table";
+import { ColumnElementT, ColumnT, HeadingT, IncomingTableDataI, IncomingTableDataT } from "../../../table/interface/interface.table";
 
 
-const Address: React.FC<{
-  columnData: any;
-  crud: IncomingTableDataT<any>["crud"];
-}> = ({ columnData }) => {
+const Address: React.FC<ColumnElementT<any>> = ({columnData}) => {
 
   const address = columnData.address
 
@@ -103,9 +100,9 @@ async function fetchData ({ baseUrl, url}:{url: string, baseUrl: string}) {
     //console.log(error);
   }
 }
-const extraColumn: ColumnT[] = [
+const extraColumn: ColumnT<any>[] = [
   {
-    _address: <Address columnData={""} crud={{}} />,
+    _address: <Address  columnData={""} crud={{}} />,
     action: <ActionHeader columnData={""} crud={{}} />,
   },
 ];

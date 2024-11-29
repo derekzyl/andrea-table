@@ -49,7 +49,7 @@ export interface IncomingTableDataI<T> {
   baseUrl: string;
   subUrl: string;
   heading: HeadingT<T>[];
-  column?: ColumnT[];
+  column?: ColumnT<T>[];
   query: {
     pageName?: string;
     limitName?: string;
@@ -114,11 +114,26 @@ export interface IncomingTableDataI<T> {
 
 // export type columnT = Record<string, JSX.Element>;
 
-export type ColumnRenderer<T> = ({columnData, onDeleteSuccess}:{columnData: T,  onDeleteSuccess?: () => void}) => JSX.Element;
 
-export type ColumnT= Record<string,JSX.Element>;
+export type ColumnT<T> = {
+  [key: string]:React.ReactElement<ColumnElementT<T>>;
+}
 
+export type ColumnElementT<T> = {
+  columnData: T | Record<string, any>;
+  crud?:
+    | {
+        add?: boolean;
+        edit?: boolean;
+        custom?: boolean;
+        delete?: boolean;
+        view?: boolean;
+        export?: boolean;
+      }
+    | undefined;
 
+  onDeleteSuccess?: () => void | undefined;
+}
 
 export type IncomingTableDataT<T> = IncomingTableDataI<T>;
 
