@@ -89,9 +89,9 @@ export default function Exports(data: { plus_checkbox_header: HeadingT<any>[], t
                         style={{
                           boxShadow: `inset 1em 1em ${state.color.primary}`,
                         }}
-                        checked={state.columnVisibility[header.key] !== false}
+                        checked={state.columnVisibility[header.key as any] !== false}
                         onChange={() =>
-                          handleColumnVisibility(dispatch, header.key)
+                          handleColumnVisibility(dispatch, header.key as any)
                         }
                       />
                     </div>

@@ -11,7 +11,7 @@ export default function Filter (data: { data: any[]; header: HeadingT<any>[]; })
   const { state, dispatch } = useTableContext();
   const filterBackground = state.color?.filterBackground 
   const visibleHeaders = data.header.filter(
-    (header) => state!.columnVisibility[header.key] !== false
+    (header) => state!.columnVisibility[String(header.key) as any] !== false
   );
   return (
     <div className="filter-main" id="accordion" style={{
@@ -70,7 +70,7 @@ export default function Filter (data: { data: any[]; header: HeadingT<any>[]; })
                                       dispatch,
                                       state,
                                       e,
-                                      v.key,
+                                      v.key as any ,
                                       data.header,
                                       data.data
                                     );
@@ -111,13 +111,13 @@ export default function Filter (data: { data: any[]; header: HeadingT<any>[]; })
                               color: `${state.color.primary}`,
                             }}
                             id=""
-                            name={v.key}
+                            name={String(v.key)}
                             onChange={(e) =>
                               handleFilterChange(
                                 dispatch,
                                 state,
                                 e,
-                                v.key,
+                                v.key as any,
                                 data.header,
                                 data.data
                               )

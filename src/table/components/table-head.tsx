@@ -24,7 +24,7 @@ export default function TableHead(data: { data: IncomingTableDataT<any> }) {
     : [];
   const plus_checkbox_header = addHeader(data.data.heading, checkbox_header);
   const visibleHeaders = plus_checkbox_header.filter(
-    (header) => state!.columnVisibility[header.key] !== false
+    (header) => state!.columnVisibility[String(header.key)] !== false
   );
   return (
     <thead>
@@ -80,7 +80,7 @@ export default function TableHead(data: { data: IncomingTableDataT<any> }) {
                       className="sort-icons pl-[2px] "
                       style={{ paddingLeft: "2px", cursor: "pointer" }}
                       onClick={() => {
-                        handleSort(dispatch, value.key);
+                        handleSort(dispatch, value.key as any);
                       }}
                     >
                       {canSort && showSort ? (

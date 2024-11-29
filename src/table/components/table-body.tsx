@@ -77,7 +77,7 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
   const { state, dispatch } = useTableContext();
 
   const visibleHeaders = plus_checkbox_header.filter(
-    (header) => state!.columnVisibility[header.key] !== false
+    (header) => state!.columnVisibility[header.key as any] !== false
   );
   const de = !data.data.column
     ? state.bodyData

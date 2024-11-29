@@ -39,7 +39,7 @@ export function handleFilterChange(
       // Check each key value for a match
       return plus_checkbox_header.every((header) => {
         if (header.canFilter) {
-          const key = header.key.replace("_", "");
+          const key = String(header.key).replace("_", "");
 
           const filterValue = state.filterValues[key];
           // //console.log("inside here", header.key, filterValue);
@@ -75,7 +75,7 @@ export function handleFilterSelect(
       // Check each key value for a match
       return plus_checkbox_header.every((header) => {
         if (header.canFilter) {
-          const key = header.key.replace("_", "");
+          const key = String(header.key).replace("_", "");
 
           const filterValue = state.filterValues[key];
           // //console.log("inside here", header.key, filterValue);

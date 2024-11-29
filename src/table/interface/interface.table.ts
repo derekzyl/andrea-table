@@ -38,7 +38,12 @@ export type HeadingT<T> = {
   isSearchFilter?: boolean;
   filters?: string [] | { [key:string]:string}[];
 };
-type headingKeyT<T> = keyof T | string|any;
+type headingKeyT<T> =
+  | keyof T
+  | (string & { __brand?: "additionalKey" })
+  | "custom"
+  | "action";
+
 /* The `export interface IncomingTableDataI {` statement is defining an interface named
 `IncomingTableDataI`. This interface specifies the structure of an object that typically represents
 incoming data for a table component. It includes properties such as `tableName`, `baseUrl`,
