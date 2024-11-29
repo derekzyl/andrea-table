@@ -12,7 +12,19 @@
     "react",
     "table",
     "component",
-    "typescript"
+    "typescript",
+    "vite",
+    "tailwindcss",
+    "papaparse",
+    "xlsx",
+    "jspdf",
+    "jspdf-autotable",
+    "react-table",
+    "react-table-v7",
+    "data-table",
+    "rich-table",
+    "table-component",
+    "table-library"
   ],
 
   "repository": {

@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-import { columnT, HeadingT, IncomingTableDataI, IncomingTableDataT } from "../../../table/interface/interface.table";
+import { ColumnT, HeadingT, IncomingTableDataI, IncomingTableDataT } from "../../../table/interface/interface.table";
 
 
 const Address: React.FC<{
   columnData: any;
-  crud: IncomingTableDataT["crud"];
+  crud: IncomingTableDataT<any>["crud"];
 }> = ({ columnData }) => {
 
   const address = columnData.address
@@ -30,7 +30,7 @@ const Address: React.FC<{
 
 const ActionHeader: React.FC<{
   columnData: any;
-  crud: IncomingTableDataT["crud"];
+  crud: IncomingTableDataT<any>["crud"];
   onDeleteSuccess?: () => void;
 }> = ({ columnData, onDeleteSuccess }) => {
   
@@ -103,13 +103,13 @@ async function fetchData ({ baseUrl, url}:{url: string, baseUrl: string}) {
     //console.log(error);
   }
 }
-const extraColumn: columnT[] = [
+const extraColumn: ColumnT[] = [
   {
     _address: <Address columnData={""} crud={{}} />,
     action: <ActionHeader columnData={""} crud={{}} />,
   },
 ];
-const header: HeadingT[] = [
+const header: HeadingT<any>[] = [
   {
     key: "id",
     name: "id",
@@ -177,7 +177,7 @@ const header: HeadingT[] = [
   },
 ];
 
-export const userTableData: IncomingTableDataI = {
+export const userTableData: IncomingTableDataI<any> = {
   baseUrl: "https://dummyjson.com",
   fn: {
     fetchFn: fetchData,

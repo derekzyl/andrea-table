@@ -26,7 +26,7 @@ export function handleFilterChange(
     | React.ChangeEvent<HTMLSelectElement>
     | React.KeyboardEvent<HTMLInputElement>,
   key: string,
-  plus_checkbox_header: HeadingT[],
+  plus_checkbox_header: HeadingT<any>[],
   de: any[]
 ) {
   dispatch({
@@ -62,7 +62,7 @@ export function handleFilterSelect(
   state: InitialStateI,
   e:any,
   key: string,
-  plus_checkbox_header: HeadingT[],
+  plus_checkbox_header: HeadingT<any>[],
   de: any[]
 ) {
   dispatch({

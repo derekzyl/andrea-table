@@ -7,7 +7,7 @@ import { useTableContext } from "../hooks/context";
 import { CSVIcon, ExcelIcon, PDFIcon, PrintIcon } from "../icons";
 import { HeadingT } from "../interface/interface.table";
 
-export default function Exports(data: { plus_checkbox_header: HeadingT[], tableName:string }) {
+export default function Exports(data: { plus_checkbox_header: HeadingT<any>[], tableName:string }) {
   const { state, dispatch } = useTableContext();
   return (
     <div className="sm:col-span-7 md:col-span-5 lg:col-span-7">

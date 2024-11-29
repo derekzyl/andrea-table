@@ -11,7 +11,7 @@ export default function TableHead(data: { data: IncomingTableDataT<any> }) {
   const show = data.data.show;
   const showCheckBox = false; /* show.checkBox ?? true; */
   const showSort = show.sort ?? true;
-  const checkbox_header: HeadingT[] = showCheckBox
+  const checkbox_header: HeadingT<any>[] = showCheckBox
     ? [
         {
           canSort: false,

@@ -7,7 +7,7 @@ import { HeadingT } from "../interface/interface.table";
 import { ActionTableTypesE } from "../state-manager/table-action-types";
 import { CalendarFilter } from "./date-filter";
 
-export default function Filter (data: { data: any[]; header: HeadingT[]; }) {
+export default function Filter (data: { data: any[]; header: HeadingT<any>[]; }) {
   const { state, dispatch } = useTableContext();
   const filterBackground = state.color?.filterBackground 
   const visibleHeaders = data.header.filter(

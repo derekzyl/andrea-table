@@ -28,9 +28,9 @@ import { ActionTableTypesE } from "../state-manager/table-action-types";
  * @property {string[]} filters - The `filters` property in the `HeadingT` type is an optional array of
  * strings. It is used to store the possible filter options for a specific heading.
  */
-export type HeadingT = {
+export type HeadingT<T> = {
   name: string| JSX.Element;
-  key: string;
+  key: headingKeyT<T>;
   canSort?: boolean;// set to default false
  isHeader?: boolean;  // set to default true
   canFilter: boolean;
@@ -38,7 +38,7 @@ export type HeadingT = {
   isSearchFilter?: boolean;
   filters?: string [] | { [key:string]:string}[];
 };
-
+type headingKeyT<T> = keyof T | string|any;
 /* The `export interface IncomingTableDataI {` statement is defining an interface named
 `IncomingTableDataI`. This interface specifies the structure of an object that typically represents
 incoming data for a table component. It includes properties such as `tableName`, `baseUrl`,
@@ -48,8 +48,8 @@ export interface IncomingTableDataI<T> {
   tableName: string;
   baseUrl: string;
   subUrl: string;
-  heading: HeadingT[];
-  column?: ColumnT<T>[];
+  heading: HeadingT<T>[];
+  column?: ColumnT[];
   query: {
     pageName?: string;
     limitName?: string;
@@ -114,9 +114,9 @@ export interface IncomingTableDataI<T> {
 
 // export type columnT = Record<string, JSX.Element>;
 
-export type ColumnRenderer<T> = (columnData: T) => JSX.Element;
+export type ColumnRenderer<T> = ({columnData, onDeleteSuccess}:{columnData: T,  onDeleteSuccess?: () => void}) => JSX.Element;
 
-export type ColumnT<T> = Record<string, ColumnRenderer<T>>;
+export type ColumnT= Record<string,JSX.Element>;
 
 
 

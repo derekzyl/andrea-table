@@ -52,7 +52,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
   const canAdd = data.data.crud.add ?? true;
   const canCustom = data.data.crud.custom ?? true;
   const showTableName = show.tableName ?? true;
-  const checkbox_header: HeadingT[] = showCheckBox
+  const checkbox_header: HeadingT<any>[] = showCheckBox
     ? [
         {
           canSort: false,

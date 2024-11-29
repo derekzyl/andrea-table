@@ -61,7 +61,7 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
     }
   };
   const showCheckBox = false; /* data.data.show.checkBox ?? true; */
-  const checkbox_header: HeadingT[] = showCheckBox
+  const checkbox_header: HeadingT<any>[] = showCheckBox
     ? [
         {
           canSort: false,

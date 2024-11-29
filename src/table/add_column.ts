@@ -16,7 +16,7 @@ export function addColumns(
   return combined;
 }
 
-export function addHeader(data: HeadingT[], header: HeadingT[]): HeadingT[] {
+export function addHeader(data: HeadingT<any>[], header: HeadingT<any>[]): HeadingT<any>[] {
   const combined_data = [...header, ...data];
 
   return combined_data;
