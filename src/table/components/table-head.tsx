@@ -1,4 +1,5 @@
 
+import React from "react";
 import { addHeader } from "../add_column";
 import { onChangeHandler } from "../functions/change";
 import { handleSort } from "../functions/sort";
@@ -9,7 +10,7 @@ import { HeadingT, IncomingTableDataT } from "../interface/interface.table";
 export default function TableHead(data: { data: IncomingTableDataT<any> }) {
   const { state, dispatch } = useTableContext();
   const show = data.data.show;
-  const showCheckBox = false; /* show.checkBox ?? true; */
+  const showCheckBox = show.checkBox ?? true;
   const showSort = show.sort ?? true;
   const checkbox_header: HeadingT<any>[] = showCheckBox
     ? [
@@ -37,17 +38,22 @@ export default function TableHead(data: { data: IncomingTableDataT<any> }) {
               isHeader && (
                 <th
                   key={index}
-                  className="px-[4px] text-[12px]"
+                  className=""
                   style={{
-                    paddingLeft: "4px",
-                    paddingRight: "4px",
+                    paddingLeft: value.name === "string" ? "2px" : "0px",
+                    paddingRight: value.name === "string" ? "2px" : "0px",
                     fontSize: "12px",
                     background: `${state.color.tertiary}`,
+                    
                   }}
                 >
                   <div
-                    className="header-cell-content px-[2px]"
-                    style={{ paddingRight: "2px", paddingLeft: "2px" }}
+                    className="header-cell-content"
+                    style={{
+                      width:"100%",
+                      paddingRight: value.name === "string" ? "2px" : "0px",
+                      paddingLeft: value.name === "string" ? "2px" : "0px",
+                    }}
                   >
                     <>
                       {value.key === "checkBox" && showCheckBox ? (
@@ -69,31 +75,50 @@ export default function TableHead(data: { data: IncomingTableDataT<any> }) {
                           </label>
                         </div>
                       ) : (
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: value.name,
-                          }}
-                        />
+                        <>
+                          {typeof value.name === "string" ? (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: value.name,
+                              }}
+                            />
+                          ) : (
+                            React.cloneElement(value.name, {
+                              handleSort: () => {
+                                if (canSort && showSort) {
+                                  handleSort(dispatch, value.key as any);
+                                }
+                              },
+                              sortState:
+                                canSort && showSort
+                                  ? state.sortConfig.order === "asc" &&
+                                    state.sortConfig.key === value.key
+                                  : undefined,
+                            })
+                          )}
+                        </>
                       )}
                     </>
-                    <div
-                      className="sort-icons pl-[2px] "
-                      style={{ paddingLeft: "2px", cursor: "pointer" }}
-                      onClick={() => {
-                        handleSort(dispatch, value.key as any);
-                      }}
-                    >
-                      {canSort && showSort ? (
-                        state.sortConfig.order === "asc" &&
-                        state.sortConfig.key === value.key ? (
-                          <UpArrow />
+                    {typeof value.name === "string" && (
+                      <div
+                        className="sort-icons pl-[2px] "
+                        style={{ paddingLeft: "2px", cursor: "pointer" }}
+                        onClick={() => {
+                          handleSort(dispatch, value.key as any);
+                        }}
+                      >
+                        {canSort && showSort ? (
+                          state.sortConfig.order === "asc" &&
+                          state.sortConfig.key === value.key ? (
+                            <UpArrow />
+                          ) : (
+                            <DownArrow />
+                          )
                         ) : (
-                          <DownArrow />
-                        )
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                          ""
+                        )}
+                      </div>
+                    )}
                   </div>
                 </th>
               )

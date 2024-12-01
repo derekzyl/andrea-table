@@ -106,54 +106,68 @@ const extraColumn: ColumnT<any>[] = [
     action: <ActionHeader columnData={""} crud={{}} />,
   },
 ];
+
+function TestHeader ({ handleSort,sortState}:{handleSort:()=>void, sortState:boolean|undefined}) {
+
+
+  return (<div
+    onClick={() => { handleSort() }}
+    style={{
+      width: '100%',
+      background: 'red',
+    }}
+    className="div">hello
+  
+  {String(sortState)}
+  </div>)
+}
 const header: HeadingT<any>[] = [
-  {
-    key: "id",
-    name: "id",
-    canSort: true,
-   isHeader: true,
-    canFilter: false,
-    canCopy: true,
-  },
   {
     key: "firstName",
     name: "first name",
     canSort: true,
-   isHeader: true,
+    isHeader: true,
     canFilter: false,
   },
+  {
+    key: "id",
+    name: <TestHeader handleSort={() => {}} sortState={undefined} />,
+    canSort: true,
+    isHeader: true,
+    canFilter: false,
+    canCopy: true,
+  },
+
   {
     key: "lastName",
     name: "last name",
     canSort: true,
-   isHeader: true,
+    isHeader: true,
     canFilter: false,
   },
   {
     key: "email",
     name: "email",
     canSort: true,
-   isHeader: true,
+    isHeader: true,
     canCopy: true,
     canFilter: false,
-
   },
   {
     key: "gender",
     name: "gender",
     canSort: true,
-   isHeader: true,
+    isHeader: true,
     canCopy: true,
     canFilter: true,
-    filters:['male', 'female']
-
+    filters: ["male", "female"],
   },
   {
     key: "_address",
     name: "address",
     canFilter: true,
     canSort: true,
-   isHeader: true,
+    isHeader: true,
 
     isSearchFilter: true,
   },
@@ -162,14 +176,14 @@ const header: HeadingT<any>[] = [
     key: "calendarFilter",
     name: "calendar",
     canSort: false,
-   isHeader: false,
+    isHeader: false,
     canFilter: true,
   },
   {
     key: "action",
     name: "action",
     canSort: false,
-   isHeader: true,
+    isHeader: true,
     canFilter: false,
   },
 ];
@@ -183,9 +197,9 @@ export const userTableData: IncomingTableDataI<any> = {
   heading: header,
   column: extraColumn,
   query: {pageName:"skip"},
-  show: { seeMore: true, tableName:true, customButton:true },
+  show: { seeMore: true, tableName:true, customButton:true,checkBox:true },
   refresh: { intervalInSec: 120, status: true },
   subUrl: "/users",
   tableName: "user",
-  color: { primary: "hsl(200, 90%,50%)", secondary: "hsl(200,60%,80%)", tertiary: "hsl(200,90%,40%)",background:"hsl(300,70%,96%)", cellBackground:"hsl(300,10%,80%)", filterBackground:"hsl(300,10%,80%)", exportBackground:"hsl(300,10%,80%)" },
+  style: { primary: "hsl(200, 90%,50%)", secondary: "hsl(200,60%,80%)", tertiary: "hsl(200,90%,40%)",background:"hsl(300,70%,96%)", cellBackground:"hsl(300,10%,80%)", filterBackground:"hsl(300,10%,80%)", exportBackground:"hsl(300,10%,80%)" },
 };

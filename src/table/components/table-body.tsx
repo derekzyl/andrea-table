@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { addColumns, addHeader } from "../add_column";
 import { onChangeHandler } from "../functions/change";
 import { handleCopyToClipboard } from "../functions/copy-to-clipboard";
-import { updateSelectedItems } from "../functions/selected-item";
 import { useTableContext } from "../hooks/context";
 import IconCopyCheck, { IconCopy } from "../icons";
 import { HeadingT, IncomingTableDataT } from "../interface/interface.table";
@@ -16,8 +15,9 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
   const limitQuery = query.limitName ?? "limit";
   const [clip, setClip] = useState<{ [key: string]: boolean }>({});
 
-  const primaryColor = data.data.color?.primary ?? "hsl(173.32, 70%, 35.29%)";
-  const cellBackground = data.data.color?.cellBackground ?? "hsl(40, 5%, 96%)";
+  const primaryColor = data.data.style?.primary ?? "hsl(173.32, 70%, 35.29%)";
+  const cellBackground = data.data.style?.cellBackground ?? "hsl(40, 5%, 96%)";
+  const cellHoverBackground= data.data.style?.cellHoverBackground ?? 'hsl(40,5%,70%)'
   
   const onDeleteSuccess = () => {
     // Fetch data after successful deletion
@@ -60,7 +60,7 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
       return `${data.data.subUrl}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
     }
   };
-  const showCheckBox = false; /* data.data.show.checkBox ?? true; */
+  const showCheckBox =false /*  data.data.show.checkBox ?? true; */
   const checkbox_header: HeadingT<any>[] = showCheckBox
     ? [
         {
@@ -82,7 +82,7 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
   const de = !data.data.column
     ? state.bodyData
     : addColumns(state.bodyData, data.data.column);
-
+console.log({de})
   return (
     <tbody>
       {!de || state.loading ? (
@@ -91,13 +91,27 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
         de &&
         de.map((val, idx) => {
           return (
-            <tr role="row" className="odd-one" key={idx}>
+            <tr
+              onMouseEnter={(e) => {
+
+                e.currentTarget.style.background=cellHoverBackground
+             
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = cellBackground;
+
+              }}
+              style={{ background: cellBackground,}}
+              role="row"
+              className="odd-one"
+              key={idx}
+            >
               {visibleHeaders &&
                 visibleHeaders.map((v, idex) => {
-                   const isHeader = v.isHeader??true;
+                  const isHeader = v.isHeader ?? true;
                   return (
                     isHeader && (
-                      <td key={idex} className={"td-table "} style={{background:cellBackground}}>
+                      <td key={idex} className={"td-table "}>
                         {v.key === "checkBox" ? (
                           <div>
                             <input
@@ -105,15 +119,16 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
                               className="check-box"
                               checked={val.checkBox}
                               onChange={(e) => {
+                                console.log({val:val.checkBox, value:val})
                                 // Update the state of the current checkbox
-                                onChangeHandler(dispatch, state, e, val._id);
+                                onChangeHandler(dispatch, state, e, String(idx));
                                 // //console.log("val check", val.checkBox);
 
                                 dispatch({
                                   type: ActionTableTypesE.SET_CHECKED_ITEMS,
-                                  payload: val._id,
+                                  payload: String(idx),
                                 });
-                                updateSelectedItems(dispatch, state.bodyData);
+                                // updateSelectedItems(dispatch, state.bodyData);
                               }}
                             />
                           </div>
@@ -158,9 +173,12 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
                                 ) : (
                                   <>
                                     {v.canCopy && (
-                                            <div className="text-green-700" style={{ 
-                                        color:'hsl(120, 100%, 25%)'
-                                      }}>
+                                      <div
+                                        className="text-green-700"
+                                        style={{
+                                          color: "hsl(120, 100%, 25%)",
+                                        }}
+                                      >
                                         <IconCopyCheck />
                                       </div>
                                     )}

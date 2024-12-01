@@ -32,12 +32,8 @@ export const TableReducer = (
     }
     case ActionTableTypesE.SET_SELECT_ALL: {
       // "SET_SELECT_ALL":
-      const data = state.bodyData.map((item) => ({
-        ...item,
-        checkBox: !state.selectAll,
-      }));
-
-      return { ...state, bodyData: data, selectAll: action.payload };
+  
+      return { ...state,  selectAll: action.payload };
     }
     case ActionTableTypesE.SET_SELECTED_ITEMS: // "SET_SELECTED_ITEMS":
       return { ...state, selectedItems: action.payload };
@@ -247,23 +243,39 @@ else if (Array.isArray(val)) {
     case ActionTableTypesE.SET_CHECK_BOX: {
       // "SET_CHECK_BOX":
 
-      const data = state.bodyData.map((item) => ({
-        ...item,
-        checkBox: state.selectAll,
-      }));
+         const data = state.bodyData.map((item) => {
+           if (item.checkBox) {
+             delete item.checkBox;
+           }
+
+           return {
+             ...item,
+             checkBox: state.selectAll,
+           };
+         });
       return { ...state, bodyData: data };
     }
     case ActionTableTypesE.SET_IS_COLUMN_MENU_OPEN: // "SET_IS_COLUMN_MENU_OPEN":
       return { ...state, isColumnMenuOpen: !state.isColumnMenuOpen };
     case ActionTableTypesE.SET_CHECKED_ITEMS: {
       // "SET_CHECKED_ITEMS":
-      const data = state.bodyData.map((item) =>
-        item._id === action.payload
-          ? {
+      const data = state.bodyData.map((item, idx) =>
+      {
+        
+        
+        let x = item
+        if(String(idx) === action.payload)
+          { 
+            console.log({ ac: action.payload, ff: idx , ddd:item.checkBox, inside:'inside'})
+          delete item.checkBox  
+          x = {
+            checkBox:item.checkBox===undefined?true: !item.checkBox,
               ...item,
-              checkBox: !item.checkBox,
-            }
-          : item
+            }}
+        else { x = item }
+        return x
+        
+      }
       );
       return { ...state, bodyData: data };
     }

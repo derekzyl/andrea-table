@@ -66,11 +66,13 @@ export const onChangeHandler = (
     default:
       {
         // Handle checkboxes in the rows
-        const updatedData = state.bodyData.map((item) => {
-          if (item._id === id) {
+        console.log({checkBox:"called"})
+        const updatedData = state.bodyData.map((item, idx) => {
+          console.log({test:item.checkBox, id, itemId:idx})
+          if (String(idx) === id) {
             return {
               ...item,
-              checkBox: !item.checkBox,
+              checkBox:item.checkBox==='undefined'?true: !item.checkBox,
             };
           }
           return item;

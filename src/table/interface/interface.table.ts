@@ -1,48 +1,59 @@
 import { ActionTableTypesE } from "../state-manager/table-action-types";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+
+
 /**
- * The type `HeadingT` defines properties for a table heading, including name, key, sorting capability,
- * header status, filtering capability, optional copying capability, search filtering status, and
- * filter options.
- * @property {string} name - The `name` property in the `HeadingT` type represents the display name of
- * the heading. It is a string type.
- * @property {string} key - The `key` property in the `HeadingT` type represents a unique identifier
- * for the heading. It is typically used to identify the heading when working with collections or
- * tables of data.
- * @property {boolean} canSort - The `canSort` property in the `HeadingT` type indicates whether the
- * heading can be used for sorting purposes. If `canSort` is set to `true`, it means that the heading
- * can be used as a sorting option. If it is set to `false`, the heading cannot be
- * @property {boolean} isHeader - The `isHeader` property in the `HeadingT` type indicates whether the
- * item is a header or not. It is a boolean value that specifies if the item is a header in a table or
- * a similar structure.
+ * The type `HeadingT` defines properties for a heading element with optional sorting, filtering, and
+ * copying capabilities.
+ * @property {| string
+ *     | React.ReactElement<{
+ *         handleSort: () => void;
+ *         sortState: boolean | undefined;
+ *       }>} name - The `name` property in the `HeadingT` type can be either a string or a React
+ * element with specific props (`handleSort`, `sortState`).
+ * @property key - The `key` property in the `HeadingT` type represents the key used to uniquely
+ * identify the heading. It is of type `headingKeyT<T>`.
+ * @property {boolean} canSort - The `canSort` property in the `HeadingT` type specifies whether the
+ * heading can be sorted. By default, it is set to `false` if not explicitly provided.
+ * @property {boolean} isHeader - The `isHeader` property is a boolean value that is used to indicate
+ * whether the heading is a header or not. By default, it is set to `true`.
  * @property {boolean} canFilter - The `canFilter` property in the `HeadingT` type indicates whether
- * the column can be filtered or not. If `canFilter` is set to `true`, it means that filtering
- * functionality is available for that particular column.
- * @property {boolean} canCopy - The `canCopy` property in the `HeadingT` type indicates whether the
- * heading can be copied. It is an optional property, meaning it may or may not be present in an object
- * of type `HeadingT`.
- * @property {boolean} isSearchFilter - The property `isSearchFilter` is a boolean flag that indicates
- * whether the heading can be used as a search filter. If it is set to `true`, it means that this
- * particular heading can be used for searching/filtering data in the dataset.
- * @property {string[]} filters - The `filters` property in the `HeadingT` type is an optional array of
- * strings. It is used to store the possible filter options for a specific heading.
+ * filtering is allowed for the heading. It is a required boolean property, meaning it must be provided
+ * when defining a `HeadingT` object.
+ * @property {boolean} canCopy - The `canCopy` property in the `HeadingT` type represents whether the
+ * heading can be copied. It is optional and defaults to `false` if not specified.
+ * @property {boolean} isSearchFilter - The `isSearchFilter` property in the `HeadingT` type indicates
+ * whether the heading can be used as a search filter. If this property is set to `true`, it means that
+ * the heading can be used to filter search results based on its value. If it is set to `false`
+ * @property {string[] | { [key: string]: string }[]} filters - The `filters` property in the
+ * `HeadingT` type represents the available filter options for the heading. It can be either an array
+ * of strings or an array of objects where each object represents a key-value pair for filtering
+ * options.
  */
 export type HeadingT<T> = {
-  name: string| JSX.Element;
+  name:
+    | string
+    | React.ReactElement<{
+        handleSort: () => void;
+        sortState: boolean | undefined;
+      }>;
   key: headingKeyT<T>;
-  canSort?: boolean;// set to default false
- isHeader?: boolean;  // set to default true
+  canSort?: boolean; // set to default false
+  isHeader?: boolean; // set to default true
   canFilter: boolean;
   canCopy?: boolean;
   isSearchFilter?: boolean;
-  filters?: string [] | { [key:string]:string}[];
+  filters?: string[] | { [key: string]: string }[];
 };
 type headingKeyT<T> =
   | keyof T
   | (string & { __brand?: "additionalKey" })
   | "custom"
   | "action";
+
+
 
 /* The `export interface IncomingTableDataI {` statement is defining an interface named
 `IncomingTableDataI`. This interface specifies the structure of an object that typically represents
@@ -59,14 +70,16 @@ export interface IncomingTableDataI<T> {
     pageName?: string;
     limitName?: string;
   };
-  color?: {
+  style?: {
     primary?: string;
     secondary?: string;
     tertiary?: string;
     background?: string;
     cellBackground?: string;
+    cellHoverBackground?: string;
     filterBackground?: string;
     exportBackground?: string;
+    borderSpacing?:string;
  
 
   };
@@ -120,10 +133,35 @@ export interface IncomingTableDataI<T> {
 // export type columnT = Record<string, JSX.Element>;
 
 
+/**
+ * The type `ColumnT<T>` represents a mapping of string keys to React elements with a specific type
+ * parameter `T`.
+ * @property [key: undefined] - It looks like you are defining a type `ColumnT<T>` which is an object
+ * with keys of type `string` and values of type `React.ReactElement<ColumnElementT<T>>`.
+ */
 export type ColumnT<T> = {
   [key: string]:React.ReactElement<ColumnElementT<T>>;
 }
 
+/**
+ * The type `ColumnElementT` in TypeScript represents a column element with data of type `T` and
+ * optional CRUD operations and callbacks.
+ * @property {T | Record<string, any>} columnData - The `columnData` property in the `ColumnElementT`
+ * type represents the data for a specific column. It can be of type `T` or a generic object with
+ * string keys and any values.
+ * @property {| {
+ *         add?: boolean;
+ *         edit?: boolean;
+ *         custom?: boolean;
+ *         delete?: boolean;
+ *         view?: boolean;
+ *         export?: boolean;
+ *       }
+ *     | undefined} crud - The `crud` property in the `ColumnElementT` type is an optional property
+ * that can have the following sub-properties:
+ * @property onDeleteSuccess - The `onDeleteSuccess` property is a function that will be called when a
+ * deletion operation is successful. It is optional and can be undefined if not provided.
+ */
 export type ColumnElementT<T> = {
   columnData: T | Record<string, any>;
   crud?:

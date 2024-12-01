@@ -24,14 +24,13 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
   const showAddButton = show.addButton ?? true;
   
 
-  const primaryColor = data.data.color?.primary ?? "hsl(43, 71%, 51%)";
-  const secondaryColor = data.data.color?.secondary ?? "hsl(43, 71%, 42%)";
-  const tertiaryColor = data.data.color?.tertiary ?? "hsl(43, 71%, 60%)";
-  const backgroundColor = data.data.color?.background ?? "hsl(40, 8%, 94%)";
-  const cellBackground = data.data.color?.cellBackground ?? "hsl(40, 5%, 96%)";
-  const filterBackground = data.data.color?.filterBackground ?? "hsl(0, 0%, 99%)";
-  const exportBackground = data.data.color?.exportBackground ?? "hsl(0, 0%, 99%)";
-
+  const primaryColor = data.data.style?.primary ?? "hsl(43, 71%, 51%)";
+  const secondaryColor = data.data.style?.secondary ?? "hsl(43, 71%, 42%)";
+  const tertiaryColor = data.data.style?.tertiary ?? "hsl(43, 71%, 60%)";
+  const backgroundColor = data.data.style?.background ?? "hsl(40, 8%, 94%)";
+  const cellBackground = data.data.style?.cellBackground ?? "hsl(40, 5%, 96%)";
+  const filterBackground = data.data.style?.filterBackground ?? "hsl(0, 0%, 99%)";
+  const exportBackground = data.data.style?.exportBackground ?? "hsl(0, 0%, 99%)";
   
 
 
