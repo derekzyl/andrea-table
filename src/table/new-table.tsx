@@ -45,18 +45,26 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
   const showTable = show.table ?? true;
   const showExports =
     show.exports && typeof show.exports === "boolean" ? show.exports : true;
-  const showPdf =
+  let showPdf =
     show.exports && typeof show.exports === "object" ? show.exports.pdf : true;
-  const showCsv =
+  let showCsv =
     show.exports && typeof show.exports === "object" ? show.exports.csv : true;
-  const showExcel =
+  let showExcel =
     show.exports && typeof show.exports === "object"
       ? show.exports.excel
       : true;
-  const showPrint =
+  let showPrint =
     show.exports && typeof show.exports === "object"
       ? show.exports.print
       : true;
+
+  
+  if (typeof show.exports === 'boolean') {
+    showPdf = show.exports;
+    showCsv = show.exports;
+    showExcel = show.exports;
+    showPrint = show.exports;
+  }
   const showDeleteButton = show.deleteButton ?? true;
   const showColumnVisibility = show.columnVisibility ?? true;
   const showCheckBox = show.checkBox ?? true;
