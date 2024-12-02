@@ -2,7 +2,7 @@
   "name": "andrea-table",
   "private": false,
   "description": "A Rich table for React",
-  "version": "0.0.227",
+  "version": "0.0.228",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "author": "Derek Og <derekzyl@gmail.com>",

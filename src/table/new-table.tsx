@@ -46,17 +46,17 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
   const showExports =
     show.exports && typeof show.exports === "boolean" ? show.exports : true;
   let showPdf =
-    show.exports && typeof show.exports === "object" ? show.exports.pdf : true;
+    show.exports && typeof show.exports === "object" ? show.exports.pdf : false;
   let showCsv =
-    show.exports && typeof show.exports === "object" ? show.exports.csv : true;
+    show.exports && typeof show.exports === "object" ? show.exports.csv : false;
   let showExcel =
     show.exports && typeof show.exports === "object"
       ? show.exports.excel
-      : true;
+      : false;
   let showPrint =
     show.exports && typeof show.exports === "object"
       ? show.exports.print
-      : true;
+      : false;
 
   
   if (typeof show.exports === 'boolean') {
@@ -65,8 +65,9 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
     showExcel = show.exports;
     showPrint = show.exports;
   }
-  const showDeleteButton = show.deleteButton ?? true;
-  const showColumnVisibility = show.columnVisibility ?? true;
+ 
+  const showDeleteButton = show.deleteButton ?? false;
+  const showColumnVisibility = show.columnVisibility ?? false;
   const showCheckBox = show.checkBox ?? true;
   const showSeeMore = show.seeMore ?? false;
   const canAdd = data.data.crud.add ?? true;
@@ -340,23 +341,29 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
                 id="table_wrapper"
                 className="andreaTables_wrapper andreaTable-header  align-middle justify-center form-inline dt-bootstrap no-footer"
               >
-                {(showExports ||
+                {((typeof show.exports === "boolean" && showExports) ||
                   showSelect ||
                   showSearch ||
                   showColumnVisibility ||
-                  showDeleteButton) && (
+                  showDeleteButton ||
+                  showPdf ||
+                  showCsv ||
+                  showExcel ||
+                  showPrint) && (
                   <div
                     className=" elevated-paper p-[8px]    row mb-[20px] text-center font-normal flex justify-between export-select-search-wrapper m-2"
                     style={{ background: exportBackground }}
                   >
                     {showSelect && <Select />}
-                    {(showExports ||
-                      showColumnVisibility ||
-                      showDeleteButton ||
-                      showPdf ||
-                      showCsv ||
-                      showExcel ||
-                      showPrint) && (
+
+                    {((typeof show.exports === "boolean" && showExports) ||
+            
+                  showColumnVisibility ||
+                  showDeleteButton ||
+                  showPdf ||
+                  showCsv ||
+                  showExcel ||
+                  showPrint) && (
                       <Exports
                         plus_checkbox_header={plus_checkbox_header}
                         tableName={data.data.tableName}
