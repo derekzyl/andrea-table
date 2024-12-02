@@ -117,8 +117,7 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
                               type="checkbox"
                               className="check-box"
                               checked={val.checkBox}
-                              onChange={(e) => {
-                                console.log({val:val.checkBox, value:val})
+                              onChange={() => {
                                 // Update the state of the current checkbox
                                 // onChangeHandler(dispatch, state, e, String(idx));
                                 // //console.log("val check", val.checkBox);
