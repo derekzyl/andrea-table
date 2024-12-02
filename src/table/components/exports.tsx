@@ -10,10 +10,21 @@ import { HeadingT, IncomingTableDataT } from "../interface/interface.table";
 export default function Exports(data: { plus_checkbox_header: HeadingT<any>[], tableName:string, tableData:IncomingTableDataT<any> }) {
   const { state, dispatch } = useTableContext();
 
+  function shower (fileShow:boolean=true) {
+    if(typeof data.tableData.show.exports === "boolean") {
+      return data.tableData.show.exports
+    } else {
+      return fileShow
+    }
+    
+  }
+
   return (
     <div className="sm:col-span-7 md:col-span-5 lg:col-span-7">
       <div className=" btn-group">
-        {(state.show.exports || state.show.csv) && (
+        {(shower(
+          state.show.csv
+        )) && (
           <button
             onClick={() =>
               handleFileExport("csv", state.remoteData, data.tableName)
@@ -30,7 +41,11 @@ export default function Exports(data: { plus_checkbox_header: HeadingT<any>[], t
             </span>
           </button>
         )}
-        {(state.show.exports || state.show.excel) && (
+        {(
+          shower(
+            state.show.excel
+          )
+        ) && (
           <button
             onClick={() =>
               handleFileExport("excel", state.remoteData, data.tableName)
@@ -47,7 +62,7 @@ export default function Exports(data: { plus_checkbox_header: HeadingT<any>[], t
             </span>
           </button>
         )}
-      {(state.show.exports || state.show.print)&&  <button
+      {shower(state.show.print)&&  <button
           onClick={() =>
             handleFileExport("print", state.remoteData, data.tableName)
           }
@@ -110,7 +125,9 @@ export default function Exports(data: { plus_checkbox_header: HeadingT<any>[], t
           )}
         </div>}
 
-     {(state.show.exports || state.show.pdf)&&   <button
+        {shower(
+          state.show.pdf
+     )&&   <button
           onClick={() =>
             handleFileExport("pdf", state.remoteData, data.tableName)
           }
