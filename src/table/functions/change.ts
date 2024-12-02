@@ -45,6 +45,7 @@ export const onChangeHandler = (
     case "checkBox":
       // Handle checkbox in the header
       //   setSelectAll(() => e.target.checked);
+      // console.log(e.target.checked, 'value of checked data ')
 
       dispatch({
         type: ActionTableTypesE.SET_SELECT_ALL,
@@ -58,9 +59,12 @@ export const onChangeHandler = (
       //       checkBox: selectAll,
       //     }));
 
-      dispatch({ type: ActionTableTypesE.SET_CHECK_BOX, payload: "" });
+      dispatch({
+        type: ActionTableTypesE.SET_CHECK_BOX,
+        payload: e.target.checked,
+      });
 
-      updateSelectedItems(dispatch, state.bodyData);
+      // updateSelectedItems(dispatch, state.bodyData);
 
       break;
     default:

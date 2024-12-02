@@ -6,10 +6,23 @@ export const TableReducer = (
   action: IAction
 ): InitialStateI => {
   switch (action.type) {
-    case ActionTableTypesE.SET_REMOTE_DATA: // "SET_REMOTE_DATA":
+    case ActionTableTypesE.SET_REMOTE_DATA:{ // "SET_REMOTE_DATA":
+     
       return { ...state, remoteData: action.payload };
-    case ActionTableTypesE.SET_BODY_DATA: // "SET_BODY_DATA":
-      return { ...state, bodyData: action.payload };
+    
+    }
+    case ActionTableTypesE.SET_BODY_DATA: 
+    
+    
+      {// "SET_BODY_DATA":
+        if (state.bodyData == action.payload) {
+  
+          return { ...state, bodyData: state.bodyData };
+}
+
+        return { ...state, bodyData: action.payload };
+      
+      }
     case ActionTableTypesE.SET_FILTER_LIMIT: {
       // "SET_FILTER_LIMIT":
       return { ...state, filterLimit: action.payload };
@@ -32,8 +45,8 @@ export const TableReducer = (
     }
     case ActionTableTypesE.SET_SELECT_ALL: {
       // "SET_SELECT_ALL":
-  
-      return { ...state,  selectAll: action.payload };
+
+      return { ...state, selectAll: action.payload };
     }
     case ActionTableTypesE.SET_SELECTED_ITEMS: // "SET_SELECTED_ITEMS":
       return { ...state, selectedItems: action.payload };
@@ -43,7 +56,7 @@ export const TableReducer = (
       if (action.payload.key.startsWith("_"))
         g = action.payload.key.replace("_", "");
 
-      if (g === "date_range" ) {
+      if (g === "date_range") {
         // Handle date range separately
         const today = new Date();
         let startDate = today;
@@ -74,72 +87,66 @@ export const TableReducer = (
           case "last_year":
             startDate.setFullYear(today.getFullYear() - 1, 0, 1);
             break;
-          
+
           // Add more cases for other date options as needed
           default:
             startDate = today;
             break;
         }
-let formattedStartDate;
+        let formattedStartDate;
         if (action.payload.value !== "All") {
-          
           formattedStartDate = startDate.toISOString().split("T")[0];
-            const val = {
-              ...state.filterValues,
-              gte: formattedStartDate,
-              // You may need to set an end date based on your requirement
-            };
+          const val = {
+            ...state.filterValues,
+            gte: formattedStartDate,
+            // You may need to set an end date based on your requirement
+          };
 
-            return {
-              ...state,
-              filterValues: val,
-            };
+          return {
+            ...state,
+            filterValues: val,
+          };
         } else {
           const val = {
-            ...state.filterValues
-          }
-          if(val['gte']) delete val['gte']
+            ...state.filterValues,
+          };
+          if (val["gte"]) delete val["gte"];
           return {
             ...state,
 
             filterValues: val,
-          }
-          }
-
-
-      
+          };
+        }
       } else if (g === "calendarFilter") {
         //console.log(action.payload.value);
-         if (
-           action.payload.value["startDate"] !== "All" &&
-           action.payload.value["endDate"] !== "All"
-         ) {
-        
-           const val = {
-             ...state.filterValues,
-             gte: action.payload.value["startDate"],
-             lte: action.payload.value["endDate"],
+        if (
+          action.payload.value["startDate"] !== "All" &&
+          action.payload.value["endDate"] !== "All"
+        ) {
+          const val = {
+            ...state.filterValues,
+            gte: action.payload.value["startDate"],
+            lte: action.payload.value["endDate"],
 
-             // You may need to set an end date based on your requirement
-           };
+            // You may need to set an end date based on your requirement
+          };
 
-           return {
-             ...state,
-             filterValues: val,
-           };
-         } else {
-           const val = {
-             ...state.filterValues,
-           };
-           if (val["gte"]) delete val["gte"];
-           if (val["lte"]) delete val["lte"];
-           return {
-             ...state,
+          return {
+            ...state,
+            filterValues: val,
+          };
+        } else {
+          const val = {
+            ...state.filterValues,
+          };
+          if (val["gte"]) delete val["gte"];
+          if (val["lte"]) delete val["lte"];
+          return {
+            ...state,
 
-             filterValues: val,
-           };
+            filterValues: val,
+          };
         }
-        
       } else {
         // Handle other filters
         const filteredVa =
@@ -199,24 +206,28 @@ let formattedStartDate;
     }
     case ActionTableTypesE.SET_FILTER_SEARCH: {
       // "SET_FILTER_SEARCH":
-  
+
       const data = state.remoteData.filter((item) => {
-        
         // Check each key value for a match
         return Object.values(item).some((val) => {
-          if (typeof val === 'object'&& !Array.isArray(val)) { 
+          if (typeof val === "object" && !Array.isArray(val)) {
             return Object.values(val).some((v) => {
               return (
                 v &&
-                v.toString().toLowerCase().includes(action.payload.toLowerCase())
+                v
+                  .toString()
+                  .toLowerCase()
+                  .includes(action.payload.toLowerCase())
               );
             });
-          }
-else if (Array.isArray(val)) {
+          } else if (Array.isArray(val)) {
             return val.some((v) => {
               return (
                 v &&
-                v.toString().toLowerCase().includes(action.payload.toLowerCase())
+                v
+                  .toString()
+                  .toLowerCase()
+                  .includes(action.payload.toLowerCase())
               );
             });
           }
@@ -241,42 +252,37 @@ else if (Array.isArray(val)) {
       return { ...state, openFilterBox: !state.openFilterBox };
 
     case ActionTableTypesE.SET_CHECK_BOX: {
-      // "SET_CHECK_BOX":
+      const data = state.bodyData.map((item) => ({
+        ...item,
+        checkBox: action.payload,
+      }));
 
-         const data = state.bodyData.map((item) => {
-           if (item.checkBox) {
-             delete item.checkBox;
-           }
 
-           return {
-             ...item,
-             checkBox: state.selectAll,
-           };
-         });
-      return { ...state, bodyData: data };
+      console.log({data})
+      return {
+        ...state,
+        bodyData: data,
+      
+      };
     }
     case ActionTableTypesE.SET_IS_COLUMN_MENU_OPEN: // "SET_IS_COLUMN_MENU_OPEN":
       return { ...state, isColumnMenuOpen: !state.isColumnMenuOpen };
     case ActionTableTypesE.SET_CHECKED_ITEMS: {
       // "SET_CHECKED_ITEMS":
-      const data = state.bodyData.map((item, idx) =>
-      {
+      const data = state.bodyData.map((item, idx) => {
+        let x = item;
+        if (String(idx) === action.payload) {
         
-        
-        let x = item
-        if(String(idx) === action.payload)
-          { 
-            console.log({ ac: action.payload, ff: idx , ddd:item.checkBox, inside:'inside'})
-          delete item.checkBox  
+          delete item.checkBox;
           x = {
-            checkBox:item.checkBox===undefined?true: !item.checkBox,
-              ...item,
-            }}
-        else { x = item }
-        return x
-        
-      }
-      );
+            checkBox: item.checkBox === undefined ? true : !item.checkBox,
+            ...item,
+          };
+        } else {
+          x = item;
+        }
+        return x;
+      });
       return { ...state, bodyData: data };
     }
     case ActionTableTypesE.SET_LOADING: {
@@ -284,7 +290,10 @@ else if (Array.isArray(val)) {
       return { ...state, loading: action.payload };
     }
     case ActionTableTypesE.SET_COLOR: {
-      return {...state, color:action.payload}
+      return { ...state, color: action.payload };
+    }
+    case ActionTableTypesE.SET_SHOW: {
+      return { ...state, show: action.payload };
     }
     default:
       return state;

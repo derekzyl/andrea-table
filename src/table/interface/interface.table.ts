@@ -94,6 +94,7 @@ export interface IncomingTableDataI<T> {
     addFn?: () => void;
     gotoFn?: () => any;
     customFn?: () => void;
+    deleteFn?: ({data}:{data:Array<any>}) => void;
 
   };
   buttonName?: {
@@ -112,7 +113,15 @@ export interface IncomingTableDataI<T> {
     select?: boolean;
     sort?: boolean;
     table?: boolean;
-    exports?: boolean;
+    exports?: boolean | {
+      pdf?: boolean;
+      csv?: boolean;
+      excel?: boolean;
+      print?: boolean;
+
+    };
+    columnVisibility?: boolean;
+    deleteButton?: boolean;
     addButton?: boolean;
     checkBox?: boolean;
     customButton?: boolean;
@@ -222,6 +231,24 @@ export interface InitialStateI {
     filterBackground: string;
     exportBackground: string;
   };
+  show: {
+exports:boolean
+      pdf: boolean;
+      csv: boolean;
+      excel: boolean;
+      print: boolean;
+
+    
+    columnVisibility: boolean;
+    deleteButton: boolean;
+    addButton: boolean;
+    checkBox: boolean;
+    customButton: boolean;
+    seeMore: boolean;
+
+    tableName: boolean;
+  
+}
 
 }
 export interface IAction {

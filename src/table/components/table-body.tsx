@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { addColumns, addHeader } from "../add_column";
-import { onChangeHandler } from "../functions/change";
 import { handleCopyToClipboard } from "../functions/copy-to-clipboard";
 import { useTableContext } from "../hooks/context";
 import IconCopyCheck, { IconCopy } from "../icons";
@@ -60,7 +59,7 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
       return `${data.data.subUrl}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
     }
   };
-  const showCheckBox =false /*  data.data.show.checkBox ?? true; */
+  const showCheckBox =  data.data.show.checkBox ?? true;
   const checkbox_header: HeadingT<any>[] = showCheckBox
     ? [
         {
@@ -82,7 +81,7 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
   const de = !data.data.column
     ? state.bodyData
     : addColumns(state.bodyData, data.data.column);
-console.log({de})
+// console.log({de})
   return (
     <tbody>
       {!de || state.loading ? (
@@ -121,7 +120,7 @@ console.log({de})
                               onChange={(e) => {
                                 console.log({val:val.checkBox, value:val})
                                 // Update the state of the current checkbox
-                                onChangeHandler(dispatch, state, e, String(idx));
+                                // onChangeHandler(dispatch, state, e, String(idx));
                                 // //console.log("val check", val.checkBox);
 
                                 dispatch({

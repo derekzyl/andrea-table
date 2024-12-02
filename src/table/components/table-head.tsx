@@ -10,7 +10,7 @@ import { HeadingT, IncomingTableDataT } from "../interface/interface.table";
 export default function TableHead(data: { data: IncomingTableDataT<any> }) {
   const { state, dispatch } = useTableContext();
   const show = data.data.show;
-  const showCheckBox = show.checkBox ?? true;
+  const showCheckBox =show.checkBox ?? true;
   const showSort = show.sort ?? true;
   const checkbox_header: HeadingT<any>[] = showCheckBox
     ? [
@@ -77,7 +77,7 @@ export default function TableHead(data: { data: IncomingTableDataT<any> }) {
                       ) : (
                         <>
                           {typeof value.name === "string" ? (
-                            <div
+                            <div style={{padding:"4px"}}
                               dangerouslySetInnerHTML={{
                                 __html: value.name,
                               }}

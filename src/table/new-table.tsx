@@ -9,12 +9,12 @@ import Paginate from "./components/paginate";
 import Search from "./components/search";
 import Select from "./components/select";
 import TableMain from "./components/table-main";
+import { compareArraysOfObjects } from "./functions/deep-compare";
 import { useTableContext } from "./hooks/context";
 import { TableContextProvider } from "./hooks/context-hooks";
 import { PlusIcon } from "./icons";
 import { HeadingT, IncomingTableDataT } from "./interface/interface.table";
 import { ActionTableTypesE } from "./state-manager/table-action-types";
-
 
 function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
   const query = data.data.query;
@@ -22,30 +22,43 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
   const limitQuery = query.limitName ?? "limit";
   const show = data.data.show;
   const showAddButton = show.addButton ?? true;
-  
 
   const primaryColor = data.data.style?.primary ?? "hsl(43, 71%, 51%)";
   const secondaryColor = data.data.style?.secondary ?? "hsl(43, 71%, 42%)";
   const tertiaryColor = data.data.style?.tertiary ?? "hsl(43, 71%, 60%)";
   const backgroundColor = data.data.style?.background ?? "hsl(40, 8%, 94%)";
   const cellBackground = data.data.style?.cellBackground ?? "hsl(40, 5%, 96%)";
-  const filterBackground = data.data.style?.filterBackground ?? "hsl(0, 0%, 99%)";
-  const exportBackground = data.data.style?.exportBackground ?? "hsl(0, 0%, 99%)";
-  
-
-
+  const filterBackground =
+    data.data.style?.filterBackground ?? "hsl(0, 0%, 99%)";
+  const exportBackground =
+    data.data.style?.exportBackground ?? "hsl(0, 0%, 99%)";
 
   const showCustomButton = show.customButton ?? false;
-const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
+  const customButtonName =
+    data.data.buttonName?.customButton ?? "Custom Button";
 
   const showFilters = show.filters ?? true;
   const showPagination = show.pagination ?? true;
   const showSearch = show.search ?? true;
   const showSelect = show.select ?? true;
 
-
   const showTable = show.table ?? true;
-  const showExports = show.exports ?? true;
+  const showExports =
+    show.exports && typeof show.exports === "boolean" ? show.exports : true;
+  const showPdf =
+    show.exports && typeof show.exports === "object" ? show.exports.pdf : true;
+  const showCsv =
+    show.exports && typeof show.exports === "object" ? show.exports.csv : true;
+  const showExcel =
+    show.exports && typeof show.exports === "object"
+      ? show.exports.excel
+      : true;
+  const showPrint =
+    show.exports && typeof show.exports === "object"
+      ? show.exports.print
+      : true;
+  const showDeleteButton = show.deleteButton ?? true;
+  const showColumnVisibility = show.columnVisibility ?? true;
   const showCheckBox = show.checkBox ?? true;
   const showSeeMore = show.seeMore ?? false;
   const canAdd = data.data.crud.add ?? true;
@@ -57,7 +70,7 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
           canSort: false,
           key: "checkBox",
           name: "check box",
-         isHeader: true,
+          isHeader: true,
           canFilter: false,
         },
       ]
@@ -65,35 +78,72 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
   const plus_checkbox_header = addHeader(data.data.heading, checkbox_header);
 
   const { state, dispatch } = useTableContext();
-
   useEffect(() => {
     dispatch({
-      type: ActionTableTypesE.SET_LOADING,
-      payload: true,
+      type: ActionTableTypesE.SET_SHOW,
+      payload: {
+        exports: showExports,
+        pdf: showPdf,
+        csv: showCsv,
+        excel: showExcel,
+        print: showPrint,
+        columnVisibility: showColumnVisibility,
+        deleteButton: showDeleteButton,
+        addButton: showAddButton,
+        checkBox: showCheckBox,
+        customButton: showCustomButton,
+        seeMore: showSeeMore,
+        tableName: showTableName,
+      },
     });
-    if (data.data.refresh && data.data.refresh.status) {
-      setInterval(() => {
-        data.data.fn.fetchFn({url:generateURL(), baseUrl:data.data.baseUrl}).then((res) => {
+  }, []);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+
+    const fetchData = () => {
+      dispatch({
+        type: ActionTableTypesE.SET_LOADING,
+        payload: true,
+      });
+
+      data.data.fn
+        .fetchFn({ url: generateURL(), baseUrl: data.data.baseUrl })
+        .then((res) => {
+          if (compareArraysOfObjects(state.remoteData, res)) {
+            dispatch({
+              type: ActionTableTypesE.SET_LOADING,
+              payload: false,
+            });
+            return;
+          }
           dispatch({
             type: ActionTableTypesE.SET_REMOTE_DATA,
             payload: res,
           });
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+          // Optionally dispatch an error action
+        })
+        .finally(() => {
+          dispatch({
+            type: ActionTableTypesE.SET_LOADING,
+            payload: false,
+          });
         });
+    };
+
+    fetchData();
+    if (
+      data.data.refresh &&
+      data.data.refresh.status &&
+      data.data.refresh.intervalInSec
+    ) {
+      intervalId = setInterval(() => {
+        fetchData();
       }, data.data.refresh.intervalInSec * 1000);
-      // return () => clearInterval(d);
     }
-    data.data.fn.fetchFn({url:generateURL(), baseUrl:data.data.baseUrl}).then((res) => {
-      dispatch({
-        type: ActionTableTypesE.SET_REMOTE_DATA,
-        payload: res,
-      });
-      if (res) {
-        dispatch({
-          type: ActionTableTypesE.SET_LOADING,
-          payload: false,
-        });
-      }
-    });
 
     function generateURL() {
       const urlSearchParams = new URLSearchParams(location.search);
@@ -104,13 +154,18 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
 
       const queryString = urlSearchParams.toString();
       if (pageQuery === "skip") {
-        
-
-        return `${data.data.subUrl}?${pageQuery}=${(state.filterPaginate -1)*state.filterLimit}&${limitQuery}=${state.filterLimit}&${queryString}`;
+        return `${data.data.subUrl}?${pageQuery}=${
+          (state.filterPaginate - 1) * state.filterLimit
+        }&${limitQuery}=${state.filterLimit}&${queryString}`;
       }
 
       return `${data.data.subUrl}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
     }
+    // return () => clearInterval(d);
+
+    return () => {
+      clearInterval(intervalId);
+    };
 
     // fetchData();
   }, [
@@ -119,6 +174,8 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
     state.filterValues,
     state.filterPaginate,
     state.filterLimit,
+    data.data.refresh?.status,
+    data.data.refresh?.intervalInSec,
   ]);
 
   useEffect(() => {
@@ -135,13 +192,20 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
     ? state.bodyData
     : addColumns(state.bodyData, data.data.column);
 
+  useEffect(() => {
+    dispatch({
+      type: ActionTableTypesE.SET_COLOR,
+      payload: {
+        primary: primaryColor,
+        secondary: secondaryColor,
+        tertiary: tertiaryColor,
+        background: backgroundColor,
+        cellBackground: cellBackground,
+        filterBackground: filterBackground,
+      },
+    });
+  }, []);
 
-  useEffect(() => { 
-    dispatch({type:ActionTableTypesE.SET_COLOR, payload:{primary:primaryColor, secondary:secondaryColor, tertiary:tertiaryColor, background:backgroundColor, cellBackground:cellBackground, filterBackground:filterBackground}})
-  },[])
-  
-  
-  
   return (
     <>
       <section
@@ -181,7 +245,10 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 >
                   <div
                     className=" custom-button   btn-primary"
-                    style={{ background: state.color.primary, color: state.color.secondary }}
+                    style={{
+                      background: state.color.primary,
+                      color: state.color.secondary,
+                    }}
                   >
                     <i
                       className="custom-icon-bcg w-[28px] h-[28px] text-[#fff] show-button-setup-icon"
@@ -208,7 +275,10 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 >
                   <div
                     className=" custom-button   btn-primary"
-                    style={{ background: state.color.primary, color: state.color.secondary }}
+                    style={{
+                      background: state.color.primary,
+                      color: state.color.secondary,
+                    }}
                   >
                     <i
                       className="custom-icon-bcg w-[28px] h-[28px] text-[#fff] show-button-setup-icon"
@@ -262,16 +332,27 @@ const customButtonName = data.data.buttonName?.customButton ?? "Custom Button";
                 id="table_wrapper"
                 className="andreaTables_wrapper andreaTable-header  align-middle justify-center form-inline dt-bootstrap no-footer"
               >
-                {(showExports || showSelect || showSearch) && (
+                {(showExports ||
+                  showSelect ||
+                  showSearch ||
+                  showColumnVisibility ||
+                  showDeleteButton) && (
                   <div
                     className=" elevated-paper p-[8px]    row mb-[20px] text-center font-normal flex justify-between export-select-search-wrapper m-2"
                     style={{ background: exportBackground }}
                   >
                     {showSelect && <Select />}
-                    {showExports && (
+                    {(showExports ||
+                      showColumnVisibility ||
+                      showDeleteButton ||
+                      showPdf ||
+                      showCsv ||
+                      showExcel ||
+                      showPrint) && (
                       <Exports
                         plus_checkbox_header={plus_checkbox_header}
                         tableName={data.data.tableName}
+                        tableData={data.data}
                       />
                     )}
 

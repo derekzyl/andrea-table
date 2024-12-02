@@ -29,11 +29,10 @@ const ActionHeader: React.FC<{
   columnData: any;
   crud: IncomingTableDataT<any>["crud"];
   onDeleteSuccess?: () => void;
-}> = ({ columnData, onDeleteSuccess }) => {
+}> = () => {
   
 
     
-    console.log({columnData, onDeleteSuccess})
   
 
 
@@ -115,6 +114,8 @@ function TestHeader ({ handleSort,sortState}:{handleSort:()=>void, sortState:boo
     style={{
       width: '100%',
       background: 'red',
+      height: "32px",
+      display:'flex'
     }}
     className="div">hello
   
