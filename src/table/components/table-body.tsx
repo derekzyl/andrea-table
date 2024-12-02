@@ -9,14 +9,17 @@ import { ActionTableTypesE } from "../state-manager/table-action-types";
 import SkeletonLoader from "./loader";
 
 export default function TableBody(data: { data: IncomingTableDataT<any> }) {
+  const { state, dispatch } = useTableContext();
   const query = data.data.query;
   const pageQuery = query.pageName ?? "page";
   const limitQuery = query.limitName ?? "limit";
   const [clip, setClip] = useState<{ [key: string]: boolean }>({});
 
-  const primaryColor = data.data.style?.primary ?? "hsl(173.32, 70%, 35.29%)";
-  const cellBackground = data.data.style?.cellBackground ?? "hsl(40, 5%, 96%)";
-  const cellHoverBackground= data.data.style?.cellHoverBackground ?? 'hsl(40,5%,70%)'
+  const primaryColor =
+    (state.style?.primary && state.style.primary!=='') ? state.style.primary : "hsl(173.32, 70%, 35.29%)";
+    "hsl(173.32, 70%, 35.29%)";
+  const cellBackground =state.style?.cellBackground ?? "hsl(40, 5%, 96%)";
+  const cellHoverBackground= state.style?.cellHoverBackground ?? 'hsl(40,5%,70%)'
   
   const onDeleteSuccess = () => {
     // Fetch data after successful deletion
@@ -73,7 +76,6 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
     : [];
   const plus_checkbox_header = addHeader(data.data.heading, checkbox_header);
 
-  const { state, dispatch } = useTableContext();
 
   const visibleHeaders = plus_checkbox_header.filter(
     (header) => state!.columnVisibility[header.key as any] !== false

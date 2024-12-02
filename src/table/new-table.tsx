@@ -32,6 +32,8 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
     data.data.style?.filterBackground ?? "hsl(0, 0%, 99%)";
   const exportBackground =
     data.data.style?.exportBackground ?? "hsl(0, 0%, 99%)";
+  
+  const border = data.data.style?.borderSpacing ?? "1px";
 
   const showCustomButton = show.customButton ?? false;
   const customButtonName =
@@ -43,20 +45,13 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
   const showSelect = show.select ?? true;
 
   const showTable = show.table ?? true;
-  const showExports =
-    show.exports && typeof show.exports === "boolean" ? show.exports : true;
-  let showPdf =
-    show.exports && typeof show.exports === "object" ? show.exports.pdf : false;
-  let showCsv =
-    show.exports && typeof show.exports === "object" ? show.exports.csv : false;
-  let showExcel =
-    show.exports && typeof show.exports === "object"
-      ? show.exports.excel
-      : false;
-  let showPrint =
-    show.exports && typeof show.exports === "object"
-      ? show.exports.print
-      : false;
+
+  let showExports = true
+   
+  let showPdf = false;
+  let showCsv = false;
+  let showExcel = false;
+  let showPrint =false;
 
   
   if (typeof show.exports === 'boolean') {
@@ -64,6 +59,15 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
     showCsv = show.exports;
     showExcel = show.exports;
     showPrint = show.exports;
+    showExports = show.exports;
+
+  } else {
+    showPdf = show.exports?.pdf ?? false;
+    showCsv = show.exports?.csv ?? false;
+    showExcel = show.exports?.excel ?? false;
+    showPrint = show.exports?.print ?? false;
+    showExports = (show.exports?.pdf ?? false) || (show.exports?.csv ?? false) || (show.exports?.excel ?? false) || (show.exports?.print ?? false);
+    
   }
  
   const showDeleteButton = show.deleteButton ?? false;
@@ -86,6 +90,7 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
     : [];
   const plus_checkbox_header = addHeader(data.data.heading, checkbox_header);
 
+
   const { state, dispatch } = useTableContext();
   useEffect(() => {
     dispatch({
@@ -105,7 +110,20 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
         tableName: showTableName,
       },
     });
-  }, []);
+  }, [
+    showExports,
+    showPdf,
+    showCsv,
+    showExcel,
+    showPrint,
+    showColumnVisibility,
+    showDeleteButton,
+    showAddButton,
+    showCheckBox,
+    showCustomButton,
+    showSeeMore,
+    showTableName,
+  ]);
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -211,9 +229,21 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
         background: backgroundColor,
         cellBackground: cellBackground,
         filterBackground: filterBackground,
+        exportBackground: exportBackground,
+        borderSpacing: border,
       },
     });
-  }, []);
+  }, [
+
+    primaryColor,
+    secondaryColor,
+    tertiaryColor,
+    backgroundColor,
+    cellBackground,
+    filterBackground,
+    exportBackground,
+    border,
+  ]);
 
   return (
     <>
@@ -239,7 +269,7 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
                     fontSize: "18px",
                     textTransform: "capitalize",
                     fontWeight: "bolder",
-                    color: `${state.color.primary}`,
+                    color: `${state.style.primary}`,
                   }}
                 >
                   {data.data.tableName}
@@ -255,8 +285,8 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
                   <div
                     className=" custom-button   btn-primary"
                     style={{
-                      background: state.color.primary,
-                      color: state.color.secondary,
+                      background: state.style.primary,
+                      color: state.style.secondary,
                     }}
                   >
                     <i
@@ -264,9 +294,9 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
                       style={{
                         width: "20px",
                         height: "20px",
-                        color: state.color.secondary,
-                        background: state.color.primary,
-                        boxShadow: `inset 0px -1px 2px 1px ${state.color.tertiary}, inset 0px 2px 2px 1px ${state.color.secondary}`,
+                        color: state.style.secondary,
+                        background: state.style.primary,
+                        boxShadow: `inset 0px -1px 2px 1px ${state.style.tertiary}, inset 0px 2px 2px 1px ${state.style.secondary}`,
                       }}
                     >
                       <PlusIcon />
@@ -285,8 +315,8 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
                   <div
                     className=" custom-button   btn-primary"
                     style={{
-                      background: state.color.primary,
-                      color: state.color.secondary,
+                      background: state.style.primary,
+                      color: state.style.secondary,
                     }}
                   >
                     <i
@@ -294,9 +324,9 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
                       style={{
                         width: "20px",
                         height: "20px",
-                        color: state.color.secondary,
-                        background: state.color.primary,
-                        boxShadow: `inset 0px -1px 2px 1px ${state.color.tertiary}, inset 0px 2px 2px 1px ${state.color.secondary}`,
+                        color: state.style.secondary,
+                        background: state.style.primary,
+                        boxShadow: `inset 0px -1px 2px 1px ${state.style.tertiary}, inset 0px 2px 2px 1px ${state.style.secondary}`,
                       }}
                     >
                       <PlusIcon />
@@ -315,15 +345,15 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
                   <div
                     className=" custom-button   btn-secondary"
                     style={{
-                      color: state.color.primary,
-                      border: `1px solid ${state.color.primary}`,
+                      color: state.style.primary,
+                      border: `1px solid ${state.style.primary}`,
                     }}
                   >
                     <div className=" text">See More</div>
                     <i
                       className="custom_submerged_gray w-[20px] h-[20px] show-button-setup-icon"
                       style={{
-                        color: state.color.primary,
+                        color: state.style.primary,
                         width: "20px",
                         height: "20px",
                       }}
@@ -341,15 +371,18 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
                 id="table_wrapper"
                 className="andreaTables_wrapper andreaTable-header  align-middle justify-center form-inline dt-bootstrap no-footer"
               >
-                {((typeof show.exports === "boolean" && showExports) ||
+                {( showExports ||
                   showSelect ||
                   showSearch ||
-                  showColumnVisibility ||
-                  showDeleteButton ||
-                  showPdf ||
-                  showCsv ||
-                  showExcel ||
-                  showPrint) && (
+                  showColumnVisibility 
+               
+                
+                
+                
+                )
+                  
+                  
+                  && (
                   <div
                     className=" elevated-paper p-[8px]    row mb-[20px] text-center font-normal flex justify-between export-select-search-wrapper m-2"
                     style={{ background: exportBackground }}

@@ -1,6 +1,6 @@
 import { InitialStateI } from "table/interface/interface.table";
 
-export const initialState:InitialStateI = {
+export const initialState: InitialStateI = {
   remoteData: [],
   bodyData: [],
   filterLimit: 5,
@@ -13,7 +13,30 @@ export const initialState:InitialStateI = {
   openFilterBox: false,
   isColumnMenuOpen: false,
   loading: false,
-  show: { exports: false, pdf: false, csv: false, excel: false, print: false, columnVisibility: false, deleteButton: false, addButton: false, checkBox: false, customButton: false, seeMore: false, tableName: false },
-  
-  color:{primary:'',secondary:'', tertiary:'',background:'', cellBackground:'', filterBackground:'', exportBackground:''} }
+  show: {
+    exports: false,
+    pdf: false,
+    csv: false,
+    excel: false,
+    print: false,
+    columnVisibility: false,
+    deleteButton: false,
+    addButton: false,
+    checkBox: false,
+    customButton: false,
+    seeMore: false,
+    tableName: false,
+  },
 
+  style: {
+    primary: "hsl(43,71%,51%)",
+    secondary: "hsl(43,71%,42%)",
+    tertiary: "hsl(43,71%,60%)",
+    background: "hsl(40, 8%, 94%)",
+    cellBackground: "hsl(40, 8%, 96%)",
+    filterBackground: "hsl(0, 0%, 99%)",
+    exportBackground: "hsl(0, 0%, 99%)",
+    cellHoverBackground: "",
+    borderSpacing: "",
+  },
+};

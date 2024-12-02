@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import {
+  ColumnElementT,
+  ColumnT,
+  HeadingT,
+  IncomingTableDataI,
+  IncomingTableDataT,
+} from "../../../table/interface/interface.table";
 
-import { ColumnElementT, ColumnT, HeadingT, IncomingTableDataI, IncomingTableDataT } from "../../../table/interface/interface.table";
+const Address: React.FC<ColumnElementT<any>> = ({ columnData }) => {
+  const address = columnData.address;
 
-
-const Address: React.FC<ColumnElementT<any>> = ({columnData}) => {
-
-  const address = columnData.address
-
-  
   return (
     <>
       <div>
- 
         <div>Address: {address.address}</div>
         <div>City: {address.city}</div>
         <div>State: {address.state}</div>
         <div>Postal Code: {address.postalCode}</div>
         <div>Country: {address.country}</div>
-     
       </div>
     </>
   );
@@ -30,26 +30,14 @@ const ActionHeader: React.FC<{
   crud: IncomingTableDataT<any>["crud"];
   onDeleteSuccess?: () => void;
 }> = () => {
-  
-
-    
-  
-
-
- 
-
   const handleClick = () => {};
   const handleDelete = async (id: string) => {
-    console.log(id)
-   
- 
+    console.log(id);
   };
 
   return (
     <div className="">
-      {
-
-      }
+      {}
       <div
         onClick={() => {
           handleClick();
@@ -73,8 +61,7 @@ const ActionHeader: React.FC<{
       <button
         className="btn-tertiary"
         onClick={() => {
-          handleDelete("")
-
+          handleDelete("");
         }}
       >
         delete
@@ -82,45 +69,50 @@ const ActionHeader: React.FC<{
     </div>
   );
 };
-async function fetchData ({ baseUrl, url}:{url: string, baseUrl: string}) {
-
-
+async function fetchData({ baseUrl, url }: { url: string; baseUrl: string }) {
   try {
-    const c =await  fetch(baseUrl+url);
+    const c = await fetch(baseUrl + url);
     // const c = axiosInstance;
 
-    const response =await c.json();
-    console.log({response})
+    const response = await c.json();
+    console.log({ response });
 
     return response.users;
-
-
   } catch (error) {
     //console.log(error);
   }
 }
 const extraColumn: ColumnT<any>[] = [
   {
-    _address: <Address  columnData={""} crud={{}} />,
+    _address: <Address columnData={""} crud={{}} />,
     action: <ActionHeader columnData={""} crud={{}} />,
   },
 ];
 
-function TestHeader ({ handleSort,sortState}:{handleSort:()=>void, sortState:boolean|undefined}) {
-
-
-  return (<div
-    onClick={() => { handleSort() }}
-    style={{
-      width: '100%',
-      background: 'red',
-      height: "32px",
-      display:'flex'
-    }}
-    className="div">hello
-  
-  {String(sortState)}
-  </div>)
+function TestHeader({
+  handleSort,
+  sortState,
+}: {
+  handleSort: () => void;
+  sortState: boolean | undefined;
+}) {
+  return (
+    <div
+      onClick={() => {
+        handleSort();
+      }}
+      style={{
+        width: "100%",
+        background: "red",
+        height: "32px",
+        display: "flex",
+      }}
+      className="div"
+    >
+      hello
+      {String(sortState)}
+    </div>
+  );
 }
 const header: HeadingT<any>[] = [
   {
@@ -197,10 +189,27 @@ export const userTableData: IncomingTableDataI<any> = {
   crud: {},
   heading: header,
   column: extraColumn,
-  query: {pageName:"skip"},
-  show: { seeMore: true, tableName:true, customButton:true,checkBox:true },
+  query: { pageName: "skip" },
+  show: {
+    seeMore: false,
+    tableName: true,
+    customButton: false,
+    checkBox: false,
+    select: false,
+    exports: false,
+    deleteButton: false,search:false,
+  },
   refresh: { intervalInSec: 120, status: true },
   subUrl: "/users",
   tableName: "user",
-  style: { primary: "hsl(200, 90%,50%)", secondary: "hsl(200,60%,80%)", tertiary: "hsl(200,90%,40%)",background:"hsl(300,70%,96%)", cellBackground:"hsl(300,10%,80%)", filterBackground:"hsl(300,10%,80%)", exportBackground:"hsl(300,10%,80%)" },
+  style: {
+    primary: "hsl(200, 90%,50%)",
+    secondary: "hsl(200,60%,80%)",
+    tertiary: "hsl(200,90%,40%)",
+    background: "hsl(300,70%,96%)",
+    cellBackground: "hsl(300,10%,80%)",
+    filterBackground: "hsl(300,10%,80%)",
+    exportBackground: "hsl(300,10%,80%)",
+    borderSpacing: "0px",
+  },
 };

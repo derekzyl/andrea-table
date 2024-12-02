@@ -8,7 +8,7 @@ import TableHead from "./table-head";
 
 export default function TableMain(data: { data: IncomingTableDataT<any> }) {
   const { state } = useTableContext();
-const borderSpacing = data.data.style?.borderSpacing ?? "1px";
+const borderSpacing = state.style?.borderSpacing ?? "1px";
 
 
   return (

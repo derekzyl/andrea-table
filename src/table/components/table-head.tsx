@@ -43,7 +43,7 @@ export default function TableHead(data: { data: IncomingTableDataT<any> }) {
                     paddingLeft: value.name === "string" ? "2px" : "0px",
                     paddingRight: value.name === "string" ? "2px" : "0px",
                     fontSize: "12px",
-                    background: `${state.color.tertiary}`,
+                    background: `${state.style.tertiary}`,
                     
                   }}
                 >

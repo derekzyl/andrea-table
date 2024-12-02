@@ -221,15 +221,16 @@ export interface InitialStateI {
   openFilterBox: boolean;
   isColumnMenuOpen: boolean;
   loading: boolean;
-  color:  {
-    primary: string;
+  style:  {
+     primary: string;
     secondary: string;
     tertiary: string;
     background: string;
     cellBackground: string;
-
+    cellHoverBackground: string;
     filterBackground: string;
     exportBackground: string;
+    borderSpacing:string;
   };
   show: {
 exports:boolean

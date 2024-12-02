@@ -9,7 +9,7 @@ import { CalendarFilter } from "./date-filter";
 
 export default function Filter (data: { data: any[]; header: HeadingT<any>[]; }) {
   const { state, dispatch } = useTableContext();
-  const filterBackground = state.color?.filterBackground 
+  const filterBackground = state.style?.filterBackground 
   const visibleHeaders = data.header.filter(
     (header) => state!.columnVisibility[String(header.key) as any] !== false
   );
@@ -108,7 +108,7 @@ export default function Filter (data: { data: any[]; header: HeadingT<any>[]; })
                             className="filter-form-control"
                             style={{
                               width: "calc(100% + 10px)",
-                              color: `${state.color.primary}`,
+                              color: `${state.style.primary}`,
                             }}
                             id=""
                             name={String(v.key)}
@@ -166,7 +166,7 @@ export default function Filter (data: { data: any[]; header: HeadingT<any>[]; })
                           className="filter-form-control"
                           style={{
                             width: "calc(100% + 10px)",
-                            color: `${state.color.primary}`,
+                            color: `${state.style.primary}`,
                           }}
                           id=""
                           name="date_range"

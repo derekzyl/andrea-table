@@ -107,7 +107,7 @@ export default function Exports(data: { plus_checkbox_header: HeadingT<any>[], t
                         type="checkbox"
                         className="check-box "
                         style={{
-                          boxShadow: `inset 1em 1em ${state.color.primary}`,
+                          boxShadow: `inset 1em 1em ${state.style.primary}`,
                         }}
                         checked={
                           state.columnVisibility[header.key as any] !== false
