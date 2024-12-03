@@ -15,11 +15,10 @@ export default function TableBody(data: { data: IncomingTableDataT<any> }) {
   const limitQuery = query.limitName ?? "limit";
   const [clip, setClip] = useState<{ [key: string]: boolean }>({});
 
-  const primaryColor =
-    (state.style?.primary && state.style.primary!=='') ? state.style.primary : "hsl(173.32, 70%, 35.29%)";
-    "hsl(173.32, 70%, 35.29%)";
-  const cellBackground =state.style?.cellBackground ?? "hsl(40, 5%, 96%)";
-  const cellHoverBackground= state.style?.cellHoverBackground ?? 'hsl(40,5%,70%)'
+  const primaryColor =state.style.primary 
+  const cellBackground = state.style.cellBackground;
+  const cellHoverBackground = state.style.cellHoverBackground
+  
   
   const onDeleteSuccess = () => {
     // Fetch data after successful deletion

@@ -34,6 +34,9 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
     data.data.style?.exportBackground ?? "hsl(0, 0%, 99%)";
   
   const border = data.data.style?.borderSpacing ?? "1px";
+const cellHoverBackground = data.data.style?.cellHoverBackground ?? "hsl(40,5%,90%)";
+
+
 
   const showCustomButton = show.customButton ?? false;
   const customButtonName =
@@ -231,6 +234,8 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
         filterBackground: filterBackground,
         exportBackground: exportBackground,
         borderSpacing: border,
+        cellHoverBackground: cellHoverBackground,
+        
       },
     });
   }, [

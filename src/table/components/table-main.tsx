@@ -8,13 +8,12 @@ import TableHead from "./table-head";
 
 export default function TableMain(data: { data: IncomingTableDataT<any> }) {
   const { state } = useTableContext();
-const borderSpacing = state.style?.borderSpacing ?? "1px";
 
 
   return (
     <table
       style={{
-        borderSpacing
+        borderSpacing:`${state.style.borderSpacing}` 
       }}
       cellSpacing="0" cellPadding="0"
       className={`table table-bordered table-striped dataTable no-footer elevated_table_data ${
