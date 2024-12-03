@@ -290,10 +290,10 @@ export const TableReducer = (
       return { ...state, loading: action.payload };
     }
     case ActionTableTypesE.SET_COLOR: {
-      return { ...state, style: action.payload };
+      return { ...state, style: {...state.style,...action.payload} };
     }
     case ActionTableTypesE.SET_SHOW: {
-      return { ...state, show: action.payload };
+      return { ...state, show: {...state.show,  ...action.payload} };
     }
     default:
       return state;

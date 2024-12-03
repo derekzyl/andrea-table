@@ -210,6 +210,6 @@ export const userTableData: IncomingTableDataI<any> = {
     cellBackground: "hsl(300,10%,80%)",
     filterBackground: "hsl(300,10%,80%)",
     exportBackground: "hsl(300,10%,80%)",
-    borderSpacing: "0px",
+    borderSpacing: "1px",
   },
 };
