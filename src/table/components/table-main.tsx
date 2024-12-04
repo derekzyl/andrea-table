@@ -23,6 +23,8 @@ export default function TableMain(data: { data: IncomingTableDataT<any> }) {
   }, [state.style.borderSpacing]);
 
 
+  console.log({state})
+
   return (
     <table
       style={{

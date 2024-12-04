@@ -265,7 +265,7 @@ const cellHoverBackground = data.data.style?.cellHoverBackground ?? "hsl(40,5%,9
         {/* filter ends here */}
 
         <div className="">
-          {(showAddButton || showTableName || showSeeMore) && (
+          {(showAddButton || showTableName || showSeeMore || showCustomButton) && (
             <div className="box-header  ">
               {showTableName && (
                 <div
