@@ -258,7 +258,6 @@ export const TableReducer = (
       }));
 
 
-      console.log({data})
       return {
         ...state,
         bodyData: data,
