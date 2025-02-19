@@ -15,7 +15,7 @@ export default function TableMain(data: { data: IncomingTableDataT<any> }) {
       if (table) {
         table.style.setProperty(
           "border-spacing",
-          state.style.borderSpacing,
+          state.style.borderSpacing||'1px',
           "important"
         );
       }
@@ -23,18 +23,14 @@ export default function TableMain(data: { data: IncomingTableDataT<any> }) {
   }, [state.style.borderSpacing]);
 
 
-  console.log({state})
 
   return (
     <table
       style={{
-        borderSpacing:`${(state.style.borderSpacing&& state.style.borderSpacing!=='')?state.style.borderSpacing:'1px'}` 
+        borderSpacing:`${state.style.borderSpacing||'1px'}` 
       }}
 
-      ref={(el) => {
-        el && el.style.setProperty('border-spacing', (state.style.borderSpacing&& state.style.borderSpacing!=='')?state.style.borderSpacing: '1px', 'important');
-        el&&el.setAttribute('style',`border-spacing:${(state.style.borderSpacing&& state.style.borderSpacing!=='')?state.style.borderSpacing:'1px'} !important`)
-      }}
+   
       cellSpacing="0" cellPadding="0"
       className={`table table-bordered table-striped dataTable no-footer elevated_table_data ${
         state.loading ? "table-block-transition" : ""
