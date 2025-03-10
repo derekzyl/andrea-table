@@ -1,14 +1,15 @@
 
 import { onChangeHandler } from "../functions/change";
+import { isMobile } from "../functions/utils";
 import { useTableContext } from "../hooks/context";
 
 export default function Search() {
   const { state, dispatch } = useTableContext();
   return (
-    <div className="m:col-span-3 md:col-span-12 lg:col-span-3">
+    <div className="m:col-span-3 md:col-span-12  lg:col-span-3">
       <div
         id="users_table_filter"
-        className="relative"
+        className="relative "
         style={{ position: "relative" }}
       >
         <input
@@ -20,6 +21,10 @@ export default function Search() {
           aria-controls="users_table"
           spellCheck={false}
           data-ms-editor="true"
+          style={{
+        
+            width:isMobile()?"100px": "100%",
+          }}
         />
 
         <div className="custom-container-icon-andrea">

@@ -794,314 +794,319 @@
 // src/components/DateRangePicker.tsx
 // src/components/DateRangePicker.tsx
 // src/components/DateRangePicker.tsx
-import dayjs from 'dayjs';
-import { range } from 'lodash';
-import { useEffect, useState } from 'react';
 
-import { handleFilterSelect } from '../functions/filter';
-import { useTableContext } from '../hooks/context';
-import { IconBxLeftArrow, IconBxRightArrow, IconDeleteEmpty } from '../icons';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import dayjs from "dayjs";
+import { range } from "lodash";
+import { useEffect, useRef, useState } from "react";
+
+import { handleFilterSelect } from "../functions/filter";
+import { useTableContext } from "../hooks/context";
+import { IconBxLeftArrow, IconBxRightArrow, IconDeleteEmpty } from "../icons";
 
 const getDaysInMonth = (month: number, year: number) => {
   return new Date(year, month + 1, 0).getDate();
 };
 
 const isDateInRange = (date: string, startDate: string, endDate: string) => {
-  return startDate && endDate && dayjs(date).isAfter(dayjs(startDate)) && dayjs(date).isBefore(dayjs(endDate));
+  return (
+    startDate &&
+    endDate &&
+    dayjs(date).isAfter(dayjs(startDate)) &&
+    dayjs(date).isBefore(dayjs(endDate))
+  );
 };
 
 const months = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
-export const CalendarFilter= ({data}:{data:any}) => {
-
+export const CalendarFilter = ({ data }: { data: any }) => {
   const { state, dispatch } = useTableContext();
-  const [startDate, setStartDate] = useState<string>('');
-  const [endDate, setEndDate] = useState<string>('');
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState<number>(dayjs().month());
   const [currentYear, setCurrentYear] = useState<number>(dayjs().year());
   const [showMonthDropdown, setShowMonthDropdown] = useState<boolean>(false);
   const [showYearDropdown, setShowYearDropdown] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
 
-  const handleDateClick = (date: string, ) => {
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target as Node)
+      ) {
+        setShowMonthDropdown(false);
+        setShowYearDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleDateClick = (date: string) => {
     if (!startDate || (startDate && endDate)) {
       setStartDate(date);
-      setEndDate('');
+      setEndDate("");
     } else if (dayjs(date).isBefore(dayjs(startDate))) {
       setStartDate(date);
     } else {
       setEndDate(date);
-      // handleFilterSelect(dispatch, state, {startDate, endDate},'calendarFilter', data.header, data.data)
     }
-
-    // if (startDate && endDate) {
-    //   handleFilterSelect(dispatch, state, {startDate, endDate},'calendarFilter', data.header, data.data)
-    // }
   };
 
-  useEffect(() => {     if (startDate && endDate) {
-      handleFilterSelect(dispatch, state, {startDate, endDate},'calendarFilter', data.header, data.data)
-    }},[ endDate, startDate])
-  function handleDeleteDates (){
-    setStartDate('')
-    setEndDate('')
+  useEffect(() => {
+    if (startDate && endDate) {
+      handleFilterSelect(
+        dispatch,
+        state,
+        { startDate, endDate },
+        "calendarFilter",
+        data.header,
+        data.data
+      );
+    }
+  }, [endDate, startDate]);
+
+  function handleDeleteDates() {
+    setStartDate("");
+    setEndDate("");
     handleFilterSelect(
-            
-            dispatch,
-            state,
-            { startDate:"All", endDate:"All" },
-            "calendarFilter",
-            data.header,
-            data.data
-          );
+      dispatch,
+      state,
+      { startDate: "All", endDate: "All" },
+      "calendarFilter",
+      data.header,
+      data.data
+    );
   }
 
-  const renderCalendar = () => {
-    const daysInMonth = getDaysInMonth(currentMonth, currentYear);
-    const startDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
-    const daysArray = range(1, daysInMonth + 1);
+  const toggleCalendar = () => {
+    setShowCalendar(!showCalendar);
+  };
 
-    return (
-      <div className="custom-date-filter-box-andrea">
-        <div className="custom-date-filter-box-andrea-button">
-          <button
-            className="custom-date-filter-box-andrea-button-button"
-            onClick={() => {
-              if (currentMonth === 0) {
-                setCurrentMonth(11);
-                setCurrentYear(currentYear - 1);
-              } else {
-                setCurrentMonth(currentMonth - 1);
-              }
-            }}
-          >
-            <IconBxLeftArrow />
-          </button>
-          <div className="flex items-center">
-            <div
-              className="font-bold cursor-pointer mr-2"
-              onClick={() => setShowMonthDropdown(!showMonthDropdown)}
-            >
-              {months[currentMonth]}
-            </div>
-            <div
-              className="font-bold cursor-pointer"
-              onClick={() => setShowYearDropdown(!showYearDropdown)}
-            >
-              {currentYear}
-            </div>
-          </div>
-          <button
-            className="p-2 bg-transparent rounded"
-            onClick={() => {
-              if (currentMonth === 11) {
-                setCurrentMonth(0);
-                setCurrentYear(currentYear + 1);
-              } else {
-                setCurrentMonth(currentMonth + 1);
-              }
-            }}
-          >
-            <IconBxRightArrow />
-          </button>
+  const formatDisplayDate = (date: string) => {
+    return date ? dayjs(date).format("MMM DD, YYYY") : "Select date";
+  };
+
+  return (
+    <div className="calendar-filter-container" ref={calendarRef}>
+      {/* Date Range Display */}
+      <div className="date-range-display">
+        <div className="date-range-value" onClick={toggleCalendar}>
+          <span>{formatDisplayDate(startDate)}</span>
+          {startDate && endDate && (
+            <span className="date-range-separator">to</span>
+          )}
+          {startDate && <span>{formatDisplayDate(endDate)}</span>}
         </div>
-        {showMonthDropdown && (
-          <div className="custom-dropdown-andrea-calendar">
-            {months.map((month, index) => (
-              <div
-                key={index}
-                className="p-1 cursor-pointer hover:bg-gray-200"
-                onClick={() => {
-                  setCurrentMonth(index);
-                  setShowMonthDropdown(false);
-                }}
-              >
-                {month}
-              </div>
-            ))}
+        {(startDate || endDate) && (
+          <div className="date-range-clear" onClick={handleDeleteDates}>
+            <IconDeleteEmpty />
           </div>
         )}
-        {showYearDropdown && (
-          <div className="custom-dropdown-andrea-calendar">
-            {range(currentYear - 10, currentYear + 11).map((year:any) => (
+      </div>
+
+      {/* Calendar */}
+      {showCalendar && (
+        <div className="custom-date-filter-box-andrea">
+          <div className="custom-date-filter-box-andrea-button">
+            <button
+              className="custom-date-filter-box-andrea-button-button"
+              onClick={() => {
+                if (currentMonth === 0) {
+                  setCurrentMonth(11);
+                  setCurrentYear(currentYear - 1);
+                } else {
+                  setCurrentMonth(currentMonth - 1);
+                }
+              }}
+            >
+              <IconBxLeftArrow />
+            </button>
+            <div className="flex items-center">
               <div
-                key={year}
-                className="p-1 cursor-pointer hover:bg-gray-200"
+                className="font-bold cursor-pointer mr-2"
                 onClick={() => {
-                  setCurrentYear(year);
+                  setShowMonthDropdown(!showMonthDropdown);
                   setShowYearDropdown(false);
                 }}
               >
-                {year}
+                {months[currentMonth]}
               </div>
-            ))}
-          </div>
-        )}
-        <div className="custom-grid-calendar-andrea">
-          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-            <div key={day} className="text-center font-medium"
-              style={{
-              
-                textAlign: "center",
-                fontWeight:500
-            }}
-            >
-              {day}
+              <div
+                className="font-bold cursor-pointer"
+                onClick={() => {
+                  setShowYearDropdown(!showYearDropdown);
+                  setShowMonthDropdown(false);
+                }}
+              >
+                {currentYear}
+              </div>
             </div>
-          ))}
-          {range(0, startDayOfWeek).map((_:any, index) => (
-            <div key={index}></div>
-          ))}
-          {daysArray.map((day:any) => {
-            const date = dayjs(new Date(currentYear, currentMonth, day)).format(
-              "YYYY-MM-DD"
-            );
-            const isSelected =
-              (startDate && date === dayjs(startDate).format("YYYY-MM-DD")) ||
-              (endDate && date === dayjs(endDate).format("YYYY-MM-DD"));
-            const inRange = isDateInRange(date, startDate, endDate);
-            return (
+            <button
+              className="custom-date-filter-box-andrea-button-button"
+              onClick={() => {
+                if (currentMonth === 11) {
+                  setCurrentMonth(0);
+                  setCurrentYear(currentYear + 1);
+                } else {
+                  setCurrentMonth(currentMonth + 1);
+                }
+              }}
+            >
+              <IconBxRightArrow />
+            </button>
+          </div>
+
+          {/* Month Dropdown */}
+          {showMonthDropdown && (
+            <div className="custom-dropdown-andrea-calendar">
+              {months.map((month, index) => (
+                <div
+                  key={index}
+                  className="p-1 cursor-pointer hover:bg-gray-200"
+                  onClick={() => {
+                    setCurrentMonth(index);
+                    setShowMonthDropdown(false);
+                  }}
+                >
+                  {month}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Year Dropdown */}
+          {showYearDropdown && (
+            <div className="custom-dropdown-andrea-calendar">
+              {range(currentYear - 5, currentYear + 6).map((year) => (
+                <div
+                  key={year}
+                  className="p-1 cursor-pointer hover:bg-gray-200"
+                  onClick={() => {
+                    setCurrentYear(year);
+                    setShowYearDropdown(false);
+                  }}
+                >
+                  {year}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Calendar Grid */}
+          <div className="custom-grid-calendar-andrea">
+            {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
               <div
                 key={day}
                 style={{
-  padding:"8px",textAlign:"center", borderRadius:"4px", background:isSelected?"hsl(120,70%,30%)":inRange?"hsl(120,50%,80%)":""
-}}
-
-                className={`p-2 text-center cursor-pointer rounded-[6px] ${
-                  isSelected
-                    ? "bg-[var(--primary-dark)] text-white"
-                    : inRange
-                    ? "bg-[var(--primary-lightest)]"
-                    : ""
-                }`}
-                onClick={() => handleDateClick(date)}
+                  textAlign: "center",
+                  fontWeight: 500,
+                  fontSize: isMobile ? "0.75rem" : "0.875rem",
+                }}
               >
                 {day}
               </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
+            ))}
 
+            {/* Empty cells for days before the first of month */}
+            {range(0, new Date(currentYear, currentMonth, 1).getDay()).map(
+              (_, index) => (
+                <div key={`empty-${index}`}></div>
+              )
+            )}
 
+            {/* Day cells */}
+            {range(1, getDaysInMonth(currentMonth, currentYear) + 1).map(
+              (day) => {
+                const date = dayjs(
+                  new Date(currentYear, currentMonth, day)
+                ).format("YYYY-MM-DD");
+                const isSelected =
+                  (startDate &&
+                    date === dayjs(startDate).format("YYYY-MM-DD")) ||
+                  (endDate && date === dayjs(endDate).format("YYYY-MM-DD"));
+                const inRange = isDateInRange(date, startDate, endDate);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  return (
-    <div
-      className="relative inline-block"
-      style={{ position: "relative", display: "inline-block" }}
-    >
-      <div
-        className="flex space-x-4 p-2  rounded-md shadow-md place-items-center"
-        style={{
-          display: "flex",
-          borderRadius: "6px",
-          placeItems: "center",
-        }}
-      >
-        <div>
-          <label
-            className="block text-sm font-medium text-gray-700"
-            style={{
-              display: "block",
-            }}
-            htmlFor="startDate"
-          >
-            Start Date
-          </label>
-          <input
-            type="text"
-            id="startDate"
-            value={startDate}
-            readOnly
-            onClick={() => setShowCalendar(!showCalendar)}
-            className="custom-input-calendar-input-dated"
-          />
-        </div>
-        <div
-          onClick={() => {
-            handleDeleteDates();
-          }}
-          className="cursor-pointer text-[var(--error-dark)] w-6 h-6"
-          style={{
-            width:"24px",
-            height: "24px",
-            color:'hsl(0,100%, 48%)'
-          }}
-        >
-          <IconDeleteEmpty />
-        </div>
-        <div>
-          <label
-            className="block text-sm font-medium text-gray-700"
-            style={{
-              display: "block",
-            }}
-            htmlFor="endDate"
-          >
-            End Date
-          </label>
-          <input
-            type="text"
-            id="endDate"
-            value={endDate}
-            readOnly
-            onClick={() => setShowCalendar(!showCalendar)}
-            className="custom-input-calendar-input-dated"
-          />
-        </div>
-      </div>
-      {showCalendar && (
-        <div
-          className="absolute top-16 left-0 z-10"
-          style={{
-            position: "absolute",
-            top: "64px",
-            left: "0px",
-            zIndex: 10,
-          }}
-        >
-          {renderCalendar()}
+                return (
+                  <div
+                    key={day}
+                    style={{
+                      padding: isMobile ? "4px" : "8px",
+                      textAlign: "center",
+                      borderRadius: "4px",
+                      background: isSelected
+                        ? "hsl(120,70%,30%)"
+                        : inRange
+                        ? "hsl(120,50%,80%)"
+                        : "",
+                      color: isSelected ? "white" : "inherit",
+                      fontSize: isMobile ? "0.75rem" : "0.875rem",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleDateClick(date)}
+                  >
+                    {day}
+                  </div>
+                );
+              }
+            )}
+          </div>
         </div>
       )}
     </div>
   );
 };
-
-
-
 
 
 

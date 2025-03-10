@@ -1,24 +1,51 @@
 
 
 export function UpArrow() {
-  return (
+   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-5 h-6"
-      style={{ width: "16px", height: "16px" }}
+      width="1em"
+      height="1em"
+        className="w-5 h-6"
+      style={{width:'16px',height:"i6px"}}
+    
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12"
-      />
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M12 5.714a1 1 0 0 1 1 1v12.5a1 1 0 0 1-2 0v-12.5a1 1 0 0 1 1-1"
+        clipRule="evenodd"
+      ></path>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M12 4.214a1 1 0 0 1 .707.293l4.5 4.5a1 1 0 0 1-1.414 1.415L12 6.628l-3.793 3.793a1 1 0 0 1-1.414-1.415l4.5-4.5A1 1 0 0 1 12 4.214"
+        clipRule="evenodd"
+      ></path>
     </svg>
   );
 }
+
+export function Search() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+      width="1em"
+      height="1em"
+      className="w-5 h-6"
+      style={{ width: "16px", height: "i6px" }}
+    >
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M469.297 439.13L347.982 317.816C370.466 288.907 384 252.707 384 213.334c0-94.104-76.562-170.667-170.666-170.667S42.667 119.23 42.667 213.334S119.23 384 213.334 384c39.373 0 75.573-13.534 104.481-36.018l121.316 121.315zm-255.963-97.796c-70.584 0-128-57.417-128-128c0-70.584 57.416-128 128-128c70.583 0 128 57.416 128 128c0 70.583-57.417 128-128 128"
+      ></path>
+    </svg>
+  );
+}
+
 
 export function DownArrow() {
   return (
@@ -26,19 +53,28 @@ export function DownArrow() {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={1.5}
+      width="1em"
+      height="1em"
       stroke="currentColor"
       className="w-5 h-6"
-      style={{width:'16px',height:"i6px"}}
+      style={{ width: "16px", height: "i6px" }}
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
-      />
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M12 18.714a1 1 0 0 1-1-1v-12.5a1 1 0 1 1 2 0v12.5a1 1 0 0 1-1 1"
+        clipRule="evenodd"
+      ></path>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M12 20.214a1 1 0 0 1-.707-.292l-4.5-4.5a1 1 0 0 1 1.414-1.415L12 17.8l3.793-3.793a1 1 0 0 1 1.414 1.415l-4.5 4.5a1 1 0 0 1-.707.292"
+        clipRule="evenodd"
+      ></path>
     </svg>
   );
 }
+
 
 export function DeleteIcon() {
   return (
@@ -103,17 +139,21 @@ export function PrintIcon() {
 export function FilterIcon() {
   return (
     <svg
-    style={{
-            width: "24px",
-            height:"24px"
-          }}>
       xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-      x="0px"
-      y="0px"
-      viewBox="1 -1 100 125"
-    
-      <path d="M91.7,8H10.3c-0.1,0-0.1,0-0.2,0C10,8,9.9,8.2,10,8.5L42,52V90l18-6.6V52L92,8.5c0,0,0-0.1,0-0.2C91.9,8.1,91.8,8,91.7,8z" />
+      viewBox="0 0 24 24"
+      style={{
+        width: "24px",
+        height: "24px",
+      }}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="1.5"
+        d="M21.25 12H8.895m-4.361 0H2.75m18.5 6.607h-5.748m-4.361 0H2.75m18.5-13.214h-3.105m-4.361 0H2.75m13.214 2.18a2.18 2.18 0 1 0 0-4.36a2.18 2.18 0 0 0 0 4.36Zm-9.25 6.607a2.18 2.18 0 1 0 0-4.36a2.18 2.18 0 0 0 0 4.36Zm6.607 6.608a2.18 2.18 0 1 0 0-4.361a2.18 2.18 0 0 0 0 4.36Z"
+      ></path>
     </svg>
   );
 }

@@ -62,10 +62,12 @@ incoming data for a table component. It includes properties such as `tableName`,
 which define various aspects of the table configuration and behavior. */
 export interface IncomingTableDataI<T> {
   tableName: string;
+  tableDescription?: string;
   baseUrl: string;
   subUrl: string;
   heading: HeadingT<T>[];
   column?: ColumnT<T>[];
+  extraComponent?: React.ReactElement;
   query: {
     pageName?: string;
     limitName?: string;

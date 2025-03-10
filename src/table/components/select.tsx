@@ -17,7 +17,7 @@ export default function Select() {
             name="filter_limit"
             aria-controls="users_table"
             className="select-button appearance-none border-transparent custom-input-andrea w-[50px] px-2 py-1 "
-            style={{ padding: "2px 1px" , width:"50px"}}
+            style={{ padding: "2px 1px" ,  width:"40px", fontWeight:600, textAlign:"center"}}
           >
             {" "}
             <option value="5">5</option>

@@ -190,26 +190,41 @@ export const userTableData: IncomingTableDataI<any> = {
   heading: header,
   column: extraColumn,
   query: { pageName: "skip" },
+  tableDescription: "this is a table for users",
+  extraComponent: (
+    <div
+      style={{
+        width: "100%",
+        background: "red",
+        height: "32px",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      hello
+    </div>
+  ),
   show: {
-    seeMore: false,
+    seeMore: true,
     tableName: true,
-    customButton: false,
+    customButton: true,
     checkBox: false,
-    select: false,
-    exports: false,
-    deleteButton: false,search:false,
+    select: true,
+    exports: true,
+    deleteButton: true,
+    search: true,
   },
   refresh: { intervalInSec: 120, status: true },
   subUrl: "/users",
   tableName: "user",
   style: {
-    primary: "hsl(200, 90%,50%)",
-    secondary: "hsl(200,60%,80%)",
-    tertiary: "hsl(200,90%,40%)",
-    background: "hsl(300,70%,96%)",
-    cellBackground: "hsl(300,10%,80%)",
-    filterBackground: "hsl(300,10%,80%)",
-    exportBackground: "hsl(300,10%,80%)",
+    primary: "hsl(200, 90%,10%)",
+    secondary: "hsl(200,60%,100%)",
+    tertiary: "hsl(200,60%,100%)",
+    background: "hsl(300,0%,99%)",
+    cellBackground: "hsl(300,0%,99%)",
+    filterBackground: "hsl(300,0%,99%)",
+    exportBackground: "hsl(300,0%,99%)",
     borderSpacing: "1px",
   },
 };
