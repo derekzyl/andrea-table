@@ -873,7 +873,7 @@ input[type="checkbox"]:focus {
 .custom-button {
     display: flex;
 
-    font-weight: 500;
+    font-weight: 400;
     padding: 4px;
     justify-content: space-around;
     align-items: center;
@@ -1085,9 +1085,9 @@ th {
 
 /* Primary Button */
 .btn-primary {
-    color: #fff;
+
     /* background-color: var(--primary); */
-    border-radius: 6px;
+    border-radius: 4px;
     transition: all 4s ease-in-out;
 
 }

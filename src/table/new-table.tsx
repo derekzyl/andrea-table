@@ -380,7 +380,7 @@ const cellHoverBackground = data.data.style?.cellHoverBackground ?? "hsl(40,5%,9
               style={{
                 padding: "8px",
 
-                color: "hsl(0, 0%, 20%)",
+                color: "hsl(0, 0%, 40%)",
                 fontSize: "14px",
                 fontWeight: 500,
                 textAlign: "start",
@@ -395,10 +395,6 @@ const cellHoverBackground = data.data.style?.cellHoverBackground ?? "hsl(40,5%,9
               style={{
                 padding: "8px",
 
-                color: "hsl(0, 0%, 20%)",
-                fontSize: "14px",
-                fontWeight: 500,
-                textAlign: "start",
               }}
             >
               {data.data.extraComponent}

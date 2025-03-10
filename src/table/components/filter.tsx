@@ -115,7 +115,7 @@ export default function Filter (data: { data: any[]; header: HeadingT<any>[]; in
             }}
             type="search"
             className="filter-search-input"
-            placeholder="Search..."
+            placeholder={`Search ${header.name}...`}
             spellCheck={false}
             data-ms-editor="true"
             list={`filterOptions_${index}`}

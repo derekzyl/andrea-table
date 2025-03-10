@@ -1,5 +1,5 @@
 import './style.css';
-import { N as o } from "./index-Ci1XLv0E.mjs";
+import { N as o } from "./index-DQabMw8Q.mjs";
 export {
   o as NewTable
 };

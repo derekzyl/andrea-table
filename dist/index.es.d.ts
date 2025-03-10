@@ -188,10 +188,12 @@ declare type HeadingT_2<T> = {
 
 declare interface IncomingTableDataI<T> {
     tableName: string;
+    tableDescription?: string;
     baseUrl: string;
     subUrl: string;
     heading: HeadingT_2<T>[];
     column?: ColumnT_2<T>[];
+    extraComponent?: React.ReactElement;
     query: {
         pageName?: string;
         limitName?: string;
@@ -259,10 +261,12 @@ declare interface IncomingTableDataI<T> {
 
 declare interface IncomingTableDataI_2<T> {
     tableName: string;
+    tableDescription?: string;
     baseUrl: string;
     subUrl: string;
     heading: HeadingT<T>[];
     column?: ColumnT<T>[];
+    extraComponent?: React.ReactElement;
     query: {
         pageName?: string;
         limitName?: string;
