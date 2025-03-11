@@ -2,7 +2,7 @@
   "name": "andrea-table",
   "private": false,
   "description": "A Rich table for React",
-  "version": "0.0.237",
+  "version": "0.0.238",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "author": "Derek Og <derekzyl@gmail.com>",
@@ -53,21 +53,28 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@types/lodash": "^4.17.7",
     "@types/papaparse": "^5.3.14",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.1",
+    "dayjs": "^1.11.13",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.3",
+    "lodash": "^4.17.21",
+    "papaparse": "^5.4.1",
     "postcss": "^8.4.47",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "rollup-plugin-postcss": "^4.0.2",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
@@ -75,13 +82,6 @@
     "vite": "^5.4.1",
     "vite-plugin-dts": "^4.2.1",
     "vite-plugin-libcss": "^1.1.1",
-    "dayjs": "^1.11.13",
-    "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.8.3",
-    "lodash": "^4.17.21",
-    "papaparse": "^5.4.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "xlsx": "^0.18.5"
   }
 }

@@ -1,4 +1,4 @@
-import { JSX as JSX_2 } from 'react/jsx-runtime';
+import { JSX } from 'react/jsx-runtime';
 import { MemoExoticComponent } from 'react';
 
 /**
@@ -344,7 +344,7 @@ declare type IncomingTableDataT<T> = IncomingTableDataI<T>;
 
 export declare const NewTable: MemoExoticComponent<(data: {
 data: IncomingTableDataT<any>;
-}) => JSX_2.Element>;
+}) => JSX.Element>;
 
 export declare type TableDataT<T> = IncomingTableDataI_2<T>;
 
