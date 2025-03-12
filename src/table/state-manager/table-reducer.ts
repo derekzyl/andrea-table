@@ -238,7 +238,7 @@ export const TableReducer = (
           );
         });
       });
-      return { ...state, bodyData: data };
+      return { ...state, bodyData: data,filterSearch:action.payload.toLowerCase() };
     }
     case ActionTableTypesE.SET_COLUMN_VISIBILITY: // "SET_COLUMN_VISIBILITY":
       return {

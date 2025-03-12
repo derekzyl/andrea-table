@@ -61,6 +61,9 @@ incoming data for a table component. It includes properties such as `tableName`,
 `subUrl`, `heading`, `column`, `query`, `color`, `refresh`, `fn`, `buttonName`, `show`, `crud`,
 which define various aspects of the table configuration and behavior. */
 export interface IncomingTableDataI<T> {
+  /* The `tableName: string;` line is defining a property named `tableName` in the `IncomingTableDataI`
+  interface. This property specifies the name of the table and expects a value of type `string`. It
+  is used to store and display the name of the table within the table component. */
   tableName: string;
   tableDescription?: string;
   baseUrl: string;
@@ -68,7 +71,12 @@ export interface IncomingTableDataI<T> {
   heading: HeadingT<T>[];
   column?: ColumnT<T>[];
   extraComponent?: React.ReactElement;
+  /* The `searchQueryName?: string` default value is q; in the `IncomingTableDataI` interface is defining an optional
+  property named `searchQueryName` of type `string`. This property allows you to specify the name of
+  the search query parameter that will be used when performing search operations within the table
+  component. */
   query: {
+    searchQueryName?:string
     pageName?: string;
     limitName?: string;
   };
@@ -209,6 +217,7 @@ export interface InitialStateI {
   bodyData: Array<Record<string, any>>; // Replace `any` with the actual data type of the body data
   filterLimit: number;
   filterPaginate: number;
+  filterSearch: string;
   selectAll: boolean;
   selectedItems: Array<string>; // Replace `any` with the actual data type of the selected items
   filterValues: { [key: string]: string } | Record<string, any>; // Replace `any` with the actual value type for each filter

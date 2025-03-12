@@ -195,6 +195,7 @@ declare interface IncomingTableDataI<T> {
     column?: ColumnT_2<T>[];
     extraComponent?: React.ReactElement;
     query: {
+        searchQueryName?: string;
         pageName?: string;
         limitName?: string;
     };
@@ -260,6 +261,9 @@ declare interface IncomingTableDataI<T> {
 }
 
 declare interface IncomingTableDataI_2<T> {
+    /* The `tableName: string;` line is defining a property named `tableName` in the `IncomingTableDataI`
+    interface. This property specifies the name of the table and expects a value of type `string`. It
+    is used to store and display the name of the table within the table component. */
     tableName: string;
     tableDescription?: string;
     baseUrl: string;
@@ -267,7 +271,12 @@ declare interface IncomingTableDataI_2<T> {
     heading: HeadingT<T>[];
     column?: ColumnT<T>[];
     extraComponent?: React.ReactElement;
+    /* The `searchQueryName?: string` default value is q; in the `IncomingTableDataI` interface is defining an optional
+    property named `searchQueryName` of type `string`. This property allows you to specify the name of
+    the search query parameter that will be used when performing search operations within the table
+    component. */
     query: {
+        searchQueryName?:string
         pageName?: string;
         limitName?: string;
     };

@@ -12,6 +12,7 @@ export const initialState: InitialStateI = {
   columnVisibility: {},
   openFilterBox: false,
   isColumnMenuOpen: false,
+  filterSearch:"",
   loading: false,
   show: {
     exports: false,

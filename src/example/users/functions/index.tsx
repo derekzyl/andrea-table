@@ -189,8 +189,9 @@ export const userTableData: IncomingTableDataI<any> = {
   crud: {},
   heading: header,
   column: extraColumn,
-  query: { pageName: "skip" },
+  query: { pageName: "skip",searchQueryName:'q' },
   tableDescription: "this is a table for users",
+
   extraComponent: (
     <div
       style={{

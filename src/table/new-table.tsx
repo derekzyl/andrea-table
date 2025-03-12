@@ -18,6 +18,7 @@ function NewTableMemo(data: { data: IncomingTableDataT<any> }) {
   const query = data.data.query;
   const pageQuery = query.pageName ?? "page";
   const limitQuery = query.limitName ?? "limit";
+  const searchQuery = query.searchQueryName ?? "";
   const show = data.data.show;
   const showAddButton = show.addButton ?? true;
 
@@ -126,7 +127,6 @@ const cellHoverBackground = data.data.style?.cellHoverBackground ?? "hsl(40,5%,9
     showSeeMore,
     showTableName,
   ]);
-
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
 
@@ -136,6 +136,46 @@ const cellHoverBackground = data.data.style?.cellHoverBackground ?? "hsl(40,5%,9
         payload: true,
       });
 
+
+    function generateURL() {
+      const urlSearchParams = new URLSearchParams(location.search);
+
+      Object.entries(state.filterValues).forEach(([key, value]) => {
+        urlSearchParams.set(key, value);
+      });
+
+      const queryString = urlSearchParams.toString();
+      if (pageQuery === "skip") {
+        if (searchQuery && searchQuery?.length > 0) {
+          if (state.filterSearch?.length >= 5) {
+       return `${data.data.subUrl}?${pageQuery}=${
+         (state.filterPaginate - 1) * state.filterLimit
+       }&${limitQuery}=${state.filterLimit}&${searchQuery}=${
+         state.filterSearch
+       }&${queryString}`;
+
+           }
+        }
+
+
+        return `${data.data.subUrl}?${pageQuery}=${
+          (state.filterPaginate - 1) * state.filterLimit
+        }&${limitQuery}=${state.filterLimit}&${queryString}`;
+      }
+      console.log({
+        searchQuery,
+        filter: state.filterSearch,
+        ddkdk: "sssssss",
+      });
+
+      if (searchQuery && searchQuery.length > 0) {
+        if (state.filterSearch.length >= 5) {
+          return `${data.data.subUrl}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${searchQuery}=${state.filterSearch}&${queryString}`;
+        }
+      }
+
+      return `${data.data.subUrl}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
+    }
       data.data.fn
         .fetchFn({ url: generateURL(), baseUrl: data.data.baseUrl })
         .then((res) => {
@@ -173,23 +213,7 @@ const cellHoverBackground = data.data.style?.cellHoverBackground ?? "hsl(40,5%,9
         fetchData();
       }, data.data.refresh.intervalInSec * 1000);
     }
-
-    function generateURL() {
-      const urlSearchParams = new URLSearchParams(location.search);
-
-      Object.entries(state.filterValues).forEach(([key, value]) => {
-        urlSearchParams.set(key, value);
-      });
-
-      const queryString = urlSearchParams.toString();
-      if (pageQuery === "skip") {
-        return `${data.data.subUrl}?${pageQuery}=${
-          (state.filterPaginate - 1) * state.filterLimit
-        }&${limitQuery}=${state.filterLimit}&${queryString}`;
-      }
-
-      return `${data.data.subUrl}?${pageQuery}=${state.filterPaginate}&${limitQuery}=${state.filterLimit}&${queryString}`;
-    }
+  
     // return () => clearInterval(d);
 
     return () => {
@@ -202,9 +226,14 @@ const cellHoverBackground = data.data.style?.cellHoverBackground ?? "hsl(40,5%,9
     data.data.subUrl,
     state.filterValues,
     state.filterPaginate,
+    state.filterSearch,
     state.filterLimit,
+    data.data.query.searchQueryName,
     data.data.refresh?.status,
     data.data.refresh?.intervalInSec,
+
+   
+
   ]);
 
   useEffect(() => {
