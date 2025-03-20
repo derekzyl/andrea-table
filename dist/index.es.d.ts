@@ -118,7 +118,6 @@ declare type headingKeyT_2<T> =
  * when defining a `HeadingT` object.
  * @property {boolean} canCopy - The `canCopy` property in the `HeadingT` type represents whether the
  * heading can be copied. It is optional and defaults to `false` if not specified.
- * @property {boolean} isSearchFilter - The `isSearchFilter` property in the `HeadingT` type indicates
  * whether the heading can be used as a search filter. If this property is set to `true`, it means that
  * the heading can be used to filter search results based on its value. If it is set to `false`
  * @property {string[] | { [key: string]: string }[]} filters - The `filters` property in the
@@ -138,7 +137,6 @@ export declare type HeadingT<T> = {
     isHeader?: boolean; // set to default true
     canFilter: boolean;
     canCopy?: boolean;
-    isSearchFilter?: boolean;
     filters?: string[] | { [key: string]: string }[];
 };
 
@@ -162,7 +160,6 @@ export declare type HeadingT<T> = {
  * when defining a `HeadingT` object.
  * @property {boolean} canCopy - The `canCopy` property in the `HeadingT` type represents whether the
  * heading can be copied. It is optional and defaults to `false` if not specified.
- * @property {boolean} isSearchFilter - The `isSearchFilter` property in the `HeadingT` type indicates
  * whether the heading can be used as a search filter. If this property is set to `true`, it means that
  * the heading can be used to filter search results based on its value. If it is set to `false`
  * @property {string[] | { [key: string]: string }[]} filters - The `filters` property in the
@@ -180,7 +177,6 @@ declare type HeadingT_2<T> = {
     isHeader?: boolean;
     canFilter: boolean;
     canCopy?: boolean;
-    isSearchFilter?: boolean;
     filters?: string[] | {
         [key: string]: string;
     }[];

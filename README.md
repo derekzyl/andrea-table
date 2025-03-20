@@ -196,7 +196,7 @@ const header: HeadingT<any>[] = [
     canSort: true,
    isHeader: true,
     filters: ["true", "false"],
-    isSearchFilter: true,
+ 
   },
 
   {
@@ -282,7 +282,7 @@ export type HeadingT<T> = {
   canSort?: boolean;// default is false
   canFilter: boolean;// default is false
   canCopy?: boolean;// default is false
-  isSearchFilter?: boolean;// default is false
+
   filters?: string[];// default is false
 };
 ```

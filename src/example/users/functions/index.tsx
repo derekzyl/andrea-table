@@ -162,7 +162,7 @@ const header: HeadingT<any>[] = [
     canSort: true,
     isHeader: true,
 
-    isSearchFilter: true,
+
   },
 
   {

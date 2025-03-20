@@ -57,7 +57,7 @@ export default function Filter (data: { data: any[]; header: HeadingT<any>[]; in
     dispatch({ type: ActionTableTypesE.SET_OPEN_FILTER_BOX, payload: "" });
   };
 
-  const renderFilterOptions = (header: HeadingT<any>, index: number) => {
+  const renderFilterOptions = (header: HeadingT<any>, _index: number) => {
     if (header.key === "createdAt") {
       return (
         <div className="filter-date-options">
@@ -94,50 +94,7 @@ export default function Filter (data: { data: any[]; header: HeadingT<any>[]; in
       return <CalendarFilter data={data} />;
     }
 
-   else if (header.isSearchFilter) {
-      return (
-        <div className="filter-search-container">
-          <input
-            name="filter_search"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                e.stopPropagation();
-                handleFilterChange(
-                  dispatch,
-                  state,
-                  e,
-                  header.key as any,
-                  data.header,
-                  data.data
-                );
-              }
-            }}
-            type="search"
-            className="filter-search-input"
-            placeholder={`Search ${header.name}...`}
-            spellCheck={false}
-            data-ms-editor="true"
-            list={`filterOptions_${index}`}
-          />
-          <div className="filter-search-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
-        </div>
-      );
-    }
+  
 
     // Render filter options as buttons instead of dropdown
     return (
